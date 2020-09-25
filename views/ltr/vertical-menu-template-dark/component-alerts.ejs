@@ -1,0 +1,311 @@
+<%- include ('../../Partials/headerStyle.ejs'); %>
+
+<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+
+    <%- include ('../../Partials/header.ejs'); %>
+
+    <%- include ('../../Partials/menu.ejs'); %>
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Alerts</h2>
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#">Components</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Alerts
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                    <div class="form-group breadcrum-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
+                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- Basic Alerts start -->
+                <section id="basic-alerts">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Default</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>
+                                            Alerts are available for any length of text, as well as an
+                                            optional dismiss button. Add
+                                            <code>.alert.alert-{color}</code> classes for alert with all theme
+                                            colors.
+                                        </p>
+                                        <div class="alert alert-primary mb-2" role="alert">
+                                            <strong>Good Morning!</strong> Start your day with some alerts.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Basic Alerts end -->
+
+                <!-- Alerts with Title start -->
+                <section id="alerts-with-title">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        Title
+                                    </h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>Add a title to the alert with the <code>.alert-heading</code></p>
+                                        <div class="alert alert-warning" role="alert">
+                                            <h4 class="alert-heading">Lorem ipsum dolor sit amet</h4>
+                                            <p class="mb-0">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                Ducimus, laborum!.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Alerts with Title end -->
+
+                <!-- Alert Colors start -->
+                <section id="alert-colors">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        Colors
+                                    </h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>
+                                            Alerts are available for any length of text, as well as an
+                                            optional dismiss button. Add
+                                            <code>.alert.alert-{color}</code> classes for alert with all theme
+                                            colors.
+                                        </p>
+                                        <div class="alert alert-primary" role="alert">
+                                            <h4 class="alert-heading">Primary</h4>
+                                            <p class="mb-0">
+                                                Tootsie roll lollipop lollipop icing. Wafer cookie danish
+                                                macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-success" role="alert">
+                                            <h4 class="alert-heading">Success</h4>
+                                            <p class="mb-0">
+                                                Tootsie roll lollipop lollipop icing. Wafer cookie danish
+                                                macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-danger" role="alert">
+                                            <h4 class="alert-heading">Danger</h4>
+                                            <p class="mb-0">
+                                                Tootsie roll lollipop lollipop icing. Wafer cookie danish
+                                                macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-warning" role="alert">
+                                            <h4 class="alert-heading">Warning</h4>
+                                            <p class="mb-0">
+                                                Tootsie roll lollipop lollipop icing. Wafer cookie danish
+                                                macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-dark" role="alert">
+                                            <h4 class="alert-heading">Dark</h4>
+                                            <p class="mb-0">
+                                                Tootsie roll lollipop lollipop icing. Wafer cookie danish
+                                                macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-info" role="alert">
+                                            <h4 class="alert-heading">Info</h4>
+                                            <p class="mb-0">
+                                                Tootsie roll lollipop lollipop icing. Wafer cookie danish
+                                                macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-light" role="alert">
+                                            <h4 class="alert-heading">Light</h4>
+                                            <p class="mb-0">
+                                                Tootsie roll lollipop lollipop icing. Wafer cookie danish
+                                                macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Alert Colors End -->
+
+                <!--Closable Alerts start -->
+                <section id="alerts-closable">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Closable Alerts</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>
+                                            Add a dismiss button and the
+                                            <code>.alert-dismissible</code> class, which adds extra padding to
+                                            the right of the alert and positions the
+                                            <code>.close button</code>.
+                                        </p>
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                Chupa chups topping bonbon. Jelly-o toffee I love. Sweet I love
+                                                wafer I love wafer.
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <p>
+                                            You can also change the icon used for the close buton on the
+                                            alerts
+                                        </p>
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                Chupa chups topping bonbon. Jelly-o toffee I love. Sweet I love
+                                                wafer I love wafer.
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--Closable Alerts end -->
+
+                <!-- Alert With Icon start -->
+                <section id="alerts-with-icons">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Icon</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>
+                                            Alert With Icon
+                                        </p>
+                                        <div class="alert alert-primary" role="alert">
+                                            <i class="feather icon-star mr-1 align-middle"></i>
+                                            <span>
+                                                Chupa chups topping bonbon. Jelly-o toffee I love. Sweet I love
+                                                wafer I love wafer.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Alert With Icon end -->
+
+                <!-- Example Alert start -->
+                <section id="alert-example">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Example</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>
+                                            An example would be to have an input and when a condition is met,
+                                            show the alert. use class <code>.alert-validation</code> for your input and class
+                                            <code>.alert-validation-msg</code> with your alert.
+                                        </p>
+                                        <form>
+                                            <label for="numbers">Enter Only Numbers</label>
+                                            <input id="numbers" class="form-control w-25 h-25 pl-1 alert-validation" type="text" placeholder="0123456789" />
+                                        </form>
+                                        <div class="alert alert-danger mt-1 alert-validation-msg" role="alert">
+                                            <i class="feather icon-info mr-1 align-middle"></i>
+                                            <span>the value is <strong>invalid</strong> you can only enter numbers</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Example Alert end -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>
