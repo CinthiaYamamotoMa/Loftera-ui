@@ -31,7 +31,7 @@ $ touch .env
 
 Adicione o seguinte conteúdo nele:
 
-API_URL=http://localhost:3000
+API_URL=http://localhost:9000
 
 *O campo API_URL deve ter o caminho que aponta para a sua api do loftera rodando localmente*
 
