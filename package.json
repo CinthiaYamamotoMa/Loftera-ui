@@ -10,14 +10,16 @@
   "license": "Themeforest Standard Licenses",
   "private": true,
   "homepage": "https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/html/ltr/vertical-menu-template/",
-  "main": "gulpfile.js",
+  "main": "app.js",
   "dependencies": {
     "async": "^3.1.0",
+    "body-parser": "^1.19.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "gulp-cli": "^2.2.0",
     "gulp-w3c-html-validator": "^1.4.4",
+    "mysql": "^2.18.1",
     "node-notifier": "^5.4.3",
     "through2": "^3.0.1"
   },

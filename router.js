@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
+
+
+
 
 // ********** GET ************
 // Dashboard
@@ -46,6 +48,10 @@ router.get('/app-user-edit', (req, res) => {
 
 
 // ********** POST ************
+router.post('/auth-register', (req, res) => {
+    var cad = req.body;
+    res.send(cad)
+});
 
 
 module.exports = router;

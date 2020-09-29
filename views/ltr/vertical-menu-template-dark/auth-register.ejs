@@ -1,4 +1,47 @@
-<%- include ('../../Partials/headerStyle.ejs'); %>
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description"
+        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>Loftera - Criar Conta</title>
+    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/authentication.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
 
 <body
     class="vertical-layout vertical-menu-modern dark-layout 1-column  navbar-floating footer-static bg-register-full-screen-image  blank-page blank-page"
@@ -25,12 +68,12 @@
                                         <p class="px-2">Preencha o formulário para criar uma conta</p>
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <form class="form">
+                                                <form class="form" action="/auth-register" method="post">
                                                     <div class="form-body">
                                                         <div class="row">
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
-                                                                    <input type="text" id="inputName"
+                                                                    <input type="text" id="inputName" name="inputName"
                                                                         class="form-control" placeholder="Nome Completo"
                                                                         required>
                                                                     <label for="inputName">Nome Completo</label>
@@ -39,7 +82,7 @@
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="cpf" id="inputCpf" class="form-control"
-                                                                        placeholder="CPF" required>
+                                                                        name="inputCPF" placeholder="CPF" required>
                                                                     <label for="inputCpf">CPF</label>
                                                                 </div>
                                                             </div>
@@ -47,7 +90,7 @@
                                                             <div class="col-md-6 col-12">
                                                                 <fieldset class="form-group">
                                                                     <select class="form-control" id="selectGender"
-                                                                        placeholder="Gênero">
+                                                                        name="inputGender" placeholder="Gênero">
                                                                         <option disabled selected>Gênero</option>
                                                                         <option>Feminino</option>
                                                                         <option>Masculino</option>
@@ -57,31 +100,36 @@
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
-                                                                    <input type='text' id="inputDataNasc" placeholder="Data de Nascimento" class="form-control pickadate" />
-                                                                    <label for="inputDataNasc">Data de Nascimento</label>
+                                                                    <input type='text' id="inputDataNasc"
+                                                                        placeholder="Data de Nascimento"
+                                                                        class="form-control pickadate"
+                                                                        name="inputDataNasc" />
+                                                                    <label for="inputDataNasc">Data de
+                                                                        Nascimento</label>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="email" id="inputEmail"
-                                                                        class="form-control" placeholder="E-mail"
-                                                                        required>
+                                                                        name="inputEmail" class="form-control"
+                                                                        placeholder="E-mail" required>
                                                                     <label for="inputEmail">E-mail</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="telephone" id="inputCel"
-                                                                        class="form-control" placeholder="Celular"
-                                                                        required>
+                                                                        name="inputCel" class="form-control"
+                                                                        placeholder="Celular" required>
                                                                     <label for="inputCel">Celular</label>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
-                                                                    <input type="password" id="inputPassword" class="form-control"
+                                                                    <input type="password" id="inputPassword"
+                                                                        class="form-control" name="inputPassword"
                                                                         placeholder="Senha" required>
                                                                     <label for="inputPassword">Senha</label>
                                                                 </div>
@@ -89,13 +137,15 @@
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="password" id="inputConfPassword"
-                                                                        class="form-control" placeholder="Confirmar Senha" required>
-                                                                    <label for="inputConfPassword">Confirmar Senha</label>
+                                                                        class="form-control"
+                                                                        placeholder="Confirmar Senha" required>
+                                                                    <label for="inputConfPassword">Confirmar
+                                                                        Senha</label>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 col-12"></div>
-                                                            
+
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-group row">
                                                                     <div class="col-12">
@@ -105,7 +155,8 @@
                                                                                 <input type="checkbox" required>
                                                                                 <span class="vs-checkbox">
                                                                                     <span class="vs-checkbox--check">
-                                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                                        <i
+                                                                                            class="vs-icon feather icon-check"></i>
                                                                                     </span>
                                                                                 </span>
                                                                                 <span class=""> Concordo com os termos e
@@ -117,11 +168,13 @@
                                                             </div>
 
                                                             <div class="col-md-6 col-12">
-                                                                <a href="auth-login" class="btn btn-outline-primary float-left btn-inline">Login</a>
+                                                                <a href="auth-login"
+                                                                    class="btn btn-outline-primary float-left btn-inline">Login</a>
                                                             </div>
 
                                                             <div class="col-md-6 col-12">
-                                                                <button type="submit" class="btn btn-primary float-right btn-inline">Cadastrar</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary float-right btn-inline">Cadastrar</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -139,7 +192,10 @@
         </div>
     </div>
     </div>
+    <!-- END: Content-->
 
+
+    <!-- BEGIN: Vendor JS-->
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->
 
@@ -151,7 +207,19 @@
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
     <!-- END: Theme JS-->
-    
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        $("#inputDataNasc").pickadate({
+            format: 'dd/mm/yyyy',
+            formatSubmit: 'dd/mm/yyyy',
+            // hiddenPrefix: 'prefix__',
+            // hiddenSuffix: '__suffix'
+        })
+    </script>
+
+    <!-- BEGIN: Page JS-->
+    <!-- END: Page JS-->
+
 </body>
 <!-- END: Body-->
 
