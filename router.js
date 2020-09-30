@@ -42,10 +42,17 @@ router.get('/app-user-edit', (req, res) => {
 
 
 // Listagem Imóvel
-
+router.get('/imoveis', (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
+})
 
 // Crud Imóvel
 
+
+// Visualizar Imóvel
+router.get('/imovel/detalhes', (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
+})
 
 // ********** POST ************
 router.post('/auth-register', (req, res) => {

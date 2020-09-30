@@ -2227,8 +2227,8 @@ body.navbar-static .navbar-container .search-input.open {
     width: 100px; }
 
 .fonticon-container:hover i {
-  color: #7367f0;
-  font-size: 2.9rem;
+  color: #fff;
+  font-size: 4.3rem !important;
   transform: scale(1.3); }
 
 .fonticon-container > .fonticon-classname, .fonticon-container > .fonticon-unit {
