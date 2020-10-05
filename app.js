@@ -7,7 +7,6 @@ const router = require('./router.js');
 const bodyParser = require('body-parser');
 
 
-
 app.use('/app-assets', express.static('app-assets'));
 
 app.engine('html', require('ejs').renderFile);

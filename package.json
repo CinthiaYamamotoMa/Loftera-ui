@@ -19,6 +19,7 @@
     "express-ejs-layouts": "^2.5.0",
     "gulp-cli": "^2.2.0",
     "gulp-w3c-html-validator": "^1.4.4",
+    "jquery-validation": "^1.19.2",
     "mysql": "^2.18.1",
     "node-notifier": "^5.4.3",
     "through2": "^3.0.1"
