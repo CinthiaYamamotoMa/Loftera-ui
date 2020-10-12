@@ -86,15 +86,14 @@
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="inputName" name="inputName"
-                                                                        class="form-control" placeholder="Nome Completo"
-                                                                        required>
+                                                                        class="form-control" placeholder="Nome Completo">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="inputCpf"
                                                                         class="form-control" name="inputCpf"
-                                                                        placeholder="CPF" required>
+                                                                        placeholder="CPF" >
                                                                 </div>
                                                             </div>
 
@@ -122,14 +121,13 @@
                                                                 <div class="form-label-group">
                                                                     <input type="email" id="inputEmail"
                                                                         name="inputEmail" class="form-control"
-                                                                        placeholder="E-mail" required>
+                                                                        placeholder="E-mail">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="inputCel" name="inputCel"
-                                                                        class="form-control" placeholder="Celular"
-                                                                        required>
+                                                                        class="form-control" placeholder="Celular">
                                                                 </div>
                                                             </div>
 
@@ -137,14 +135,14 @@
                                                                 <div class="form-label-group">
                                                                     <input type="password" id="inputPassword"
                                                                         class="form-control" name="inputPassword"
-                                                                        placeholder="Senha" required>
+                                                                        placeholder="Senha">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="password" name="inputConfPassword"
                                                                         id="inputConfPassword" class="form-control"
-                                                                        placeholder="Confirmar Senha" required>
+                                                                        placeholder="Confirmar Senha">
                                                                 </div>
                                                             </div>
 
@@ -154,8 +152,7 @@
                                                                 <div class="form-group row">
                                                                     <div class="col-12">
                                                                         <fieldset class="checkbox">
-                                                                            <div
-                                                                                class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
                                                                                 <input type="checkbox" required
                                                                                     id="terms_of_use"
                                                                                     name="terms_of_use">
@@ -179,7 +176,7 @@
                                                             </div>
 
                                                             <div class="col-md-6 col-12">
-                                                                <button type="button" onclick="submitmanual()"
+                                                                <button onclick="submitmanual()"
                                                                     class="btn btn-primary float-right btn-inline">Cadastrar</button>
                                                             </div>
                                                         </div>
@@ -217,6 +214,7 @@
 
 
     <!-- BEGIN: Page JS-->
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
@@ -231,81 +229,71 @@
             $('#inputDataNasc').mask('00/00/0000');
             $('#inputCel').mask('(00) 00000-0000');
             $('#inputCpf').mask('000.000.000-00', { reverse: true });
+            
+            
+        });
+
+
+        function submitmanual() {
             $('#sign_up_form').validate({
                 rules: {
                     inputName: {
                         required: true,
-                        minlength: 12
-                    },
+                        minlength: 12 },
                     inputCpf: {
                         required: true,
-                        minlength: 11,
-                    },
+                        minlength: 11, },
                     inputDataNasc: {
                         required: true,
-                        dateBR: true,
-                    },
+                        dateBR: true, },
                     inputEmail: {
                         required: true,
-                        email: true
-                    },
+                        email: true },
                     inputCel: {
                         required: true,
-                        minlength: 11
-                    },
+                        minlength: 11 },
                     inputPassword: {
                         required: true,
-                        minlength: 8
-                    },
+                        minlength: 8 },
                     inputConfPassword: {
                         required: true,
-                        equalTo: "#inputPassword"
-                    },
+                        equalTo: "#inputPassword" },
                     selectGender: "required",
                     terms_of_use: "required"
                 },
                 messages: {
                     inputName: {
-                        required: "O campo nome é obrigatório.",
-                        minlength: "O campo nome deve ter no minimo 12 caracteres"
-                    },
+                        required: "Campo Nome Completo deve ser preenchido",
+                        minlength: "O campo nome deve ter no minimo 12 caracteres" },
                     inputCpf: {
                         required: "O campo CPF é obrigatório.",
-                        minlength: "O campo CPF deve ter 11 caracteres",
-
-                    },
+                        minlength: "O campo CPF deve ter 11 caracteres"},
                     inputDataNasc: {
                         required: "O campo data de nascimento é obrigatório.",
-                        dateBR: "Insira uma data válida."
-                    },
+                        dateBR: "Insira uma data válida." },
                     inputCel: {
                         required: "O campo Celular é obrigatório.",
-                        minlength: "O numero de celular deve ter pelo menos 11 digitos com DDD"
-
-                    },
+                        minlength: "O numero de celular deve ter pelo menos 11 digitos com DDD" },
                     inputEmail: {
                         required: "O campo email é obrigatório.",
-                        email: "O campo email deve conter um email válido."
-                    },
+                        email: "O campo email deve conter um email válido." },
                     inputPassword: {
                         required: "O campo senha é obrigatório.",
-                        minlength: "A senha deve ter no mínimo 8 caracteres"
-                    },
+                        minlength: "A senha deve ter no mínimo 8 caracteres" },
                     inputConfPassword: {
                         required: "O campo confirmação de senha é obrigatório.",
-                        equalTo: "O campo confirmação de senha deve ser identico ao campo senha."
-                    },
+                        equalTo: "O campo confirmação de senha deve ser identico ao campo senha." },
                     selectGender: "Selecione seu Gênero.",
                     terms_of_use: "Para se cadastrar você deve aceitar os termos de uso."
                 }
             });
-        });
+            
+            if ($("#sign_up_form").valid()){
+                $("#sign_up_form").submit();
+            }else {return;}
 
-
-        function submitmanual() {
-            $("#inputCpf").val($("#inputCpf").cleanVal());
-            $("#inputCel").val($("#inputCel").cleanVal());
-            $("#sign_up_form").submit();
+                
+            
         }
 
     </script>
