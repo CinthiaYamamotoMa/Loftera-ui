@@ -1,55 +1,4 @@
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description"
-        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Loftera - Criar Conta</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
-
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
-
-    <!-- END: Vendor CSS-->
-
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css">
-
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/authentication.css">
-    <!-- END: Page CSS-->
-
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <style>
-        input.masked,
-        .shell span {
-            font-size: 16px;
-            font-family: monospace;
-            padding-right: 10px;
-            background-color: transparent;
-            text-transform: uppercase;
-        }
-    </style>
-    <!-- END: Custom CSS-->
-
-</head>
+<%- include ('../../Partials/headerStyle.ejs'); %>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
@@ -57,6 +6,7 @@
 <body
     class="vertical-layout vertical-menu-modern dark-layout 1-column  navbar-floating footer-static bg-register-full-screen-image  blank-page blank-page"
     data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="dark-layout-register">
+
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -67,127 +17,184 @@
             <div class="content-body">
                 <section class="row flexbox-container">
                     <div class="col-xl-8 col-10 d-flex justify-content-center">
-                        <div class="card rounded-0 mb-0">
-                            <div class="row m-0">
-                                <div class="col-lg-12 col-12 p-0">
-                                    <div class="card rounded-0 mb-0 p-2">
-                                        <div class="card-header pt-50 pb-1">
-                                            <div class="card-title">
-                                                <h4 class="mb-0">Criar Conta</h4>
-                                            </div>
+                        <!-- Input Validation start -->
+                        <section class="input-validation">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Registro de usuário</h4>
                                         </div>
-                                        <p class="px-2">Preencha o formulário para criar uma conta</p>
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <form id="sign_up_form" class="form" action="/auth-register"
-                                                    method="post">
-                                                    <div class="form-body">
-                                                        <div class="row">
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="text" id="inputName" name="inputName"
-                                                                        class="form-control" placeholder="Nome Completo">
+                                                <form class="form-horizontal" novalidate>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <input type="text" id="fullname" name="fullname" class="form-control"
+                                                                        data-validation-required-message="This field is required"
+                                                                        placeholder="Nome completo">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="text" id="inputCpf"
-                                                                        class="form-control" name="inputCpf"
-                                                                        placeholder="CPF" >
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <input type="email" id="email" name="email"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="Must be a valid email"
+                                                                        placeholder="Email">
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-md-6 col-12">
-                                                                <fieldset class="form-group">
-                                                                    <select class="form-control" id="selectGender"
-                                                                        name="selectGender" placeholder="Gênero">
-                                                                        <option disabled selected>Gênero</option>
-                                                                        <option>Feminino</option>
-                                                                        <option>Masculino</option>
-                                                                        <option>Outros</option>
-                                                                    </select>
-                                                                </fieldset>
-                                                            </div>
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="text" id="inputDataNasc"
-                                                                        placeholder="Data de Nascimento"
-                                                                        class="form-control pickadate"
-                                                                        name="inputDataNasc" />
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <input type="text" id="cellphone" name="cellphone"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="Must be a valid email"
+                                                                        placeholder="Celular">
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="email" id="inputEmail"
-                                                                        name="inputEmail" class="form-control"
-                                                                        placeholder="E-mail">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <input type="text" id="cpf" name="cpf"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="Must be a valid email"
+                                                                        placeholder="Cpf">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="text" id="inputCel" name="inputCel"
-                                                                        class="form-control" placeholder="Celular">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <input type="text" id="gender" name="gender"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="Must be a valid email"
+                                                                        placeholder="Gênero">
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="password" id="inputPassword"
-                                                                        class="form-control" name="inputPassword"
-                                                                        placeholder="Senha">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <input type="text" id="profile" name="profile"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="Must be a valid email"
+                                                                        placeholder="Perfil">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="password" name="inputConfPassword"
-                                                                        id="inputConfPassword" class="form-control"
-                                                                        placeholder="Confirmar Senha">
+                                                            <div class="form-group">
+                                                                <label>Password Input Field</label>
+                                                                <div class="controls">
+                                                                    <input type="password" name="password"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="This field is required"
+                                                                        placeholder="Password">
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-md-6 col-12"></div>
-
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-group row">
-                                                                    <div class="col-12">
-                                                                        <fieldset class="checkbox">
-                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                <input type="checkbox" required
-                                                                                    id="terms_of_use"
-                                                                                    name="terms_of_use">
-                                                                                <span class="vs-checkbox">
-                                                                                    <span class="vs-checkbox--check">
-                                                                                        <i
-                                                                                            class="vs-icon feather icon-check"></i>
-                                                                                    </span>
-                                                                                </span>
-                                                                                <span class=""> Concordo com os termos e
-                                                                                    condições</span>
-                                                                            </div>
-                                                                        </fieldset>
-                                                                    </div>
+                                                            <div class="form-group">
+                                                                <label>Repeat password must match</label>
+                                                                <div class="controls">
+                                                                    <input type="password" name="password2"
+                                                                        data-validation-match-match="password"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="Repeat password must match"
+                                                                        placeholder="Repeat Password">
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-md-6 col-12">
-                                                                <a href="auth-login"
-                                                                    class="btn btn-outline-primary float-left btn-inline">Login</a>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Must only consist of numbers</label>
+                                                                <div class="controls">
+                                                                    <input type="text" name="numeric"
+                                                                        class="form-control" required
+                                                                        data-validation-containsnumber-regex="(\d)+"
+                                                                        data-validation-containsnumber-message="The numeric field may only contain numeric characters."
+                                                                        placeholder="Enter Numbers only">
+                                                                </div>
                                                             </div>
-
-                                                            <div class="col-md-6 col-12">
-                                                                <button onclick="submitmanual()"
-                                                                    class="btn btn-primary float-right btn-inline">Cadastrar</button>
+                                                            <div class="form-group">
+                                                                <label>Only alphabetic characters</label>
+                                                                <div class="controls">
+                                                                    <input type="text" name="alpha" class="form-control"
+                                                                        required
+                                                                        data-validation-containsnumber-regex="^[a-zA-Z]+$"
+                                                                        data-validation-containsnumber-message="The alpha field may only contain alphabetic characters."
+                                                                        placeholder="Enter Character only">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Enter Number between 10 & 20</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control"
+                                                                        data-validation-regex-regex="([^a-z]*[A-Z]*)*"
+                                                                        data-validation-containsnumber-regex="([^0-9]*[0-9]+)+"
+                                                                        data-validation-containsnumber-message="Enter Number between 10 & 20"
+                                                                        min="10" max="20" required
+                                                                        placeholder="Enter Number between 10 & 20">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Must match the specified regular expression :
+                                                                    ^([0-9]+)$ - numbers only</label>
+                                                                <div class="controls">
+                                                                    <input type="text" name="text" class="form-control"
+                                                                        data-validation-containsnumber-regex="^([0-9]+)$"
+                                                                        data-validation-containsnumber-message="The regex field format is invalid."
+                                                                        placeholder="Enter specified regular expression"
+                                                                        required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Length should not be less than the specified
+                                                                    length : 3</label>
+                                                                <div class="controls">
+                                                                    <input type="text" name="minChar"
+                                                                        class="form-control"
+                                                                        data-validation-required-message="The min field must be at least 3 characters."
+                                                                        minlength="3"
+                                                                        placeholder="Enter minimum 3 characters">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>The digits field must be numeric and exactly
+                                                                    contain 3 digits</label>
+                                                                <div class="controls">
+                                                                    <input type="text" name="digit" class="form-control"
+                                                                        data-validation-regex-regex="([^a-z]*[A-Z]*)*"
+                                                                        data-validation-containsnumber-regex="([^0-9]*[0-9]+)+"
+                                                                        data-validation-required-message="The digits field must be numeric and exactly contain 3 digits"
+                                                                        maxlength="3" minlength="3"
+                                                                        placeholder="Enter Exactly 3 digits">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Only alphabetic characters, numbers, dashes or
+                                                                    underscores</label>
+                                                                <div class="controls">
+                                                                    <input type="text" name="reg-exp"
+                                                                        class="form-control"
+                                                                        data-validation-regex-regex="^[-a-zA-Z_\d]+$"
+                                                                        data-validation-regex-message="Must Enter Character, Number, Dash or Uderscore"
+                                                                        placeholder="Enter Character, Numbers, Dash, Uderscore"
+                                                                        required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Must be a valid url</label>
+                                                                <div class="controls">
+                                                                    <input type="text" name="url" class="form-control"
+                                                                        data-validation-regex-regex="^(http(s)?:\/\/)?(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+                                                                        data-validation-regex-message="Must be a valid url"
+                                                                        placeholder="Enter valid url" required>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </section>
+                        <!-- Input Validation end -->
                     </div>
             </div>
             </section>
@@ -195,112 +202,26 @@
         </div>
     </div>
     </div>
-    <!-- END: Content-->
-
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
 
     <!-- BEGIN: Vendor JS-->
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
-
     <!-- END: Theme JS-->
 
-
     <!-- BEGIN: Page JS-->
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="../../../app-assets/js/scripts/jquery.mask.js"></script>
-    <script type="text/javascript">
-    jQuery.validator.addMethod("dateBR", function (value, element) {
-            return this.optional(element) || /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(value);
-        }, "*Data inválida");
-
-
-        $(document).ready(function () {
-            $('#inputDataNasc').mask('00/00/0000');
-            $('#inputCel').mask('(00) 00000-0000');
-            $('#inputCpf').mask('000.000.000-00', { reverse: true });
-            
-            
-        });
-
-
-        function submitmanual() {
-            $('#sign_up_form').validate({
-                rules: {
-                    inputName: {
-                        required: true,
-                        minlength: 12 },
-                    inputCpf: {
-                        required: true,
-                        minlength: 11, },
-                    inputDataNasc: {
-                        required: true,
-                        dateBR: true, },
-                    inputEmail: {
-                        required: true,
-                        email: true },
-                    inputCel: {
-                        required: true,
-                        minlength: 11 },
-                    inputPassword: {
-                        required: true,
-                        minlength: 8 },
-                    inputConfPassword: {
-                        required: true,
-                        equalTo: "#inputPassword" },
-                    selectGender: "required",
-                    terms_of_use: "required"
-                },
-                messages: {
-                    inputName: {
-                        required: "Campo Nome Completo deve ser preenchido",
-                        minlength: "O campo nome deve ter no minimo 12 caracteres"},
-                    inputCpf: {
-                        required: "O campo CPF é obrigatório.",
-                        minlength: "O campo CPF deve ter 11 caracteres"},
-                    inputDataNasc: {
-                        required: "O campo data de nascimento é obrigatório.",
-                        dateBR: "Insira uma data válida." },
-                    inputCel: {
-                        required: "O campo Celular é obrigatório.",
-                        minlength: "O numero de celular deve ter pelo menos 11 digitos com DDD" },
-                    inputEmail: {
-                        required: "O campo email é obrigatório.",
-                        email: "O campo email deve conter um email válido." },
-                    inputPassword: {
-                        required: "O campo senha é obrigatório.",
-                        minlength: "A senha deve ter no mínimo 8 caracteres" },
-                    inputConfPassword: {
-                        required: "O campo confirmação de senha é obrigatório.",
-                        equalTo: "O campo confirmação de senha deve ser identico ao campo senha." },
-                    selectGender: "Selecione seu Gênero.",
-                    terms_of_use: "Para se cadastrar você deve aceitar os termos de uso."
-                }
-            });
-            
-            if ($("#sign_up_form").valid()){
-                $("#sign_up_form").submit();
-            }else {return;}
-
-                
-            
-        }
-
-    </script>
+    <script src="../../../app-assets/js/scripts/forms/validation/form-validation.js"></script>
     <!-- END: Page JS-->
-
-
-
 
 </body>
 <!-- END: Body-->
