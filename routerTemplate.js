@@ -3,9 +3,7 @@ const routerTemplate = express.Router();
 const path = require('path');
 
 // Dashboard
-routerTemplate.get('/', (req, res) => {
-    res.render('ltr/vertical-menu-template-dark/index.ejs')
-})
+
 
 routerTemplate.get('/app-calender', (req, res) => {
     res.render('ltr/vertical-menu-template-dark/app-calender.ejs')

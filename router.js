@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
-
-
+const userController = require('./controllers/userController');
+var passport = require('passport');
+var { ensureAuthenticated, forwardAuthenticated } = require('./controllers/authController')
 
 // ********** GET ************
 // Dashboard
@@ -56,9 +56,26 @@ router.get('/imovel/detalhes', (req, res) => {
 
 // ********** POST ************
 router.post('/auth-register', (req, res) => {
-    var cad = req.body;
-    res.send(cad)
+    userController.store(req, res)
 });
 
+router.post('/auth', (req, res, next) => {
+
+    const handler = passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/auth-login'
+    });
+
+    handler(req, res, next);
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/auth-login');
+});
+
+router.get('/', ensureAuthenticated, (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/index.ejs')
+})
 
 module.exports = router;

@@ -30,9 +30,9 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body pt-1">
-                                                <form action="index">
+                                                <form id="login" action="/auth" method="POST">
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input type="text" class="form-control" id="user-name" placeholder="E-mail" required>
+                                                        <input type="text" class="form-control" id="email" placeholder="E-mail" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
@@ -40,7 +40,7 @@
                                                     </fieldset>
 
                                                     <fieldset class="form-label-group position-relative has-icon-left">
-                                                        <input type="password" class="form-control" id="user-password" placeholder="Senha" required>
+                                                        <input type="password" class="form-control" id="password" placeholder="Senha" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-lock"></i>
                                                         </div>
@@ -100,6 +100,27 @@
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
     <!-- END: Theme JS-->
+
+    <script>
+        function login() {
+            console.log('login')
+            $.ajax({
+                type: 'post',
+                url: '/auth',
+                data: {
+                    email: $("#email").val(),
+                    password: $("#password").val()
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    console.log('success', retorno)
+                },
+                error: function(retorno) {
+                    console.log('error', retorno)
+                }
+            })
+        }
+    </script>
     
 </body>
 <!-- END: Body-->
