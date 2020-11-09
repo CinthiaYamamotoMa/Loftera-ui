@@ -39,7 +39,9 @@ router.get('/app-user-edit', (req, res) => {
 })
 
 // Cadastro Imóvel
-
+router.get('/imovel/cadastro', (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/imovel-cadastro.ejs')
+})
 
 // Listagem Imóvel
 router.get('/imoveis', (req, res) => {
@@ -74,7 +76,7 @@ router.get('/logout', (req, res) => {
     res.redirect('/auth-login');
 });
 
-router.get('/', ensureAuthenticated, (req, res) => {
+router.get('/', (req, res) => {
     res.render('ltr/vertical-menu-template-dark/index.ejs')
 })
 

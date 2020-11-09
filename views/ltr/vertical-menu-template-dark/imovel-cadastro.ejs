@@ -1,0 +1,484 @@
+<%- include ('../../Partials/headerStyle.ejs'); %>
+
+<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  "
+    data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+
+    <%- include ('../../Partials/header.ejs'); %>
+
+    <%- include ('../../Partials/menu.ejs'); %>
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- Dashboard Analytics Start -->
+                <section id="dashboard-analytics">
+
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Endereço</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input type="text" id="cep" class="form-control"
+                                                                placeholder="CEP" name="cep">
+                                                            <label for="cep">CEP</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input id="rua" class="form-control" name="rua"
+                                                                placeholder="Rua">
+                                                            <label for="rua">Rua</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input type="number" id="numero" class="form-control"
+                                                                name="numero" placeholder="Número">
+                                                            <label for="numero">Número</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input id="complemento" class="form-control"
+                                                                name="complemento" placeholder="Complemento">
+                                                            <label for="complemento">Complemento</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input id="bairro" class="form-control" name="bairro"
+                                                                placeholder="Bairro">
+                                                            <label for="bairro">Bairro</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input id="cidade" class="form-control" name="cidade"
+                                                                placeholder="Cidade">
+                                                            <label for="cidade">Cidade</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-label-group">
+                                                            <input id="estado" class="form-control" name="estado"
+                                                                placeholder="Estado">
+                                                            <label for="estado">Estado</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="reset"
+                                                            class="btn btn-outline-warning mr-1 mb-1">Apagar
+                                                            tudo</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="">
+                                            <div class="card-body">
+                                                <div
+                                                    class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12">
+                                                    <button type="button" value="casa" disabled
+                                                        class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-home"
+                                                            aria-hidden="true"></i></button>
+                                                    <button type="button" value="apto" disabled
+                                                        class="btn btn-icon btn-flat-primary mb-1"><i
+                                                            class="fa fa-building-o" aria-hidden="true"></i></button>
+                                                    <button type="button" value="quarto" disabled
+                                                        class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-bed"
+                                                            aria-hidden="true"></i></button>
+                                                </div>
+                                                <div class="chart-info d-flex justify-content-between mb-1">
+                                                    <div class="series-info d-flex align-items-center">
+                                                        <span class="text-bold-600 ml-50">Aluguel</span>
+                                                    </div>
+                                                    <div class="col-md-6 col-3">
+                                                        <input class="form-control form-control-sm" type="text"
+                                                            placeholder="R$ 2700">
+                                                    </div>
+                                                </div>
+                                                <div class="chart-info d-flex justify-content-between mb-1">
+                                                    <div class="series-info d-flex align-items-center">
+                                                        <span class="text-bold-600 ml-50">Condomínio</span>
+                                                        <a href="#modalCondominio" data-toggle="modal"
+                                                            data-target="#modalCondominio"> <i class="fa fa-info-circle ml-1"
+                                                                aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <div class="col-md-6 col-3">
+                                                        <input class="form-control form-control-sm" type="text"
+                                                            placeholder="R$ 498">
+                                                    </div>
+                                                </div>
+                                                <div class="chart-info d-flex justify-content-between">
+                                                    <div class="series-info d-flex align-items-center">
+                                                        <span class="text-bold-600 ml-50">IPTU</span>
+                                                        <a href="#modalIptu" data-toggle="modal"
+                                                            data-target="#modalIptu"> <i class="fa fa-info-circle"
+                                                                aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <div class="col-md-6 col-3">
+                                                        <input class="form-control form-control-sm" type="text"
+                                                            placeholder="R$ 30">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card border-primary text-primary">
+                                        <div class="card-content">
+                                            <div class="card-body text-center">
+                                                <div class="text-center">
+                                                    <h6>- Valor Total -</h6>
+                                                    <h2 class="text-primary"><i class="fas fa-dollar-sign"></i> 1200
+                                                        </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row match-height">
+                        <div class="col-lg-4 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h4>Comodidades</h4>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="chart-info d-flex justify-content-between">
+                                                <div class="series-info d-flex align-items-center">
+                                                    <!-- <i class="fas fa-wifi"></i> -->
+                                                    <div class="btn-group">
+                                                        <div class="dropdown">
+                                                            <button
+                                                                class="btn btn-flat-primary dropdown-toggle mr-1 mb-1"
+                                                                type="button" id="dropdownMenuButton100"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                Primary
+                                                            </button>
+                                                            <div class="dropdown-menu"
+                                                                aria-labelledby="dropdownMenuButton100">
+                                                                <a class="dropdown-item" href="#">Option 1</a>
+                                                                <a class="dropdown-item" href="#">Option 2</a>
+                                                                <a class="dropdown-item" href="#">Option 3</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <small class="secondary media-heading">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
+                                                            class="fas fa-close"></i></button>
+                                                </small>
+                                            </div>
+                                            <div class="chart-info d-flex justify-content-between">
+                                                <div class="series-info d-flex align-items-center">
+                                                    <i class="fas fa-utensils"></i>
+                                                    <span class="text-bold-600 ml-50">Cozinha</span>
+                                                </div>
+                                                <small class="secondary media-heading">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
+                                                            class="fas fa-close"></i></button>
+                                                </small>
+
+                                            </div>
+                                            <div class="chart-info d-flex justify-content-between mb-75">
+                                                <div class="series-info d-flex align-items-center">
+                                                    <i class="fas fa-swimmer"></i>
+                                                    <span class="text-bold-600 ml-50">Piscina</span>
+                                                </div>
+                                                <small class="secondary media-heading">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
+                                                            class="fas fa-close"></i></button>
+                                                </small>
+                                            </div>
+                                            <div class="chart-info d-flex justify-content-between mb-75">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-icon rounded-circle btn-primary mr-1 mb-1"><i
+                                                        class="fa fa-plus"></i></button>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h4>Fotos</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="swiper-fade-effect swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <div class="chart-info d-flex justify-content-between mb-75">
+                                                        <button type="file"
+                                                            class="btn btn-icon btn-icon rounded-circle btn-primary mr-1 mb-1"><i
+                                                                class="fa fa-upload"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="swiper-slide"> <img class="img-fluid"
+                                                        src="../../../app-assets/images/banner/banner-19.jpg"
+                                                        alt="banner">
+                                                </div>
+                                                <div class="swiper-slide"> <img class="img-fluid"
+                                                        src="../../../app-assets/images/banner/banner-18.jpg"
+                                                        alt="banner">
+                                                </div>
+                                                <div class="swiper-slide"> <img class="img-fluid"
+                                                        src="../../../app-assets/images/banner/banner-17.jpg"
+                                                        alt="banner">
+                                                </div>
+                                                <div class="swiper-slide"> <img class="img-fluid"
+                                                        src="../../../app-assets/images/banner/banner-16.jpg"
+                                                        alt="banner">
+                                                </div>
+                                            </div>
+                                            <!-- Add Pagination -->
+                                            <div class="swiper-pagination swiper-pagination-white"></div>
+                                            <!-- Add Arrows -->
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row match-height">
+                        <div class="col-lg-4 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h4>Regras</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="chart-info d-flex justify-content-between">
+                                                <div class="series-info d-flex align-items-center">
+                                                    <!-- <i class="fas fa-wifi"></i> -->
+                                                    <div class="btn-group">
+                                                        <div class="dropdown">
+                                                            <button
+                                                                class="btn btn-flat-primary dropdown-toggle mr-1 mb-1"
+                                                                type="button" id="dropdownMenuButton100"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                Primary
+                                                            </button>
+                                                            <div class="dropdown-menu"
+                                                                aria-labelledby="dropdownMenuButton100">
+                                                                <a class="dropdown-item" href="#">Option 1</a>
+                                                                <a class="dropdown-item" href="#">Option 2</a>
+                                                                <a class="dropdown-item" href="#">Option 3</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <small class="secondary media-heading">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
+                                                            class="fas fa-close"></i></button>
+                                                </small>
+                                            </div>
+                                            <div class="chart-info d-flex justify-content-between">
+                                                <div class="series-info d-flex align-items-center">
+                                                    <i class="fas fa-utensils"></i>
+                                                    <span class="text-bold-600 ml-50">Cozinha</span>
+                                                </div>
+                                                <small class="secondary media-heading">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
+                                                            class="fas fa-close"></i></button>
+                                                </small>
+
+                                            </div>
+                                            <div class="chart-info d-flex justify-content-between mb-75">
+                                                <div class="series-info d-flex align-items-center">
+                                                    <i class="fas fa-swimmer"></i>
+                                                    <span class="text-bold-600 ml-50">Piscina</span>
+                                                </div>
+                                                <small class="secondary media-heading">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
+                                                            class="fas fa-close"></i></button>
+                                                </small>
+                                            </div>
+                                            <div class="chart-info d-flex justify-content-between mb-75">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-icon rounded-circle btn-primary mr-1 mb-1"><i
+                                                        class="fa fa-plus"></i></button>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h4>Localização</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="basic-map" class="height-400"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-lg-6 col-6 justify-content-between">
+                        <div class="chart-info d-flex mb-1">
+                            <button type="button" class="btn btn-primary mr-1 mb-1">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="modal fade" id="modalCondominio" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-s modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary white">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                    Condomínio
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-start align-items-center mb-1 text-white">
+                                    Valor sujeito a alteração conforme deliberações condominiais, 
+                                    podendo, ainda, variar de acordo com as despesas fixas e 
+                                    eventuais do condomínio (ex.: água, luz, conservação e 
+                                    manutenção do prédio, entre outros).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalIptu" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-s modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary white">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                    IPTU
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-start align-items-center mb-1 text-white">
+                                    O IPTU é um imposto municipal cujo valor é 
+                                    determinado pela prefeitura.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span
+                class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a
+                    class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio"
+                    target="_blank">Pixinvent,</a>All rights Reserved</span><span
+                class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                    class="feather icon-heart pink"></i></span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i
+                    class="feather icon-arrow-up"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/tether.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/shepherd.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/swiper.min.js"></script>
+
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/swiper.js"></script>
+
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBgjNW0WA93qphgZW-joXVR6VC3IiYFjfo"></script>
+    <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
+
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>

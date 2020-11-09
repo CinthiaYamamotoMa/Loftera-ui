@@ -1,58 +1,4 @@
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description"
-        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Loftera - Criar Conta</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
-
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
-
-    <!-- END: Vendor CSS-->
-
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css">
-
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/authentication.css">
-    <!-- END: Page CSS-->
-
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <style>
-        input.masked,
-        .shell span {
-            font-size: 16px;
-            font-family: monospace;
-            padding-right: 10px;
-            background-color: transparent;
-            text-transform: uppercase;
-        }
-    </style>
-    <!-- END: Custom CSS-->
-
-</head>
-<!-- END: Head-->
-
-<!-- BEGIN: Body-->
+<%- include ('../../Partials/headerStyle.ejs'); %>
 
 <body
     class="vertical-layout vertical-menu-modern dark-layout 1-column  navbar-floating footer-static bg-register-full-screen-image  blank-page blank-page"
@@ -86,15 +32,14 @@
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="name" name="name"
-                                                                        class="form-control" placeholder="Nome Completo"
-                                                                        required>
+                                                                        class="form-control" placeholder="Nome Completo">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="cpf"
                                                                         class="form-control" name="cpf"
-                                                                        placeholder="CPF" required>
+                                                                        placeholder="CPF">
                                                                 </div>
                                                             </div>
 
@@ -109,27 +54,12 @@
                                                                     </select>
                                                                 </fieldset>
                                                             </div>
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="text" id="dataNasc"
-                                                                        placeholder="Data de Nascimento"
-                                                                        class="form-control pickadate"
-                                                                        name="dataNasc" />
-                                                                </div>
-                                                            </div>
-
+                                                            
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="email" id="email"
                                                                         name="email" class="form-control"
-                                                                        placeholder="E-mail" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="form-label-group">
-                                                                    <input type="text" id="cellPhone" name="cellPhone"
-                                                                        class="form-control" placeholder="Celular"
-                                                                        required>
+                                                                        placeholder="E-mail">
                                                                 </div>
                                                             </div>
 
@@ -137,14 +67,29 @@
                                                                 <div class="form-label-group">
                                                                     <input type="password" id="password"
                                                                         class="form-control" name="password"
-                                                                        placeholder="Senha" required>
+                                                                        placeholder="Senha">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="password" name="confPassword"
                                                                         id="confPassword" class="form-control"
-                                                                        placeholder="Confirmar Senha" required>
+                                                                        placeholder="Confirmar Senha">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-label-group">
+                                                                    <textarea type="text" id="descricao"
+                                                                        placeholder="Descrição"
+                                                                        class="form-control"
+                                                                        name="descricao"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-label-group">
+                                                                    <input type="text" id="cellPhone" name="cellPhone"
+                                                                        class="form-control" placeholder="Celular">
                                                                 </div>
                                                             </div>
 
@@ -156,7 +101,7 @@
                                                                         <fieldset class="checkbox">
                                                                             <div
                                                                                 class="vs-checkbox-con vs-checkbox-primary">
-                                                                                <input type="checkbox" required
+                                                                                <input type="checkbox"
                                                                                     id="terms_of_use"
                                                                                     name="terms_of_use">
                                                                                 <span class="vs-checkbox">
@@ -246,9 +191,8 @@
                         required: true,
                         minlength: 11,
                     },
-                    dataNasc: {
-                        required: true,
-                        dateBR: true,
+                    descricao: {
+                        required: true
                     },
                     email: {
                         required: true,
@@ -277,16 +221,13 @@
                     cpf: {
                         required: "O campo CPF é obrigatório.",
                         minlength: "O campo CPF deve ter 11 caracteres",
-
                     },
-                    dataNasc: {
-                        required: "O campo data de nascimento é obrigatório.",
-                        dateBR: "Insira uma data válida."
+                    descricao: {
+                        required: "O campo descrição é obrigatório."
                     },
                     cellPhone: {
                         required: "O campo Celular é obrigatório.",
                         minlength: "O numero de celular deve ter pelo menos 11 digitos com DDD"
-
                     },
                     email: {
                         required: "O campo email é obrigatório.",
