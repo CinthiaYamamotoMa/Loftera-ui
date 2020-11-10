@@ -65,11 +65,11 @@
                                             <div class="media-body mt-50">
                                                 <h4 class="media-heading">Angelo Sashington</h4>
                                                 <div class="col-12 d-flex mt-1 px-0">
-                                                    <a href="#"
-                                                        class="btn btn-primary d-none d-sm-block mr-75">Change</a>
+                                                    <a href="#" id="editarFoto"
+                                                        class="btn btn-primary d-none d-sm-block mr-75">Alterar</a>
                                                     <a href="#" class="btn btn-primary d-block d-sm-none mr-75"><i
                                                             class="feather icon-edit-1"></i></a>
-                                                    <a href="#"
+                                                    <a href="#" id="apagarFoto"
                                                         class="btn btn-outline-danger d-none d-sm-block">Apagar</a>
                                                     <a href="#" class="btn btn-outline-danger d-block d-sm-none"><i
                                                             class="feather icon-trash-2"></i></a>
@@ -98,15 +98,7 @@
                                                             <option>Outros</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="controls">
-                                                            <label>E-mail</label>
-                                                            <input type="email" class="form-control"
-                                                                placeholder="E-mail" value="angelo@sashington.com"
-                                                                required
-                                                                data-validation-required-message="Preencha o campo">
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>Descrição do Perfil</label>
@@ -129,10 +121,13 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label>Data de Nascimento</label>
-                                                        <input type="text" class="form-control"
-                                                            value="WinDon Technologies Pvt Ltd"
-                                                            placeholder="Data de Nascimento">
+                                                        <div class="controls">
+                                                            <label>E-mail</label>
+                                                            <input type="email" class="form-control"
+                                                                placeholder="E-mail" value="angelo@sashington.com"
+                                                                required
+                                                                data-validation-required-message="Preencha o campo">
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Celular</label>
@@ -145,7 +140,7 @@
                                                     class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                     <button type="submit"
                                                         class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Salvar</button>
-                                                    <button type="reset"
+                                                    <button id="apagarConta"
                                                         class="btn btn-outline-danger d-none d-sm-block">Apagar
                                                         Conta</button>
                                                 </div>

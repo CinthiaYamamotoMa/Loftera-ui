@@ -1,6 +1,5 @@
 const axios = require('axios').default;
 
-
 module.exports = {
 
     store(req, res) {
@@ -34,4 +33,21 @@ module.exports = {
                 }
             });
     },
+
+    findById(req, res) {
+        axios({
+            method: 'get',
+            url: `http://localhost:3000/user`,
+            params: { id: req.query.userId}
+        })
+        .then((retorno) => {
+            res.status(200);
+            console.log('user >>>> ', retorno)
+            res.locals = { user: retorno.data.retorno }
+            res.send(retorno.data.retorno)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
 }

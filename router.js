@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('./controllers/userController');
+const imovelController = require('./controllers/imovelController');
 var passport = require('passport');
 var { ensureAuthenticated, forwardAuthenticated } = require('./controllers/authController')
 
@@ -44,7 +45,9 @@ router.get('/imovel/cadastro', (req, res) => {
 })
 
 // Listagem Imóvel
-router.get('/imoveis', (req, res) => {
+router.get('/imoveis', async (req, res) => {
+    var imoveis = await imovelController.findAll(req, res);
+    res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
 })
 
@@ -52,7 +55,9 @@ router.get('/imoveis', (req, res) => {
 
 
 // Visualizar Imóvel
-router.get('/imovel/detalhes', (req, res) => {
+router.get('/imovel/detalhes/:id', (req, res) => {
+    // userController.findById()
+    console.log(req)
     res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
 })
 
