@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body pt-1">
-                                                <form id="login" action="/auth" method="POST">
+                                                <form id="login"  method="POST">
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
                                                         <input type="text" class="form-control" id="email" placeholder="E-mail" required>
                                                         <div class="form-control-position">
@@ -64,7 +64,7 @@
                                                     </div>
                                                     
                                                     <a href="auth-register" class="btn btn-outline-primary float-left btn-inline">Cadastre-se</a>
-                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+                                                    <button type="button" class="btn btn-primary float-right btn-inline" onclick="login()">Login</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -103,17 +103,18 @@
 
     <script>
         function login() {
-            console.log('login')
+            let site = "http://localhost:3000/";
             $.ajax({
                 type: 'post',
-                url: '/auth',
-                data: {
-                    email: $("#email").val(),
-                    password: $("#password").val()
-                },
-                datatype: "application/json",
+                url: site+'auth',
+                data : JSON.stringify( { email : $("#email").val(), password : $("#password").val()}),
+                dataType: "json",
+                contentType: "application/json",
                 success: function (retorno) {
-                    console.log('success', retorno)
+                    localStorage.setItem("currentUser", JSON.stringify(retorno.user));
+                    console.log('success', retorno);
+                    window.location = "/";
+
                 },
                 error: function(retorno) {
                     console.log('error', retorno)

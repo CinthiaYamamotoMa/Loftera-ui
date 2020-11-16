@@ -82,7 +82,7 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('ltr/vertical-menu-template-dark/index.ejs')
+    res.render('ltr/vertical-menu-template-dark/index.ejs', req.body)
 })
 
 module.exports = router;
