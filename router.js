@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('./controllers/userController');
+const commentController = require('./controllers/commentController');
 const imovelController = require('./controllers/imovelController');
 var passport = require('passport');
 var { ensureAuthenticated, forwardAuthenticated } = require('./controllers/authController')
@@ -47,6 +48,7 @@ router.get('/imovel/cadastro', (req, res) => {
 // Listagem Imóvel
 router.get('/imoveis', async (req, res) => {
     var imoveis = await imovelController.findAll(req, res);
+    console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
 })
@@ -55,9 +57,9 @@ router.get('/imoveis', async (req, res) => {
 
 
 // Visualizar Imóvel
-router.get('/imovel/detalhes/:id', (req, res) => {
-    // userController.findById()
-    console.log(req)
+router.get('/imovel/detalhes/:id', async (req, res) => {
+    var imovel = await imovelController.findById(req, res)
+    res.locals = { imovel }
     res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
 })
 
@@ -74,6 +76,10 @@ router.post('/auth', (req, res, next) => {
     });
 
     handler(req, res, next);
+});
+
+router.post('/comment', (req, res) => {
+    commentController.store(req, res)
 });
 
 router.get('/logout', (req, res) => {

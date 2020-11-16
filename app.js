@@ -15,6 +15,8 @@ require('./utils/passport')(passport);
 
 app.use('/app-assets', express.static('app-assets'));
 
+app.use('/noty', express.static('app-assets'));
+
 app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'ejs');
