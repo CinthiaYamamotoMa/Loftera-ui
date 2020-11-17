@@ -243,13 +243,13 @@
                                                         </div>
                                                         <div class="user-page-info">
                                                             <h6 class="primary media-heading">
-                                                                <%= imovel.imovel.user.name %>
+                                                                <%= imovel.imovel.product.user.name %>
                                                             </h6>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-8">
                                                         <small class="notification-text">
-                                                            <%= imovel.imovel.user.description %>
+                                                            <%= imovel.imovel.product.user.description %>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -302,7 +302,7 @@
                                                 <div class="progress-bar" role="progressbar"
                                                     aria-valuenow=""
                                                     aria-valuemin="1"
-                                                    aria-valuemax="5" style="width: <%= ((Number(imovel.imovel.product.rating.limpeza)*100)/5) %>%"></div>
+                                                    aria-valuemax="5" style="width: <%= (((Number(imovel.imovel.product.rating.limpeza)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
                                             </div>
                                             <div id="estrelaLimpeza" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -312,7 +312,7 @@
                                             <p class="mb-0">Comunicação</p>
                                             <div class="progress progress-bar-primary" id="avaliacaoComunicacao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow=""
-                                                    aria-valuemin="1" aria-valuemax="5" style="width: <%= ((Number(imovel.imovel.product.rating.comunicacao)*100)/5) %>%"
+                                                    aria-valuemin="1" aria-valuemax="5" style="width: <%= (((Number(imovel.imovel.product.rating.comunicacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"
                                                     aria-describedby="example-caption-4"></div>
                                             </div>
                                             <div id="estrelaComunicacao" class="mb-2" style="display: none;">
@@ -323,7 +323,7 @@
                                             <p class="mb-0">Check-in</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoCheckin">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= ((Number(imovel.imovel.product.rating.checkin)*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.checkin)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
                                             </div>
                                             <div id="estrelaCheckin" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -333,7 +333,7 @@
                                             <p class="mb-0">Precisão</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoPrecisao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= ((Number(imovel.imovel.product.rating.precisao)*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.precisao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
                                             </div>
                                             <div id="estrelaPrecisao" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -343,7 +343,7 @@
                                             <p class="mb-0">Localização</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoLocalizacao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= ((Number(imovel.imovel.product.rating.localizacao)*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.localizacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
                                             </div>
                                             <div id="estrelaLocalizacao" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -353,7 +353,7 @@
                                             <p class="mb-0">Valor</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoValor">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= ((Number(imovel.imovel.product.rating.valor)*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.valor)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
                                             </div>
                                             <div id="estrelaValor" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
