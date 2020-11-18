@@ -175,6 +175,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
+                                                        <% for (var i = 0; i < imovel.imovel.product.interessados.length; i++) { %>
                                                         <div
                                                             class="d-flex justify-content-start align-items-center mb-1">
                                                             <div class="avatar mr-50">
@@ -182,42 +183,16 @@
                                                                     alt="avtar img holder" height="35" width="35">
                                                             </div>
                                                             <div class="user-page-info">
-                                                                <h6 class="mb-0">Carissa Dolle</h6>
+                                                                <h6 class="mb-0">
+                                                                    <%= imovel.imovel.product.interessados[i].name %>
+                                                                </h6>
                                                             </div>
-                                                            <button type="button"
+                                                            <button type="button" onclick="conversar('<%= imovel.imovel.product.interessados[i].id %>')"
                                                                 class="btn btn-primary btn-icon ml-auto"><i
                                                                     class="far fa-comment-alt"></i></button>
                                                         </div>
-                                                        <div
-                                                            class="d-flex justify-content-start align-items-center mb-1">
-                                                            <div class="avatar mr-50">
-                                                                <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
-                                                                    alt="avtar img holder" height="35" width="35">
-                                                            </div>
-                                                            <div class="user-page-info">
-                                                                <h6 class="mb-0">Carissa Dolle</h6>
-                                                            </div>
-                                                            <button type="button"
-                                                                class="btn btn-primary btn-icon ml-auto"><i
-                                                                    class="far fa-comment-alt"></i></button>
-
-                                                        </div>
-                                                        <div
-                                                            class="d-flex justify-content-start align-items-center mb-1">
-                                                            <div class="avatar mr-50">
-                                                                <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
-                                                                    alt="avtar img holder" height="35" width="35">
-                                                            </div>
-                                                            <div class="user-page-info">
-                                                                <h6 class="mb-0">Carissa Dolle</h6>
-                                                            </div>
-                                                            <button type="button"
-                                                                class="btn btn-primary btn-icon ml-auto"><i
-                                                                    class="far fa-comment-alt"></i></button>
-
-                                                        </div>
+                                                        <% } %>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -299,10 +274,10 @@
                                         <div class="col-12">
                                             <p class="mb-0">Limpeza</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoLimpeza">
-                                                <div class="progress-bar" role="progressbar"
-                                                    aria-valuenow=""
-                                                    aria-valuemin="1"
-                                                    aria-valuemax="5" style="width: <%= (((Number(imovel.imovel.product.rating.limpeza)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow=""
+                                                    aria-valuemin="1" aria-valuemax="5"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.limpeza)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
                                             <div id="estrelaLimpeza" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -312,7 +287,8 @@
                                             <p class="mb-0">Comunicação</p>
                                             <div class="progress progress-bar-primary" id="avaliacaoComunicacao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow=""
-                                                    aria-valuemin="1" aria-valuemax="5" style="width: <%= (((Number(imovel.imovel.product.rating.comunicacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"
+                                                    aria-valuemin="1" aria-valuemax="5"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.comunicacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"
                                                     aria-describedby="example-caption-4"></div>
                                             </div>
                                             <div id="estrelaComunicacao" class="mb-2" style="display: none;">
@@ -323,7 +299,9 @@
                                             <p class="mb-0">Check-in</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoCheckin">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.checkin)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.checkin)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
                                             <div id="estrelaCheckin" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -333,7 +311,9 @@
                                             <p class="mb-0">Precisão</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoPrecisao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.precisao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.precisao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
                                             <div id="estrelaPrecisao" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -343,7 +323,9 @@
                                             <p class="mb-0">Localização</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoLocalizacao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.localizacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.localizacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
                                             <div id="estrelaLocalizacao" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -353,7 +335,9 @@
                                             <p class="mb-0">Valor</p>
                                             <div class="progress progress-bar-primary mt-25" id="avaliacaoValor">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width: <%= (((Number(imovel.imovel.product.rating.valor)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.valor)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
                                             <div id="estrelaValor" class="mb-2" style="display: none;">
                                                 <%- include ('../../Partials/avaliacao.ejs'); %>
@@ -381,7 +365,8 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <div class="scrollable-container media-list" style="max-height: 350px; display: block;">
+                                        <div class="scrollable-container media-list"
+                                            style="max-height: 350px; display: block;">
                                             <% for (var i = 0; i < imovel.imovel.product.comments.length; i++) { %>
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
@@ -743,6 +728,10 @@
 
         function avaliar() {
 
+        }
+
+        function conversar(id) {
+            console.log(id)
         }
     </script>
 

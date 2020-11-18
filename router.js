@@ -26,7 +26,9 @@ router.get('/auth-forgot-password', (req, res) => {
 })
 
 // Trocar Senha
-router.get('/auth-reset-password', (req, res) => {
+router.get('/auth-reset-password/:id', (req, res) => {
+    // var user = await userController.findById(req, res)
+    // res.locals = { imovel }
     res.render('ltr/vertical-menu-template-dark/auth-reset-password.ejs')
 })
 
@@ -51,6 +53,14 @@ router.get('/imoveis', async (req, res) => {
     console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
+})
+
+// Imóveis de Interesse
+router.get('/imovel/interesse', async (req, res) => {
+    var imoveis = await imovelController.findAll(req, res);
+    console.log(imoveis)
+    res.locals = { imoveis }
+    res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
 })
 
 // Crud Imóvel
