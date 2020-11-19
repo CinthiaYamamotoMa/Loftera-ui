@@ -51,7 +51,6 @@ router.get('/imovel/cadastro', (req, res) => {
 // Listagem Imóvel
 router.get('/imoveis', async (req, res) => {
     var imoveis = await imovelController.findAll(req, res);
-    console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
 })
@@ -84,8 +83,6 @@ router.post('/auth', (req, res, next) => {
         successRedirect: '/',
         failureRedirect: '/auth-login'
     });
-
-    console.log(req)
 
     handler(req, res, next);
 });
