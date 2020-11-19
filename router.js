@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('./controllers/userController');
+const interestedController = require('./controllers/interestedController');
 const commentController = require('./controllers/commentController');
 const imovelController = require('./controllers/imovelController');
 var passport = require('passport');
@@ -57,8 +58,7 @@ router.get('/imoveis', async (req, res) => {
 
 // Imóveis de Interesse
 router.get('/imovel/interesse', async (req, res) => {
-    var imoveis = await imovelController.findAll(req, res);
-    console.log(imoveis)
+    var imoveis = await interestedController.findInteressados(req, res);
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
 })
