@@ -12,7 +12,7 @@
                         <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/app-chat"
                                 data-toggle="tooltip" data-placement="top" title="Chat"><i
                                     class="ficon feather icon-message-square"></i></a></li>
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/imovel/interesse"
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" onclick="listarInteressados()"
                                 data-toggle="tooltip" data-placement="top" title="Favoritados"><i
                                     class="ficon feather icon-heart pink"></i></a></li>
                     </ul>
@@ -209,5 +209,14 @@
         $("#navUser").attr('style', 'display:none')
         localStorage.removeItem('currentUser')
         window.location = `/auth-login`
+    }
+
+    function listarInteressados() {
+        if (localStorage.currentUser != undefined) {
+            var id = JSON.parse(localStorage.currentUser).id
+            window.location = `/imovel/interesse/${id}`
+        } else {
+            alert('Faça login para visualizar seus imóveis favoritos')
+        }
     }
 </script>

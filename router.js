@@ -56,7 +56,7 @@ router.get('/imoveis', async (req, res) => {
 })
 
 // Imóveis de Interesse
-router.get('/imovel/interesse', async (req, res) => {
+router.get('/imovel/interesse/:id', async (req, res) => {
     var imoveis = await interestedController.findInteressados(req, res);
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
