@@ -1,7 +1,7 @@
 <%- include ('../../Partials/headerStyle.ejs'); %>
 
 <body
-    class="vertical-layout vertical-menu-modern dark-layout 1-column  navbar-floating footer-static bg-register-full-screen-image  blank-page blank-page"
+    class="vertical-layout vertical-menu-modern dark-layout 1-column bg-full-screen-image navbar-floating footer-static bg-register-full-screen-image  blank-page blank-page"
     data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="dark-layout-register">
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -13,7 +13,7 @@
             <div class="content-body">
                 <section class="row flexbox-container">
                     <div class="col-xl-8 col-10 d-flex justify-content-center">
-                        <div class="card rounded-0 mb-0">
+                        <div class="card rounded-0 mb-0" style="filter: drop-shadow(2px 4px 6px black);">
                             <div class="row m-0">
                                 <div class="col-lg-12 col-12 p-0">
                                     <div class="card rounded-0 mb-0 p-2">
@@ -93,6 +93,20 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-label-group">
+                                                                    <input type="text" id="question" name="question"
+                                                                        class="form-control" placeholder="Pergunta para Recuperação de Senha">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-label-group">
+                                                                    <input type="text" id="answer" name="answer"
+                                                                        class="form-control" placeholder="Resposta para Recuperação de Senha">
+                                                                </div>
+                                                            </div>
+
                                                             <div class="col-md-6 col-12"></div>
 
                                                             <div class="col-md-6 col-12">
@@ -142,25 +156,12 @@
         </div>
     </div>
     </div>
-    <!-- END: Content-->
 
-
-    <!-- BEGIN: Vendor JS-->
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
 
-    <!-- END: Theme JS-->
-
-
-    <!-- BEGIN: Page JS-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
