@@ -42,7 +42,6 @@ module.exports = {
         })
         .then((retorno) => {
             res.status(200);
-            console.log('user >>>> ', retorno)
             res.locals = { user: retorno.data.retorno }
             res.send(retorno.data.retorno)
         })

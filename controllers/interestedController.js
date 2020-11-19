@@ -6,7 +6,7 @@ module.exports.findInteressados = async function (req, res) {
     await axios({
         method: 'get',
         url: site + 'interested',
-        params: { userId: 1 }
+        params: { userId: req.params.id }
     })
         .then((retorno) => {
             res.status(200);

@@ -10,7 +10,6 @@ module.exports = {
         })
             .then((retorno) => {
                 res.status(200);
-                // console.log('comment >>>>>>> ', retorno)
                 // res.json({ success: true });
                 res.send(req.data)
             })
