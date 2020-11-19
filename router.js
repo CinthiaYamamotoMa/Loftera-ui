@@ -85,6 +85,8 @@ router.post('/auth', (req, res, next) => {
         failureRedirect: '/auth-login'
     });
 
+    console.log(req)
+
     handler(req, res, next);
 });
 
