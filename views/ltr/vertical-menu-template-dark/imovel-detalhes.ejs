@@ -23,8 +23,10 @@
                                 <section id="component-swiper-fade-effect">
                                     <div class="card mb-0">
                                         <div class="card-header">
-                                            <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> Jardim São
-                                                Caetano</h4>
+                                            <h4 class="card-title">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                <%= imovel.imovel.district %>
+                                            </h4>
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body">
@@ -59,18 +61,22 @@
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mb-1 mt-1">
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Rua </span> Serra Redonda
+                                                        <span class="text-bold-600 ml-50">Rua </span>
+                                                        <%= imovel.imovel.street %>
                                                     </div>
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Bairro </span> Jardim Guairacá
+                                                        <span class="text-bold-600 ml-50">Bairro </span>
+                                                        <%= imovel.imovel.district %>
                                                     </div>
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mt-1">
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Cidade </span> São Paulo
+                                                        <span class="text-bold-600 ml-50">Cidade </span>
+                                                        <%= imovel.imovel.city %>
                                                     </div>
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Estado </span> São Paulo
+                                                        <span class="text-bold-600 ml-50">Estado </span>
+                                                        <%= imovel.imovel.state %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,21 +94,22 @@
                                                 <div
                                                     class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12">
                                                     <button type="button" value="casa" disabled
-                                                        class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-home"
-                                                            aria-hidden="true"></i></button>
+                                                        class="btn btn-icon btn-flat-primary mb-1 <%- imovel.imovel.addressTypeId == 1 ? 'imovelType' : '' %>"><i
+                                                            class="fa fa-home" aria-hidden="true"></i></button>
                                                     <button type="button" value="apto" disabled
-                                                        class="btn btn-icon btn-flat-primary mb-1"><i
+                                                        class="btn btn-icon btn-flat-primary mb-1 <%- imovel.imovel.addressTypeId == 2 ? 'imovelType' : '' %>"><i
                                                             class="fa fa-building-o" aria-hidden="true"></i></button>
                                                     <button type="button" value="quarto" disabled
                                                         class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-bed"
                                                             aria-hidden="true"></i></button>
                                                 </div>
-                                                <div class="chart-info d-flex justify-content-between mb-1">
+                                                <div
+                                                    class="chart-info d-flex justify-content-between mb-1 <%- imovel.imovel.addressTypeId == 3 ? 'imovelType' : '' %>">
                                                     <div class="series-info d-flex align-items-center">
                                                         <span class="text-bold-600 ml-50">Aluguel</span>
                                                     </div>
                                                     <small class="secondary media-heading">
-                                                        R$ 2700
+                                                        R$ <%- imovel.imovel.product.aluguel %>
                                                     </small>
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mb-1">
@@ -114,7 +121,7 @@
                                                                 aria-hidden="true"></i></a>
                                                     </div>
                                                     <small class="secondary media-heading">
-                                                        R$ 498
+                                                        R$ <%- imovel.imovel.product.condo %>
                                                     </small>
                                                 </div>
 
@@ -126,7 +133,7 @@
                                                                 aria-hidden="true"></i></a>
                                                     </div>
                                                     <small class="secondary media-heading">
-                                                        R$ 60
+                                                        R$ <%- imovel.imovel.product.iptu %>
                                                     </small>
                                                 </div>
                                             </div>
@@ -139,7 +146,9 @@
                                             <div class="card-body text-center">
                                                 <div class="text-center">
                                                     <h6>- Valor Total -</h6>
-                                                    <h1 class="text-white" style="font-weight: bold;"><i class="fas fa-dollar-sign"></i> 1200
+                                                    <h1 class="text-white" style="font-weight: bold;">
+                                                        <i class="fas fa-dollar-sign"></i>
+                                                        <%= (Number(imovel.imovel.product.aluguel)+Number(imovel.imovel.product.condo)+Number(imovel.imovel.product.iptu)) %>
                                                     </h1>
                                                 </div>
                                             </div>
@@ -166,6 +175,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
+                                                        <% for (var i = 0; i < imovel.imovel.product.interessados.length; i++) { %>
                                                         <div
                                                             class="d-flex justify-content-start align-items-center mb-1">
                                                             <div class="avatar mr-50">
@@ -173,42 +183,16 @@
                                                                     alt="avtar img holder" height="35" width="35">
                                                             </div>
                                                             <div class="user-page-info">
-                                                                <h6 class="mb-0">Carissa Dolle</h6>
+                                                                <h6 class="mb-0">
+                                                                    <%= imovel.imovel.product.interessados[i].name %>
+                                                                </h6>
                                                             </div>
-                                                            <button type="button"
+                                                            <button type="button" onclick="conversar('<%= imovel.imovel.product.interessados[i].id %>')"
                                                                 class="btn btn-primary btn-icon ml-auto"><i
                                                                     class="far fa-comment-alt"></i></button>
                                                         </div>
-                                                        <div
-                                                            class="d-flex justify-content-start align-items-center mb-1">
-                                                            <div class="avatar mr-50">
-                                                                <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
-                                                                    alt="avtar img holder" height="35" width="35">
-                                                            </div>
-                                                            <div class="user-page-info">
-                                                                <h6 class="mb-0">Carissa Dolle</h6>
-                                                            </div>
-                                                            <button type="button"
-                                                                class="btn btn-primary btn-icon ml-auto"><i
-                                                                    class="far fa-comment-alt"></i></button>
-
-                                                        </div>
-                                                        <div
-                                                            class="d-flex justify-content-start align-items-center mb-1">
-                                                            <div class="avatar mr-50">
-                                                                <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
-                                                                    alt="avtar img holder" height="35" width="35">
-                                                            </div>
-                                                            <div class="user-page-info">
-                                                                <h6 class="mb-0">Carissa Dolle</h6>
-                                                            </div>
-                                                            <button type="button"
-                                                                class="btn btn-primary btn-icon ml-auto"><i
-                                                                    class="far fa-comment-alt"></i></button>
-
-                                                        </div>
+                                                        <% } %>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -227,22 +211,20 @@
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4">
                                                         <div class="avatar mr-50">
                                                             <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
                                                                 alt="avtar img holder" height="35" width="35">
                                                         </div>
                                                         <div class="user-page-info">
-                                                            <h6 class="primary media-heading">John Doe</h6>
+                                                            <h6 class="primary media-heading">
+                                                                <%= imovel.imovel.product.user.name %>
+                                                            </h6>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-10 col-md-10 col-sm-10">
+                                                    <div class="col-lg-8 col-md-8 col-sm-8">
                                                         <small class="notification-text">
-                                                            Meu nome é Wellington, tenho 26 anos, nasci e sempre residi
-                                                            em
-                                                            São Paulo.
-                                                            Sou Químico por formação, porém trabalho atualmente no ramo
-                                                            comercial, onde me encontrei e me realizo profissionalmente.
+                                                            <%= imovel.imovel.product.user.description %>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -264,26 +246,18 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12 col-12">
+                                            <% for (var i = 0; i < imovel.imovel.product.attributes.length; i++) { %>
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-wifi text-success"></i>
-                                                    <span class="text-bold-600 ml-50">Wi-fi</span>
+                                                    <i
+                                                        class="<%= imovel.imovel.product.attributes[i].icon %> text-success"></i>
+                                                    <span class="text-bold-600 ml-50">
+                                                        <%= imovel.imovel.product.attributes[i].name %>
+                                                    </span>
                                                 </div>
+                                            </div>
+                                            <% } %>
 
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between mb-1">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-utensils text-success"></i>
-                                                    <span class="text-bold-600 ml-50">Cozinha</span>
-                                                </div>
-
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between mb-75">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-swimmer text-success"></i>
-                                                    <span class="text-bold-600 ml-50">Piscina</span>
-                                                </div>
-                                            </div>
                                             <hr>
                                         </div>
                                     </div>
@@ -299,59 +273,83 @@
                                     <div class="card-body">
                                         <div class="col-12">
                                             <p class="mb-0">Limpeza</p>
-                                            <div class="progress progress-bar-primary mt-25">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width:50%"></div>
+                                            <div class="progress progress-bar-primary mt-25" id="avaliacaoLimpeza">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow=""
+                                                    aria-valuemin="1" aria-valuemax="5"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.limpeza)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
-                                            <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            <div id="estrelaLimpeza" class="mb-2" style="display: none;">
+                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <p class="mb-0">Comunicação</p>
-                                            <div class="progress progress-bar-primary mt-25">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width:50%"></div>
+                                            <div class="progress progress-bar-primary" id="avaliacaoComunicacao">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow=""
+                                                    aria-valuemin="1" aria-valuemax="5"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.comunicacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%"
+                                                    aria-describedby="example-caption-4"></div>
                                             </div>
-                                            <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            <div id="estrelaComunicacao" class="mb-2" style="display: none;">
+                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <p class="mb-0">Check-in</p>
-                                            <div class="progress progress-bar-primary mt-25">
+                                            <div class="progress progress-bar-primary mt-25" id="avaliacaoCheckin">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width:50%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.checkin)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
-                                            <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            <div id="estrelaCheckin" class="mb-2" style="display: none;">
+                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <p class="mb-0">Precisão</p>
-                                            <div class="progress progress-bar-primary mt-25">
+                                            <div class="progress progress-bar-primary mt-25" id="avaliacaoPrecisao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width:50%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.precisao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
-                                            <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            <div id="estrelaPrecisao" class="mb-2" style="display: none;">
+                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <p class="mb-0">Localização</p>
-                                            <div class="progress progress-bar-primary mt-25">
+                                            <div class="progress progress-bar-primary mt-25" id="avaliacaoLocalizacao">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width:50%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.localizacao)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
-                                            <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            <div id="estrelaLocalizacao" class="mb-2" style="display: none;">
+                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <p class="mb-0">Valor</p>
-                                            <div class="progress progress-bar-primary mt-25">
+                                            <div class="progress progress-bar-primary mt-25" id="avaliacaoValor">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                    aria-valuemin="50" aria-valuemax="100" style="width:50%"></div>
+                                                    aria-valuemin="50" aria-valuemax="100"
+                                                    style="width: <%= (((Number(imovel.imovel.product.rating.valor)/Number(imovel.imovel.product.rating.qtdAvaliacoes))*100)/5) %>%">
+                                                </div>
                                             </div>
-                                            <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            <div id="estrelaValor" class="mb-2" style="display: none;">
+                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                            </div>
                                         </div>
                                         <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
-                                            id="avaliar">
+                                            id="avaliar" onclick="habilitarAvaliacao()">
                                             <i class="fas fa-star"></i>
                                             Avaliar Imóvel
                                         </button>
                                         <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
-                                            id="salvarAvaliacao">
+                                            id="salvarAvaliacao" style="display: none;">
                                             <i class="fas fa-save"></i>
                                             Salvar Avaliação
                                         </button>
@@ -361,58 +359,43 @@
                         </div>
 
                         <div class="col-lg-4 col-12 ">
-                            <div class="card">
+                            <div class="card" id="divComentarios">
                                 <div class="card-header">
                                     <h4 class="card-title">Comentários</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <div class="scrollable-container media-list">
+                                        <div class="scrollable-container media-list"
+                                            style="max-height: 350px; display: block;">
+                                            <% for (var i = 0; i < imovel.imovel.product.comments.length; i++) { %>
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
                                                     <div class="media-left"><span><img class="round"
-                                                                src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
+                                                                src="../../../app-assets/images/portrait/small/avatar-s-10.jpg"
                                                                 alt="avatar" height="40" width="40"></span></div>
                                                     <div class="media-body"
                                                         style="margin-left: 10px; margin-right: 3px;">
-                                                        <h6 class="primary media-heading">John Doe</h6>
-                                                        <small class="notification-text">Ótimo atendimento, móveis em
-                                                            bom
-                                                            estado
+                                                        <h6 class="primary media-heading">
+                                                            <%- imovel.imovel.product.comments[i].user.name %>
+                                                        </h6>
+                                                        <small class="notification-text">
+                                                            <%- imovel.imovel.product.comments[i].description %>
                                                         </small>
                                                     </div>
-                                                    <small class="secondary media-heading">
-                                                        <i class="fas fa-star"></i> 4,9
-                                                    </small>
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="chart-info d-flex justify-content-between mb-1">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <div class="media-left"><span><img class="round"
-                                                                src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
-                                                                alt="avatar" height="40" width="40"></span></div>
-                                                    <div class="media-body"
-                                                        style="margin-left: 10px; margin-right: 3px;">
-                                                        <h6 class="primary media-heading">John Doe</h6>
-                                                        <small class="notification-text">Ótimo atendimento, móveis em
-                                                            bom
-                                                            estado
-                                                        </small>
-                                                    </div>
-                                                    <small class="secondary media-heading">
-                                                        <i class="fas fa-star"></i> 4,9
-                                                    </small>
-                                                </div>
-                                            </div>
-                                            <hr>
+                                            <% } %>
                                         </div>
-                                        <fieldset class="form-label-group mb-50">
-                                            <textarea class="form-control" id="label-textarea" rows="3"
-                                                placeholder="Add Comment"></textarea>
-                                            <label for="label-textarea">Add Comment</label>
-                                        </fieldset>
-                                        <button type="button" class="btn btn-sm btn-primary">Post Comment</button>
+                                        <div>
+                                            <fieldset class="form-label-group mb-50">
+                                                <textarea class="form-control" id="comentario" rows="3"
+                                                    placeholder="Add Comment"></textarea>
+                                                <label for="label-textarea">Adicionar Comentário</label>
+                                            </fieldset>
+                                            <button type="button" onclick="publicarComentario()"
+                                                class="btn btn-primary mr-1 mb-1">Publicar</button>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -429,34 +412,17 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12 col-12">
+                                            <% for (var i = 0; i < imovel.imovel.product.rules.length; i++) { %>
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-paw text-success"></i>
-                                                    <span class="text-bold-600 ml-50">Pet <i
-                                                            class="fas fa-check"></i></span>
+                                                    <i
+                                                        class="<%= imovel.imovel.product.rules[i].icon %> text-success"></i>
+                                                    <span class="text-bold-600 ml-50">
+                                                        <%= imovel.imovel.product.rules[i].name %>
+                                                        <i class="fas fa-check"></i></span>
                                                 </div>
                                             </div>
-                                            <div class="chart-info d-flex justify-content-between mb-1">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-smoking text-danger"></i>
-                                                    <span class="text-bold-600 ml-50">Fumar <i
-                                                            class="fas fa-times"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between mb-75">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-glass-cheers text-danger"></i>
-                                                    <span class="text-bold-600 ml-50">Festas <i
-                                                            class="fas fa-times"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between mb-75">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-volume-off text-danger"></i>
-                                                    <span class="text-bold-600 ml-50">Barulho até as 22h <i
-                                                            class="fas fa-times"></i></span>
-                                                </div>
-                                            </div>
+                                            <% } %>
                                             <hr>
 
                                         </div>
@@ -661,26 +627,10 @@
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
-    <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix blue-grey lighten-2 mb-0"><span
-                class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a
-                    class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio"
-                    target="_blank">Pixinvent,</a>All rights Reserved</span><span
-                class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
-                    class="feather icon-heart pink"></i></span>
-            <button class="btn btn-primary btn-icon scroll-top" type="button"><i
-                    class="feather icon-arrow-up"></i></button>
-        </p>
+        
     </footer>
-    <!-- END: Footer-->
 
-
-    <!-- BEGIN: Vendor JS-->
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
     <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
     <script src="../../../app-assets/vendors/js/extensions/tether.min.js"></script>
     <script src="../../../app-assets/vendors/js/extensions/shepherd.min.js"></script>
@@ -689,36 +639,76 @@
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
+
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
-    <!-- END: Theme JS-->
 
-    <!-- BEGIN: Page JS-->
     <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
     <script src="../../../app-assets/js/scripts/extensions/swiper.js"></script>
 
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBgjNW0WA93qphgZW-joXVR6VC3IiYFjfo"></script>
     <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
-    <!-- END: Page Vendor JS-->
 
-    <!-- BEGIN: Theme JS-->
-    <script src="../../../app-assets/js/core/app-menu.js"></script>
-    <script src="../../../app-assets/js/core/app.js"></script>
-    <script src="../../../app-assets/js/scripts/components.js"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
     <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
 
-    <!-- END: Page JS-->
 
     <script>
-        
+        console.log(JSON.parse(localStorage.currentUser).id)
+        function publicarComentario() {
+            // @todo: verificar se o usuário está logado
+            if ($("#comentario").val() == "") {
+
+            } else {
+                if(localStorage.currentUser) {
+                    var id = JSON.parse(localStorage.currentUser).id
+                    $.ajax({
+                    type: 'post',
+                    url: '/comment',
+                    data: {
+                        description: $("#comentario").val(),
+                        userId: id,
+                        productId: "<%= imovel.imovel.id %>"
+                    },
+                    datatype: "application/json",
+                    success: function (retorno) {
+                        document.location.reload(true);
+                    },
+                    error: function (retorno) {
+                        console.error('error', retorno)
+                    }
+                })
+                }
+            }
+        }
+
+        function habilitarAvaliacao() {
+            $("#salvarAvaliacao").removeAttr('style')
+            $("#estrelaLimpeza").removeAttr('style')
+            $("#estrelaComunicacao").removeAttr('style')
+            $("#estrelaCheckin").removeAttr('style')
+            $("#estrelaPrecisao").removeAttr('style')
+            $("#estrelaLocalizacao").removeAttr('style')
+            $("#estrelaValor").removeAttr('style')
+
+            $("#avaliar").attr('style', 'display:none')
+            $("#avaliacaoLimpeza").attr('style', 'display:none')
+            $("#avaliacaoComunicacao").attr('style', 'display:none')
+            $("#avaliacaoCheckin").attr('style', 'display:none')
+            $("#avaliacaoPrecisao").attr('style', 'display:none')
+            $("#avaliacaoLocalizacao").attr('style', 'display:none')
+            $("#avaliacaoValor").attr('style', 'display:none')
+        }
+
+        function avaliar() {
+
+        }
+
+        function conversar(id) {
+            console.log(id)
+        }
     </script>
 
 </body>

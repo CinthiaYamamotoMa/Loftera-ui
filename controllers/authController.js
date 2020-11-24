@@ -1,6 +1,5 @@
 module.exports = {
     ensureAuthenticated: (req, res, next) => {
-        console.log('Caiu no ensure >>>>> ', req.isAuthenticated())
         if(req.isAuthenticated()) {
             req.session.isAuthenticated = true
             return next();
