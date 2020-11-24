@@ -153,6 +153,10 @@ routerTemplate.get('/component-popovers', (req, res) => {
     res.render('ltr/vertical-menu-template-dark/component-popovers.ejs')
 })
 
+routerTemplate.get('/component-progress', (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/component-progress.ejs')
+})
+
 routerTemplate.get('/component-spinner', (req, res) => {
     res.render('ltr/vertical-menu-template-dark/component-spinner.ejs')
 })

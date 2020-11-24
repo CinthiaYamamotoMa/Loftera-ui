@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('./controllers/userController');
+const interestedController = require('./controllers/interestedController');
+const commentController = require('./controllers/commentController');
 const imovelController = require('./controllers/imovelController');
 var passport = require('passport');
 var { ensureAuthenticated, forwardAuthenticated } = require('./controllers/authController')
@@ -25,7 +27,9 @@ router.get('/auth-forgot-password', (req, res) => {
 })
 
 // Trocar Senha
-router.get('/auth-reset-password', (req, res) => {
+router.get('/auth-reset-password/:id', (req, res) => {
+    // var user = await userController.findById(req, res)
+    // res.locals = { imovel }
     res.render('ltr/vertical-menu-template-dark/auth-reset-password.ejs')
 })
 
@@ -47,17 +51,25 @@ router.get('/imovel/cadastro', (req, res) => {
 // Listagem Imóvel
 router.get('/imoveis', async (req, res) => {
     var imoveis = await imovelController.findAll(req, res);
+    console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
+})
+
+// Imóveis de Interesse
+router.get('/imovel/interesse', async (req, res) => {
+    var imoveis = await interestedController.findInteressados(req, res);
+    res.locals = { imoveis }
+    res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
 })
 
 // Crud Imóvel
 
 
 // Visualizar Imóvel
-router.get('/imovel/detalhes/:id', (req, res) => {
-    // userController.findById()
-    console.log(req)
+router.get('/imovel/detalhes/:id', async (req, res) => {
+    var imovel = await imovelController.findById(req, res)
+    res.locals = { imovel }
     res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
 })
 
@@ -73,7 +85,13 @@ router.post('/auth', (req, res, next) => {
         failureRedirect: '/auth-login'
     });
 
+    console.log(req)
+
     handler(req, res, next);
+});
+
+router.post('/comment', (req, res) => {
+    commentController.store(req, res)
 });
 
 router.get('/logout', (req, res) => {

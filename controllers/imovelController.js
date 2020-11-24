@@ -1,21 +1,22 @@
 const axios = require('axios').default;
 
 module.exports.findById = async function (req, res){
-
-    axios({
+    var imovel
+    var id = req.params.id
+    await axios({
         method: 'get',
-        url: `http://localhost:3000/imovel`,
-        params: { id: req.query.imovelId}
+        url: `http://localhost:3000/imovel/`,
+        params: { id }
     })
     .then((retorno) => {
         res.status(200);
-        console.log('imovel >>>> ', retorno)
-        res.locals = { imovel: retorno.data.retorno }
-        res.send(retorno.data.retorno)
+        imovel = { imovel: retorno.data.data }
     })
     .catch((error) => {
         console.log(error)
     })
+
+    return imovel
 
 },
 
@@ -29,7 +30,6 @@ module.exports.findAll = async function (req, res) {
     .then((retorno) => {
         res.status(200);
         imoveis = retorno.data.data
-        console.log('imoveis >>>> ', retorno.data.data)
     })
     .catch((error) => {
         console.log(error)
