@@ -7,6 +7,7 @@
 
     <%- include ('../../Partials/menu.ejs'); %>
 
+
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -78,27 +79,26 @@
                                                         <div class="controls">
                                                             <label>Nome Completo</label>
                                                             <input type="text" class="form-control"
-                                                                placeholder="Nome Completo" value="John Doe"
-                                                                required
+                                                                placeholder="Nome Completo" name="name" id="name" required
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Gênero</label>
-                                                        <select class="form-control">
-                                                            <option>Feminino</option>
-                                                            <option>Masculino</option>
-                                                            <option>Outros</option>
+                                                        <select class="form-control" name="gender" id="gender">
+                                                            <option value="F">Feminino</option>
+                                                            <option value="M">Masculino</option>
+                                                            <option value="O">Outros</option>
                                                         </select>
                                                     </div>
-                                                    
+
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>Descrição do Perfil</label>
-                                                            <textarea class="form-control"
-                                                                placeholder="Descrição" value=""
-                                                                required
-                                                                data-validation-required-message="Preencha o campo"></textarea>
+                                                            <textarea class="form-control" name="description"
+                                                                id="description" required
+                                                                data-validation-required-message="Preencha o campo">
+                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -106,8 +106,8 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>CPF</label>
-                                                            <input type="text" class="form-control" placeholder="Name"
-                                                                value="Angelo Sashington" required
+                                                            <input type="text" class="form-control" name="cpf" id="cpf"
+                                                                required
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
@@ -115,24 +115,24 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>E-mail</label>
-                                                            <input type="email" class="form-control"
-                                                                placeholder="E-mail" value="angelo@sashington.com"
-                                                                required
+                                                            <input type="email" class="form-control" name="email"
+                                                                id="email" required
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Celular</label>
-                                                        <input type="text" class="form-control"
-                                                            value="WinDon Technologies Pvt Ltd" placeholder="Celular">
+                                                        <input type="text" class="form-control" name="cellPhone"
+                                                            id="cellPhone">
                                                     </div>
                                                 </div>
 
                                                 <div
                                                     class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                    <button type="submit"
-                                                        class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Salvar</button>
-                                                    <button id="apagarConta"
+                                                    <button type="button" name="saveuser" id="saveuser"
+                                                        class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1"
+                                                        onclick="edit_user_account()">Salvar</button>
+                                                    <button id="deleteUser" name="deleteUser" onclick="user_delete()"
                                                         class="btn btn-outline-danger d-none d-sm-block">Apagar
                                                         Conta</button>
                                                 </div>
@@ -250,28 +250,27 @@
                                     </div>
                                     <div class="tab-pane" id="changePassword" aria-labelledby="social-tab"
                                         role="tabpanel">
-                                        <form novalidate>
+                                        <form novalidate id="reset_password_form" name="reset_password_form">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label for="account-old-password">Senha Atual</label>
-                                                            <input type="password" class="form-control"
-                                                                id="account-old-password" required
-                                                                placeholder="Senha Atual"
-                                                                data-validation-required-message="This old password field is required">
+
+
+                                                            <input type="password" class="form-control" id="oldPassword"
+                                                                name="oldPassword" required placeholder="Senha Antiga">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label for="account-new-password">Nova Senha</label>
-                                                            <input type="password" name="password"
-                                                                id="account-new-password" class="form-control"
-                                                                placeholder="Nova Senha" required
-                                                                data-validation-required-message="The password field is required"
-                                                                minlength="6">
+                                                            <label form="account-new-password">Nova Senha</label>
+                                                            <input type="password" name="newPassword"
+                                                                id="newPassword" class="form-control"
+                                                                placeholder="Nova Senha" >
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -280,20 +279,21 @@
                                                         <div class="controls">
                                                             <label for="account-retype-new-password">Confirmar Nova
                                                                 Senha</label>
-                                                            <input type="password" name="con-password"
-                                                                class="form-control" required
-                                                                id="account-retype-new-password"
-                                                                data-validation-match-match="password"
-                                                                placeholder="Confirmar Nova Senha"
-                                                                data-validation-required-message="The Confirm password field is required"
-                                                                minlength="6">
+                                                            <input type="password" name="confPassword"
+                                                                class="form-control" id="confPassword"
+                                                                placeholder="Confirmar nova senha">
+
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                    <button type="submit"
-                                                        class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Salvar</button>
-                                                    <button type="reset" class="btn btn-outline-warning">Cancelar</button>
+
+                                                    <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0"
+                                                        type="button" id="changePassword" name="changePassword">Salvar
+                                                        Senha</button>
+                                                    <button type="reset"
+                                                        class="btn btn-outline-warning">Cancelar</button
+
                                                 </div>
                                             </div>
                                         </form>
@@ -313,6 +313,18 @@
 
     <footer class="footer footer-static footer-light">
 
+        <p class="clearfix blue-grey lighten-2 mb-0"><span
+                class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a
+                    class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio"
+                    target="_blank">Pixinvent,</a>All rights Reserved</span><span
+                class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                    class="feather icon-heart pink"></i></span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i
+                    class="feather icon-arrow-up"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+
     </footer>
 
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
@@ -328,7 +340,170 @@
 
     <script src="../../../app-assets/js/scripts/pages/app-user.js"></script>
     <script src="../../../app-assets/js/scripts/navs/navs.js"></script>
-    
+
+    <!-- END: Page JS-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="../../../app-assets/js/scripts/jquery.mask.js"></script>
+    <script type="text/javascript">
+
+
+        function buscar_user(userId) {
+            //debugger;
+            let site = "http://localhost:3000/user/" + userId;
+            $.ajax({
+                type: 'get',
+                url: site,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (retorno) {
+                    console.log('success', retorno);
+                    var userInfo = retorno.data;
+                    $("#name").val(userInfo.name);
+                    $("#gender").val(userInfo.gender);
+                    $("#description").val(userInfo.description);
+                    $("#cpf").val(userInfo.cpf);
+                    $("#email").val(userInfo.email);
+                    $("#cellPhone").val(userInfo.cellPhone);
+
+
+                },
+                error: function (retorno) {
+                    console.log('error', retorno)
+                }
+            })
+        }
+
+        $("#changePassword").click(function (e) {
+            console.log('click')
+            e.preventDefault();
+            $('#reset_password_form').validate({
+                rules: {
+                    oldPassword: "required",
+                    newPassword: {
+                        required: true,
+                        minlength: 8
+                    },
+                    confPassword: {
+                        required: true,
+                        equalTo: "#newPassword"
+                    }
+                },
+                messages: {
+                    oldPassword: "O campo senha é obrigatório.",
+                    newPassword: {
+                        required: "O campo senha é obrigatório",
+                        minLength: "O campo senha deve ter pelo menos 8 caracteres."
+                    },
+                    confPassword: {
+                        required: "O campo confirmação de senha é obrigatório.",
+                        equalTo: "O campo confirmação de senha deve ser idêntico ao campo senha."
+                    }
+                }
+            });
+            if (!$("#reset_password_form").valid()) {
+                return;
+            } else {
+                console.log('else')
+                debugger;
+                edit_user_password();
+            }
+        })   
+
+        
+
+
+        function edit_user_account() {
+            let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
+            $.ajax({
+                type: 'put',
+                url: site,
+                data: JSON.stringify({
+                    name: $("#name").val(),
+                    email: $("#email").val(),
+                    cpf: $("cpf").val(),
+                    cellPhone: $("#cellPhone").val(),
+                    gender: $("#gender").val(),
+                    description: $("#description").val()
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (retorno) {
+                    localStorage.setItem("currentUser", JSON.stringify(retorno.user));
+                    console.log('success', retorno);
+                    alert('Dados Atualizados com sucesso!');
+                    window.location = "/app-user-edit";
+
+                },
+                error: function (retorno) {
+                    console.log('error', retorno)
+                    alert("Nâo foi possível atualizar seus dados \n" + retorno)
+                }
+            })
+        }
+
+        function edit_user_password() {
+            //debugger;
+            let site = "http://localhost:3000/usersp/" + JSON.parse(localStorage.getItem("currentUser")).id;
+            $.ajax({
+                type: 'put',
+                url: site,
+                data: JSON.stringify({
+                    password: $("#oldPassword").val(),
+                    newPassword: $("#newPassword").val()
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (retorno) {
+                    console.log('success', retorno);
+                    alert('Dados Atualizados com sucesso!');
+                    window.location = "/app-user-edit";
+
+                },
+                error: function (retorno) {
+                    console.log('error', retorno)
+                    alert("Nâo foi possível atualizar seus dados \n" + retorno)
+                }
+            })
+        }
+
+        function user_delete() {
+            //debugger;
+            let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
+            let r = confirm("Gostaria de deletar sua conta?")
+            if (r == true) {
+                $.ajax({
+                    type: 'delete',
+                    url: site,
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (retorno) {
+                        console.log('success', retorno);
+                        alert('Conta Deletada com sucesso');
+                        window.location = "/auth-login";
+
+                    },
+                    error: function (retorno) {
+                        console.log('error', retorno)
+                        alert("Nâo foi possível atualizar seus dados \n" + retorno)
+                    }
+                })
+            }
+            else {
+                window.location = "/app-user-edit"
+            }
+        }
+
+
+            $(document).ready(function () {
+            let user = JSON.parse(localStorage.getItem("currentUser"));
+            let userId = user.id;
+            let userPassword = user.password;
+            buscar_user(userId);
+            })  
+    </script>
+
 </body>
 
 </html>
