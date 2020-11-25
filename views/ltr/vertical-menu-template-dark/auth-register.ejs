@@ -264,6 +264,7 @@
                 datatype: "application/json",
                 success: function (retorno) {
                     console.log('success', retorno)
+                    window.location = `/auth-login`
                 },
                 error: function(retorno) {
                     console.log('error', retorno)

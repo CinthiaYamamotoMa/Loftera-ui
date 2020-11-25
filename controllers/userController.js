@@ -11,7 +11,7 @@ module.exports = {
             .then((retorno) => {
                 res.status(200);
                 // res.json({ success: true });
-                // res.send(req.body)
+                res.send(req.data)
             })
             .catch((retorno) => {
                 console.log('catch', retorno)
