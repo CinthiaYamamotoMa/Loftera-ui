@@ -105,9 +105,15 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (retorno) {
+                    if(retorno.user != null && retorno.user != undefined && retorno.user != ""){
                     localStorage.setItem("currentUser", JSON.stringify(retorno.user));
                     console.log('success', retorno);
                     window.location = "/imoveis";
+                    }
+                    else{
+                        alert("usuário não encontrado");
+                        window.location = "/auth-login";
+                    }
 
                 },
                 error: function(retorno) {

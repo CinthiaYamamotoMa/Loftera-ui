@@ -355,7 +355,6 @@
                     $("#email").val(userInfo.email);
                     $("#cellPhone").val(userInfo.cellPhone);
 
-
                 },
                 error: function (retorno) {
                     console.log('error', retorno)
@@ -394,7 +393,7 @@
                 return;
             } else {
                 console.log('else')
-                debugger;
+                //debugger;
                 edit_user_password();
             }
         })   
@@ -404,6 +403,7 @@
 
         function edit_user_account() {
             let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
+            //debugger;
             $.ajax({
                 type: 'put',
                 url: site,
@@ -418,7 +418,6 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (retorno) {
-                    localStorage.setItem("currentUser", JSON.stringify(retorno.user));
                     console.log('success', retorno);
                     alert('Dados Atualizados com sucesso!');
                     window.location = "/app-user-edit";
@@ -444,14 +443,23 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (retorno) {
+                    if(retorno.data.id != null && retorno.data.id != undefined && retorno.data.id != ""){
                     console.log('success', retorno);
-                    alert('Dados Atualizados com sucesso!');
+                    alert("Senha Atualizada com sucesso");
                     window.location = "/app-user-edit";
+                }
+                else{
+                    alert(retorno.data);
+                    $("#oldPassword").val("");
+                    $("#newPassword").val("");
+                    $("#confPassword").val("");
+                    $("#oldPassword").focus;
+                }
 
                 },
                 error: function (retorno) {
                     console.log('error', retorno)
-                    alert("Nâo foi possível atualizar seus dados \n" + retorno)
+                    alert("Nâo foi possível atualizar seus dados \n" + retorno.data)
                 }
             })
         }

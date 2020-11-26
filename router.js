@@ -27,7 +27,7 @@ router.get('/auth-forgot-password', (req, res) => {
 })
 
 // Trocar Senha
-router.get('/auth-reset-password/:id', (req, res) => {
+router.get('/auth-reset-password/', (req, res) => {
     // var user = await userController.findById(req, res)
     // res.locals = { imovel }
     res.render('ltr/vertical-menu-template-dark/auth-reset-password.ejs')
