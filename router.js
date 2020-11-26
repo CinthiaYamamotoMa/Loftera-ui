@@ -27,7 +27,7 @@ router.get('/auth-forgot-password', (req, res) => {
 })
 
 // Trocar Senha
-router.get('/auth-reset-password/:id', (req, res) => {
+router.get('/auth-reset-password/', (req, res) => {
     // var user = await userController.findById(req, res)
     // res.locals = { imovel }
     res.render('ltr/vertical-menu-template-dark/auth-reset-password.ejs')
@@ -58,6 +58,7 @@ router.get('/imoveis', async (req, res) => {
 // Imóveis de Interesse
 router.get('/imovel/interesse/:id', async (req, res) => {
     var imoveis = await interestedController.findInteressados(req, res);
+    console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
 })
@@ -70,6 +71,10 @@ router.get('/imovel/detalhes/:id', async (req, res) => {
     var imovel = await imovelController.findById(req, res)
     res.locals = { imovel }
     res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
+})
+
+router.post('/interesse', async (req, res) => {
+    var imovel = await interestedController.storeInteressados(req, res)
 })
 
 // ********** POST ************

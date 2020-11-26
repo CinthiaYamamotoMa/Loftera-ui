@@ -8,7 +8,7 @@
                                 class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                     class="ficon feather icon-menu"></i></a></li>
                     </ul>
-                    <ul class="nav navbar-nav bookmark-icons" style="display: none;" id="chatAndInterested">
+                    <ul class="nav navbar-nav bookmark-icons" style="display: none;" id="chatAndInterested" name="chatAndInterested">
                         <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/app-chat"
                                 data-toggle="tooltip" data-placement="top" title="Chat"><i
                                     class="ficon feather icon-message-square"></i></a></li>
@@ -82,10 +82,10 @@
                             <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center" href="javascript:void(0)">Read all notifications</a></li>
                         </ul>
                     </li> -->
-                    <li class="dropdown dropdown-user nav-item" id="navUser" style="display: none;"><a
+                    <li class="dropdown dropdown-user nav-item" id="navUser" name = "navUser" style="display: none;"><a
                         class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                         <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600"
-                                id="user"></span><span class="user-status">Available</span></div><span><img
+                                id="user" name= "user"></span><span class="user-status">Disponível</span></div><span><img
                                 class="round" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
                                 alt="avatar" height="40" width="40"></span>
                         </a>
@@ -200,12 +200,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     
-    if (localStorage.currentUser != undefined) {
-        $("#navUser").removeAttr('style')
-        var name = JSON.parse(localStorage.currentUser).name
-        $("#user").html(name.toString())
+    function carregar_user(user){
+        if (user.id != undefined && user.id != null && user.id != "") {
+            $("#navUser").removeAttr('style')
+            $("#user").html(user.name)
 
-        $("#chatAndInterested").removeAttr('style')
+            $("#chatAndInterested").removeAttr('style')
+        }
     }
 
     function logout() {
@@ -215,11 +216,19 @@
     }
 
     function listarInteressados() {
-        if (localStorage.currentUser != undefined) {
-            var id = JSON.parse(localStorage.currentUser).id
+        if (localStorage.getItem("currentUser") != undefined) {
+            var id = localStorage.getItem("currentUser").id
             window.location = `/imovel/interesse/${id}`
         } else {
             alert('Faça login para visualizar seus imóveis favoritos')
         }
     }
+
+    $(document).ready(function () {
+        let user = JSON.parse(localStorage.getItem("currentUser"));
+        let userId = user.id;
+        let userPassword = user.password;
+        carregar_user(user);
+    })
+
 </script> 
