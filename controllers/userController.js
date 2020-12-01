@@ -10,11 +10,10 @@ module.exports = {
         })
             .then((retorno) => {
                 res.status(200);
-                // res.json({ success: true });
-                res.send(req.data)
+                res.json({ success: true });
+                // res.send(req.data)
             })
             .catch((retorno) => {
-                console.log('catch', retorno)
                 if (retorno.response.status == 500) {
                     res.status(500);
                     res.json({ success: false });

@@ -443,23 +443,22 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (retorno) {
-                    if(retorno.data.id != null && retorno.data.id != undefined && retorno.data.id != ""){
-                    console.log('success', retorno);
-                    alert("Senha Atualizada com sucesso");
-                    window.location = "/app-user-edit";
-                }
-                else{
-                    alert(retorno.data);
-                    $("#oldPassword").val("");
-                    $("#newPassword").val("");
-                    $("#confPassword").val("");
-                    $("#oldPassword").focus;
-                }
-
+                    if (retorno.data.id != null && retorno.data.id != undefined && retorno.data.id != "") {
+                        console.log('success', retorno);
+                        alert("Senha Atualizada com sucesso");
+                        window.location = "/app-user-edit";
+                    }
+                    else{
+                        alert(retorno.data);
+                        $("#oldPassword").val("");
+                        $("#newPassword").val("");
+                        $("#confPassword").val("");
+                        $("#oldPassword").focus;
+                    }
                 },
                 error: function (retorno) {
                     console.log('error', retorno)
-                    alert("Nâo foi possível atualizar seus dados \n" + retorno.data)
+                    alert("Não foi possível atualizar seus dados \n" + retorno.data)
                 }
             })
         }

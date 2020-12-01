@@ -630,7 +630,10 @@
     <div class="drag-target"></div>
 
     <footer class="footer footer-static footer-light">
-
+        <button class="btn btn-primary btn-icon scroll-top" type="button" onclick="registrarInteresse()">
+            Tenho Interesse <i class="ficon feather icon-heart"></i>
+        </button>
+        </p>
     </footer>
 
     <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
@@ -712,6 +715,26 @@
 
         function conversar(id) {
             console.log(id)
+        }
+
+        function registrarInteresse() {
+            var id = JSON.parse(localStorage.currentUser).id
+            $.ajax({
+                type: 'post',
+                url: '/interesse',
+                data: {
+                    userId: id,
+                    productId: "<%= imovel.imovel.id %>"
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    console.log(retorno)
+                    alert('Imóvel Favoritado')
+                },
+                error: function (retorno) {
+                    console.error('error', retorno)
+                }
+            })
         }
     </script>
 
