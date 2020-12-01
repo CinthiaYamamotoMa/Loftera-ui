@@ -39,3 +39,20 @@ module.exports.store = async function (req, res) {
         });
 
 }
+
+module.exports.findUsers = async function (req, res) {
+
+    var caracteristicas
+    await axios({
+        method: 'get',
+        url: `http://localhost:3000/findUsers`
+    })
+    .then((retorno) => {
+        res.status(200);
+        caracteristicas = retorno.data.data
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+    return caracteristicas
+}
