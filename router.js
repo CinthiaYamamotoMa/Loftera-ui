@@ -5,6 +5,7 @@ const interestedController = require('./controllers/interestedController');
 const commentController = require('./controllers/commentController');
 const imovelController = require('./controllers/imovelController');
 const psychographicController = require('./controllers/psychographicController');
+const ratingController = require('./controllers/ratingController');
 
 var passport = require('passport');
 var { ensureAuthenticated, forwardAuthenticated } = require('./controllers/authController')
@@ -40,6 +41,11 @@ router.get('/card-caracteristica', async (req, res) => {
     var caracteristicas = await psychographicController.findAll(req, res)
     res.locals = { caracteristicas: caracteristicas }
     res.render('ltr/vertical-menu-template-dark/card-caracteristica.ejs')
+})
+
+// Cadastro de tipo de conta
+router.get('/role', async (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/role.ejs')
 })
 
 router.post('/caracteristicas', async (req, res) => {
@@ -82,7 +88,12 @@ router.get('/imovel/detalhes/:id', async (req, res) => {
 })
 
 router.post('/interesse', async (req, res) => {
-    var imovel = await interestedController.storeInteressados(req, res)
+    await interestedController.storeInteressados(req, res)
+})
+
+// Avaliar Imóvel
+router.post('/avaliar', async (req, res) => {
+    await ratingController.store(req, res)
 })
 
 // ********** POST ************
