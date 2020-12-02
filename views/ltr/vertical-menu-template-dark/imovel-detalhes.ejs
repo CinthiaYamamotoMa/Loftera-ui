@@ -694,6 +694,11 @@
     <div class="drag-target"></div>
 
     <footer class="footer footer-static footer-light">
+        <button class="btn btn-danger btn-icon scroll-top"
+            style="left: 30px !important; display: none;" type="button" onclick="deleteImovel()"
+            id="deleteImovel">
+            Deletar Imóvel
+        </button>
         <button class="btn btn-<%= imovel.imovel.avaliable ? 'success' : 'danger' %> btn-icon scroll-top"
             style="left: 30px !important; display: none;" type="button" onclick="updateAvaliable()"
             id="updateAvaliable">
@@ -741,8 +746,12 @@
         }
 
         if (JSON.parse(localStorage.currentUser).id == "<%= imovel.imovel.product.userId %>") {
+            $("#tenhointeresse").attr("style", "display: none;");
+            
             $("#updateAvaliable").removeAttr('style')
-            $("#updateAvaliable").attr('style', 'left:30px !important')
+
+            $("#deleteImovel").removeAttr('style')
+            $("#deleteImovel").attr('style', 'margin-bottom: 45px !important;')
         }
 
         function updateAvaliable() {
@@ -758,6 +767,25 @@
                     alert('Imóvel Atualizado')
                     document.location.reload(true);
                     console.log('certo >>> ', retorno)
+                },
+                error: function (retorno) {
+                    console.error('error', retorno)
+                }
+            })
+        }
+
+        function deleteImovel() {
+            // @todo Confirmar se quer deletar usando um sweet alert
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:3000/deleteImovel',
+                data: {
+                    productId: "<%= imovel.imovel.id %>",
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    alert('Imóvel Deletado')
+                    window.location = "/imoveis";
                 },
                 error: function (retorno) {
                     console.error('error', retorno)
@@ -938,6 +966,7 @@
         }
 
         function registrarInteresse() {
+            // @todo Remover interesse
             var id = JSON.parse(localStorage.currentUser).id
             $.ajax({
                 type: 'post',
