@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="">
                                         <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
-                                            data-target="#interessados">
+                                            data-target="#interessados" id="interessados">
                                             <i class="fas fa-users"></i>
                                             Listar Interessados</button>
 
@@ -206,7 +206,7 @@
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-between pb-0">
                                             <h4>Proprietário</h4>
-                                            <button type="button"
+                                            <button type="button" id="conversar"
                                                 class="btn btn-flat-primary border-primary text-primary mr-1 mb-1"><i
                                                     class="ficon feather icon-message-square"></i> Conversar</button>
                                         </div>
@@ -491,7 +491,7 @@
                                                     placeholder="Add Comment"></textarea>
                                                 <label for="label-textarea">Adicionar Comentário</label>
                                             </fieldset>
-                                            <button type="button" onclick="publicarComentario()"
+                                            <button type="button" onclick="publicarComentario()" id="publicar"
                                                 class="btn btn-primary mr-1 mb-1">Publicar</button>
                                         </div>
                                     </div>
@@ -598,7 +598,7 @@
     <div class="drag-target"></div>
 
     <footer class="footer footer-static footer-light">
-        <button class="btn btn-primary btn-icon scroll-top" type="button" onclick="registrarInteresse()">
+        <button class="btn btn-primary btn-icon scroll-top" type="button" id="tenhointeresse" onclick="registrarInteresse()">
             Tenho Interesse <i class="ficon feather icon-heart"></i>
         </button>
         </p>
@@ -629,7 +629,15 @@
 
 
     <script>
-        console.log(JSON.parse(localStorage.currentUser).id)
+
+        if(localStorage.getItem("currentUser") == null) {
+            $("#avaliar").attr("disabled", "true");
+            $("#publicar").attr("disabled", "true");
+            $("#conversar").attr("disabled", "true");
+            $("#tenhointeresse").attr("disabled", "true");
+            $("#interessados").attr("disabled", "true");
+        }
+        
         function publicarComentario() {
             // @todo: verificar se o usuário está logado
             if ($("#comentario").val() == "") {
