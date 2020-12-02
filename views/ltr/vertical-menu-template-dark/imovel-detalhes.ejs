@@ -154,50 +154,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="">
-                                        <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
-                                            data-target="#interessados" id="interessados">
+                                    <div style="margin-top: 26px;">
+                                        <button style="padding-top: 19px; padding-bottom: 19px;" type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
+                                            data-target="#interessados" id="listarInteressados">
                                             <i class="fas fa-users"></i>
-                                            Listar Interessados</button>
-
-                                        <div class="modal fade" id="interessados" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable modal-xs modal-dialog-centered"
-                                                role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-primary white">
-                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">
-                                                            Interessados neste imóvel <i class="far fa-heart"></i>
-                                                        </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <% for (var i = 0; i < imovel.imovel.product.interessados.length; i++) { %>
-                                                        <div
-                                                            class="d-flex justify-content-start align-items-center mb-1">
-                                                            <div class="avatar mr-50">
-                                                                <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
-                                                                    alt="avtar img holder" height="35" width="35">
-                                                            </div>
-                                                            <div class="user-page-info">
-                                                                <h6 class="mb-0">
-                                                                    <%= imovel.imovel.product.interessados[i].name %>
-                                                                </h6>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="conversar('<%= imovel.imovel.product.interessados[i].id %>')"
-                                                                class="btn btn-primary btn-icon ml-auto">
-                                                                <i class="far fa-comment-alt"></i>
-                                                            </button>
-                                                        </div>
-                                                        <% } %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            Listar Interessados
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -207,6 +169,7 @@
                                         <div class="card-header d-flex justify-content-between pb-0">
                                             <h4>Proprietário</h4>
                                             <button type="button" id="conversar"
+                                                onclick="criar_chat('<%= imovel.imovel.product.user.id %>', '../../../app-assets/images/portrait/small/avatar-s-5.jpg', '<%= imovel.imovel.product.user.name %>')"
                                                 class="btn btn-flat-primary border-primary text-primary mr-1 mb-1"><i
                                                     class="ficon feather icon-message-square"></i> Conversar</button>
                                         </div>
@@ -282,21 +245,37 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaLimpeza" class="mb-2" style="display: none;">
-                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center" id="limpeza">
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="1" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="limpeza">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="2" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="3" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="4" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="5" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -310,21 +289,37 @@
                                                     aria-describedby="example-caption-4"></div>
                                             </div>
                                             <div id="estrelaComunicacao" class="mb-2" style="display: none;">
-                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center" id="comunicacao">
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="1" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="comunicacao">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="2" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="3" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="4" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="5" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -338,21 +333,37 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaCheckin" class="mb-2" style="display: none;">
-                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center" id="checkin">
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="1" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="checkin">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="2" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="3" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="4" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="5" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -366,21 +377,37 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaPrecisao" class="mb-2" style="display: none;">
-                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center" id="precisao">
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="1" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="precisao">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="2" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="3" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="4" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="5" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -394,21 +421,37 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaLocalizacao" class="mb-2" style="display: none;">
-                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center" id="localizacao">
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="1" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="localizacao">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="2" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="3" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="4" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="5" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -422,21 +465,37 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaValor" class="mb-2" style="display: none;">
-                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center" id="valor">
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="1" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="valor">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="2" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="3" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="4" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
-                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
-                                                        <a class="nav-link" value="5" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -544,6 +603,43 @@
                     </div>
 
                 </section>
+
+                <div class="modal fade" id="interessados" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-xs modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary white">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                    Interessados neste imóvel <i class="far fa-heart"></i>
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <% for (var i = 0; i < imovel.imovel.product.interessados.length; i++) { %>
+                                <div class="d-flex justify-content-start align-items-center mb-1">
+                                    <div class="avatar mr-50">
+                                        <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
+                                            alt="avtar img holder" height="35" width="35">
+                                    </div>
+                                    <div class="user-page-info">
+                                        <h6 class="mb-0">
+                                            <%= imovel.imovel.product.interessados[i].name %>
+                                        </h6>
+                                    </div>
+                                    <button type="button"
+                                        onclick="criar_chat('<%= imovel.imovel.product.interessados[i].id %>', '../../../app-assets/images/portrait/small/avatar-s-5.jpg', '<%= imovel.imovel.product.interessados[i].name %>')"
+                                        class="btn btn-primary btn-icon ml-auto">
+                                        <i class="far fa-comment-alt"></i>
+                                    </button>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="modal fade" id="modalCondominio" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-s modal-dialog-centered" role="document">
@@ -598,10 +694,16 @@
     <div class="drag-target"></div>
 
     <footer class="footer footer-static footer-light">
-        <button class="btn btn-primary btn-icon scroll-top" type="button" id="tenhointeresse" onclick="registrarInteresse()">
+        <button class="btn btn-<%= imovel.imovel.avaliable ? 'success' : 'danger' %> btn-icon scroll-top"
+            style="left: 30px !important; display: none;" type="button" onclick="updateAvaliable()"
+            id="updateAvaliable">
+            Imóvel <%= imovel.imovel.avaliable ? 'Disponível' : 'Alugado' %> <i
+                class="ficon feather icon-<%= imovel.imovel.avaliable ? 'check' : 'x' %>"></i>
+        </button>
+        <button class="btn btn-primary btn-icon scroll-top" type="button" id="tenhointeresse"
+            onclick="registrarInteresse()">
             Tenho Interesse <i class="ficon feather icon-heart"></i>
         </button>
-        </p>
     </footer>
 
     <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
@@ -630,14 +732,39 @@
 
     <script>
 
-        if(localStorage.getItem("currentUser") == null) {
+        if (localStorage.getItem("currentUser") == null) {
             $("#avaliar").attr("disabled", "true");
             $("#publicar").attr("disabled", "true");
             $("#conversar").attr("disabled", "true");
             $("#tenhointeresse").attr("disabled", "true");
             $("#interessados").attr("disabled", "true");
         }
-        
+
+        if (JSON.parse(localStorage.currentUser).id == "<%= imovel.imovel.product.userId %>") {
+            $("#updateAvaliable").removeAttr('style')
+            $("#updateAvaliable").attr('style', 'left:30px !important')
+        }
+
+        function updateAvaliable() {
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:3000/avaliable',
+                data: {
+                    productId: "<%= imovel.imovel.id %>",
+                    avaliable: "<%= imovel.imovel.avaliable %>",
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    alert('Imóvel Atualizado')
+                    document.location.reload(true);
+                    console.log('certo >>> ', retorno)
+                },
+                error: function (retorno) {
+                    console.error('error', retorno)
+                }
+            })
+        }
+
         function publicarComentario() {
             // @todo: verificar se o usuário está logado
             if ($("#comentario").val() == "") {
@@ -696,59 +823,59 @@
 
         var limpeza = $("#estrelaLimpeza").children("ul").children()
         limpeza.on("click", (event) => {
-            for(i = 0; i < limpeza.length; i++) {
-                    removeAttribute(limpeza[i])
+            for (i = 0; i < limpeza.length; i++) {
+                removeAttribute(limpeza[i])
             }
             var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
-            for(i = 0; i < avaliacao; i++) {
-                    addAttribute(limpeza[i]);
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(limpeza[i]);
             }
             avaliacaoImovel.limpeza = avaliacao
         })
 
         var comunicacao = $("#estrelaComunicacao").children("ul").children()
         comunicacao.on("click", (event) => {
-            for(i = 0; i < comunicacao.length; i++) {
-                    removeAttribute(comunicacao[i])
+            for (i = 0; i < comunicacao.length; i++) {
+                removeAttribute(comunicacao[i])
             }
             var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
-            for(i = 0; i < avaliacao; i++) {
-                    addAttribute(comunicacao[i]);
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(comunicacao[i]);
             }
             avaliacaoImovel.comunicacao = avaliacao
         })
 
         var checkin = $("#estrelaCheckin").children("ul").children()
         checkin.on("click", (event) => {
-            for(i = 0; i < checkin.length; i++) {
-                    removeAttribute(checkin[i])
+            for (i = 0; i < checkin.length; i++) {
+                removeAttribute(checkin[i])
             }
             var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
-            for(i = 0; i < avaliacao; i++) {
-                    addAttribute(checkin[i]);
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(checkin[i]);
             }
             avaliacaoImovel.checkin = avaliacao
         })
 
         var precisao = $("#estrelaPrecisao").children("ul").children()
         precisao.on("click", (event) => {
-            for(i = 0; i < precisao.length; i++) {
-                    removeAttribute(precisao[i])
+            for (i = 0; i < precisao.length; i++) {
+                removeAttribute(precisao[i])
             }
             var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
-            for(i = 0; i < avaliacao; i++) {
-                    addAttribute(precisao[i]);
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(precisao[i]);
             }
             avaliacaoImovel.precisao = avaliacao
         })
 
         var localizacao = $("#estrelaLocalizacao").children("ul").children()
         localizacao.on("click", (event) => {
-            for(i = 0; i < localizacao.length; i++) {
+            for (i = 0; i < localizacao.length; i++) {
                 removeAttribute(localizacao[i])
             }
             var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
-            for(i = 0; i < avaliacao; i++) {
+            for (i = 0; i < avaliacao; i++) {
                 addAttribute(localizacao[i]);
             }
             avaliacaoImovel.localizacao = avaliacao
@@ -756,11 +883,11 @@
 
         var valor = $("#estrelaValor").children("ul").children()
         valor.on("click", (event) => {
-            for(i = 0; i < valor.length; i++) {
+            for (i = 0; i < valor.length; i++) {
                 removeAttribute(valor[i])
             }
             var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
-            for(i = 0; i < avaliacao; i++) {
+            for (i = 0; i < avaliacao; i++) {
                 addAttribute(valor[i]);
             }
             avaliacaoImovel.valor = avaliacao
@@ -776,12 +903,12 @@
 
         function avaliar() {
             var semAvaliar = 0
-            for (var i in avaliacaoImovel){
-                if(avaliacaoImovel[i] == 0) {
+            for (var i in avaliacaoImovel) {
+                if (avaliacaoImovel[i] == 0) {
                     semAvaliar++
                 }
             }
-            if(semAvaliar == 0) {
+            if (semAvaliar == 0) {
                 $.ajax({
                     type: 'post',
                     url: '/avaliar',
@@ -805,8 +932,9 @@
             }
         }
 
-        function conversar(id) {
-            console.log(id)
+        function criar_chat(userId, userProfileImage, userName) {
+            localStorage.setItem("currentChatUser", JSON.stringify(userId, userProfileImage, userName));
+            window.location = "/app-chat";
         }
 
         function registrarInteresse() {

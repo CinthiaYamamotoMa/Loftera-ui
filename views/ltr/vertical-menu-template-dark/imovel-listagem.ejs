@@ -77,211 +77,108 @@
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
                             <h2 class="content-header-title float-left mb-0">Imóveis</h2>
-                            
+
                         </div>
                     </div>
                 </div>
 
             </div>
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-light navbar-shadow">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Buscar Imóveis</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-label-group">
+                                                <input type="text" id="country-floating" class="form-control"
+                                                    name="country-floating" placeholder="Country">
+                                                <label for="country-floating">Rua</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-label-group">
+                                                <input type="text" id="first-name-column" class="form-control"
+                                                    placeholder="First Name" name="fname-column">
+                                                <label for="first-name-column">Bairro</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-label-group">
+                                                <input type="text" id="last-name-column" class="form-control"
+                                                    placeholder="Last Name" name="lname-column">
+                                                <label for="last-name-column">Cidade</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-label-group">
+                                                <input type="text" id="city-column" class="form-control"
+                                                    placeholder="City" name="city-column">
+                                                <label for="city-column">Estado</label>
+                                            </div>
+                                        </div>
 
-                            <div class="navbar-wrapper">
-                                <div class="navbar-container content">
-                                    <div class="navbar-collapse" id="navbar-mobile-1">
-                                        <ul class="nav navbar-nav bookmark-icons mr-auto float-left">
-                                            <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i
-                                                        class="ficon feather icon-search"></i></a>
-                                                <div class="search-input">
-                                                    <div class="search-input-icon"><i
-                                                            class="feather icon-search primary"></i></div>
-                                                    <input class="input" type="text" placeholder="Buscar Imóvel"
-                                                        tabindex="-1" data-search="template-list">
-                                                    <div class="search-input-close"><i class="feather icon-x"></i></div>
-                                                    <ul class="search-list search-list-main"></ul>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <ul class="nav navbar-nav float-right">
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-label-group">
+                                                <input type="number" id="valorMax" class="form-control" name="valorMax"
+                                                    placeholder="Valor Total Máximo">
+                                                <label for="valorMax">Valor Total Máximo</label>
+                                            </div>
+                                        </div>
 
-                                            <li class="dropdown dropdown-notification nav-item">
-                                                <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
-                                                    Filtros <i class="fa fa-filter" aria-hidden="true"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
-                                                    <div class="sidebar-detached">
-                                                        <div class="sidebar">
-                                                            <div class="sidebar-shop" id="ecommerce-sidebar-toggler">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <div class="brands">
-                                                                            <div class="brand-title mt-1 pb-1">
-                                                                                <h6 class="filter-title mb-0">Brands
-                                                                                </h6>
-                                                                            </div>
-                                                                            <div class="brand-list" id="brands">
-                                                                                <ul class="list-unstyled">
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between align-items-center py-25">
-                                                                                        <span
-                                                                                            class="vs-checkbox-con vs-checkbox-primary">
-                                                                                            <span
-                                                                                                class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                <label class="switch">
-                                                                                                    <input
-                                                                                                        type="checkbox"
-                                                                                                        value="false">
-                                                                                                    <span
-                                                                                                        class="slider round">
-                                                                                                    </span>
-                                                                                            </span>
-                                                                                            </label>
-                                                                                            <span class="">Próximo ao
-                                                                                                metrô</span>
-                                                                                        </span>
-                                                                                        <span>746</span>
-                                                                                    </li>
+                                        <div class="col-md-3 col-12" style="text-align: center;">
+                                            <div value="casa" style="margin-right: 15px;"
+                                                class="btn btn-icon btn-flat-primary mb-1 imovelType"><i
+                                                    class="fa fa-home" aria-hidden="true"></i></div>
 
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between align-items-center py-25">
-                                                                                        <span
-                                                                                            class="vs-checkbox-con vs-checkbox-primary">
-                                                                                            <span
-                                                                                                class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                <label class="switch">
-                                                                                                    <input
-                                                                                                        type="checkbox"
-                                                                                                        value="false">
-                                                                                                    <span
-                                                                                                        class="slider round">
-                                                                                                    </span>
-                                                                                            </span>
-                                                                                            </label>
-                                                                                        </span>
-                                                                                        <span class="">Whirlpool</span>
-                                                                                        </span>
-                                                                                        <span>298</span>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
+                                            <div value="apto" style="margin-right: 15px;"
+                                                class="btn btn-icon btn-flat-primary mb-1 imovelType"><i
+                                                    class="fa fa-building-o" aria-hidden="true"></i></div>
 
+                                            <div value="quarto" style="margin-right: 15px;"
+                                                class="btn btn-icon btn-flat-primary mb-1 imovelType"><i
+                                                    class="fa fa-bed" aria-hidden="true"></i></div>
 
-                                                                        <div id="ratings">
-                                                                            <div class="ratings-title mt-1 pb-75">
-                                                                                <h6 class="filter-title mb-0">Avaliações
-                                                                                </h6>
-                                                                            </div>
-                                                                            <div class="d-flex justify-content-between">
-                                                                                <ul
-                                                                                    class="unstyled-list list-inline ratings-list mb-0">
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li>& up</li>
-                                                                                </ul>
-                                                                                <div class="stars-received">(160)</div>
-                                                                            </div>
-                                                                            <div class="d-flex justify-content-between">
-                                                                                <ul
-                                                                                    class="unstyled-list list-inline ratings-list mb-0">
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li>& up</li>
-                                                                                </ul>
-                                                                                <div class="stars-received">(176)</div>
-                                                                            </div>
-                                                                            <div class="d-flex justify-content-between">
-                                                                                <ul
-                                                                                    class="unstyled-list list-inline ratings-list mb-0">
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li>& up</li>
-                                                                                </ul>
-                                                                                <div class="stars-received">(291)</div>
-                                                                            </div>
-                                                                            <div class="d-flex justify-content-between">
-                                                                                <ul
-                                                                                    class="unstyled-list list-inline ratings-list mb-0 ">
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-warning"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li class="ratings-list-item"><i
-                                                                                            class="feather icon-star text-light"></i>
-                                                                                    </li>
-                                                                                    <li>& up</li>
-                                                                                </ul>
-                                                                                <div class="stars-received">(190)</div>
-                                                                            </div>
-                                                                        </div>
+                                        </div>
 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </li>
+                                        <div class="col-md-3">
+                                            <div id="estrelas" class="mb-2" style="font-size: medium;">
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center" id="limpeza">
+                                                    <li><a class="nav-link">Avaliação</a></li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip" data-placement="top" ><i class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
 
-                                        </ul>
-                                        </li>
-
-                                        <li class="nav-item nav-search"><a class="nav-link nav-link-search"></a>
-
-                                        </li>
-                                        </ul>
+                                        
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary mr-1 mb-1"><i
+                                                    class="fas fa-search"></i> Buscar</button>
+                                            <button type="reset"
+                                                class="btn btn-outline-danger mr-1 mb-1">Apagar</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </nav>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -401,6 +298,12 @@
     <footer class="footer footer-static footer-light">
 
     </footer>
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/swiper.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/tether.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/shepherd.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/swiper.min.js"></script>
 
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
 
