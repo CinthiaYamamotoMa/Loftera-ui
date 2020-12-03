@@ -66,25 +66,25 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
 
                     <div class="row" style="place-content: center;">
-                        
+
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <p>
-                                O Estudante poderá buscar por imóveis 
-                            de acordo com a localização de sua 
-                            instituição de ensino e por outros 
-                            estudantes com caracteristicas
-                            semelhantes.
+                                O Estudante poderá buscar por imóveis
+                                de acordo com a localização de sua
+                                instituição de ensino e por outros
+                                estudantes com caracteristicas
+                                semelhantes.
                             </p>
                         </div>
 
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <p>
                                 O Proprietário poderá cadastrar seus imóveis
-                            para disponibilizar para estudantes alugarem.
+                                para disponibilizar para estudantes alugarem.
                             </p>
                         </div>
                     </div>
@@ -106,11 +106,31 @@
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
-    <!-- END: Theme JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </body>
 
 <script>
+
+    function notificacao(confirmButton, modal_color, icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: confirmButton,
+            timer: 3000,
+            timerProgressBar: true,
+            background: modal_color,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
+    }
 
     var roles = $("#role").children(".col-lg-4");
     var role
@@ -157,25 +177,26 @@
     }
 
     function registrarRole() {
-        if(role == undefined) {
-            alert('Selecione uma opção')
+        if (role == undefined) {
+            Swal.fire('Selecione uma opção')
         } else {
             $.ajax({
-            type: 'post',
-            url: 'http://localhost:3000/role',
-            data: {
-                role: role.getAttribute("id"),
-                userId: JSON.parse(localStorage.currentUser).id
-            },
-            datatype: "application/json",
-            success: function (retorno) {
-                alert('Conta Cadastrada')
-                window.location = `/imoveis`
-            },
-            error: function (retorno) {
-                console.log('error', retorno)
-            }
-        })
+                type: 'post',
+                url: 'http://localhost:3000/role',
+                data: {
+                    role: role.getAttribute("id"),
+                    userId: JSON.parse(localStorage.currentUser).id
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    notificacao(false, '#626262', 'success', 'Conta Cadastrada')
+                    window.location = `/imoveis`
+                },
+                error: function (retorno) {
+                    notificacao(false, '#d33', 'error', 'Não foi possível cadastrar sua conta')
+                    console.log('error', retorno)
+                }
+            })
         }
     }
 </script>

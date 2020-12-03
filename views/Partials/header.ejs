@@ -216,6 +216,8 @@
         if (user.id != undefined && user.id != null && user.id != "") {
             $("#navUser").removeAttr('style')
             $("#user").html(user.name)
+            $("#acessar").attr("style", "display: none;");
+
             if(user.image.deleted == true) {
                 user.image.name = "default.png"
             } else {
@@ -225,7 +227,6 @@
 
             $("#chatAndInterested").removeAttr('style')
 
-            $("#acessar").attr("style", "display: none;");
         }
     }
 
@@ -245,7 +246,7 @@
             var id = JSON.parse(localStorage.currentUser).id
             window.location = `/imovel/interesse/${id}`
         } else {
-            alert('Faça login para visualizar seus imóveis favoritos')
+            Swal.fire('Faça Login')
         }
     }
 

@@ -52,7 +52,8 @@
                                         <!-- users edit media object start -->
                                         <div class="media mb-2">
                                             <a class="mr-2 my-25" href="#">
-                                                <img id="imagemUsuario" src="../../../app-assets/images/portrait/small/<%= user.image.deleted ? 'default.png' : user.image.name%>"
+                                                <img id="imagemUsuario"
+                                                    src="../../../app-assets/images/portrait/small/<%= user.image.deleted ? 'default.png' : user.image.name%>"
                                                     alt="users avatar" class="users-avatar-shadow rounded" height="90"
                                                     width="90">
                                             </a>
@@ -69,14 +70,16 @@
                                                         </div>
                                                         <div style="display: none;" id="uploadImagem">
                                                             <input id="foto" type="file" name="avatar" accept="image/*"
-                                                            class="btn btn-primary d-none d-sm-block mr-75"></input>
-                                                            <input style="display: none;" type="text" id="userId" name="userId"></input>
-                                                            <button type="submit" style="display: none;" id="salvarFoto" class="btn btn-primary d-none d-sm-block mr-75">
+                                                                class="btn btn-primary d-none d-sm-block mr-75"></input>
+                                                            <input style="display: none;" type="text" id="userId"
+                                                                name="userId"></input>
+                                                            <button type="submit" style="display: none;" id="salvarFoto"
+                                                                class="btn btn-primary d-none d-sm-block mr-75">
                                                                 <i class="fas fa-upload"></i> Enviar
                                                             </button>
                                                         </div>
                                                     </form>
-                                                    
+
                                                     <button id="apagarFoto" onclick="deleteAvatar()"
                                                         class="btn btn-outline-danger d-none d-sm-block">
                                                         <i class="feather icon-trash-2"></i>
@@ -135,8 +138,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Celular</label>
-                                                        <input type="text" class="form-control" name="cellPhone" value="<%= user.cellPhone %>"
-                                                            id="cellPhone">
+                                                        <input type="text" class="form-control" name="cellPhone"
+                                                            value="<%= user.cellPhone %>" id="cellPhone">
                                                     </div>
                                                 </div>
 
@@ -340,14 +343,32 @@
 
     <script src="../../../app-assets/js/scripts/pages/app-user.js"></script>
     <script src="../../../app-assets/js/scripts/navs/navs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <!-- END: Page JS-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="../../../app-assets/js/scripts/jquery.mask.js"></script>
     <script type="text/javascript">
 
+        function notificacao(confirmButton, modal_color, icon, message) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: confirmButton,
+                timer: 3000,
+                timerProgressBar: true,
+                background: modal_color,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: icon,
+                title: message
+            })
+        }
 
         function buscar_user(userId) {
             //debugger;
@@ -419,36 +440,47 @@
             $("#editarFoto").attr("style", "display: none;")
             $("#uploadImagem").removeAttr('style')
             $("#userId").val(JSON.parse(localStorage.currentUser).id)
-            
+
             $("#salvarFoto").removeAttr('style')
             $("#salvarFoto").attr("style", "margin-top: -44px; left: 412px !important;")
             $("#apagarFoto").attr("style", "left: 128px; !important;")
         }
 
         function deleteAvatar() {
-            $.ajax({
-                type: 'post',
-                url: '/deleteAvatar',
-                data: JSON.stringify({
-                    userId: 1
-                }),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (retorno) {
-                    console.log('success', retorno);
-                    alert('Foto Atualizada com sucesso!');
-                    window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
-                },
-                error: function (retorno) {
-                    console.log('error', retorno)
-                    alert("Nâo foi possível atualizar seus dados \n" + retorno)
+            Swal.fire({
+                title: 'Tem certeza que deseja deletar sua foto?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#218838',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<i class="far fa-trash-alt"></i> Sim, apagar',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/deleteAvatar',
+                        data: JSON.stringify({
+                            userId: 1
+                        }),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (retorno) {
+                            console.log('success', retorno);
+                            notificacao(false, '#626262', 'success', 'Foto Apagada')
+                            window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
+                        },
+                        error: function (retorno) {
+                            console.log('error', retorno)
+                            notificacao(false, '#ea5455', 'error', 'Não foi possível apagar sua foto')
+                        }
+                    })
                 }
             })
         }
 
         function edit_user_account() {
             let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
-            //debugger;
             $.ajax({
                 type: 'put',
                 url: site,
@@ -464,13 +496,13 @@
                 contentType: "application/json",
                 success: function (retorno) {
                     console.log('success', retorno);
-                    alert('Dados Atualizados com sucesso!');
+                    notificacao(false, '#626262', 'success', 'Dados Atualizados com sucesso!')
                     window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
 
                 },
                 error: function (retorno) {
                     console.log('error', retorno)
-                    alert("Nâo foi possível atualizar seus dados \n" + retorno)
+                    notificacao(false, '#ea5455', 'error', 'Não foi possível atualizar seus dados')
                 }
             })
         }
@@ -490,11 +522,12 @@
                 success: function (retorno) {
                     if (retorno.data.id != null && retorno.data.id != undefined && retorno.data.id != "") {
                         console.log('success', retorno);
-                        alert("Senha Atualizada com sucesso");
+                        notificacao(false, '#626262', 'success', 'Senha Atualizada')
                         window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
                     }
                     else {
-                        alert(retorno.data);
+                        notificacao(false, '#ea5455', 'error', 'Não foi possível atualizar sua senha')
+
                         $("#oldPassword").val("");
                         $("#newPassword").val("");
                         $("#confPassword").val("");
@@ -503,36 +536,42 @@
                 },
                 error: function (retorno) {
                     console.log('error', retorno)
-                    alert("Não foi possível atualizar seus dados \n" + retorno.data)
+                    notificacao(false, '#ea5455', 'error', 'Não foi possível atualizar sua senha')
                 }
             })
         }
 
         function user_delete() {
-            //debugger;
-            let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
-            let r = confirm("Gostaria de deletar sua conta?")
-            if (r == true) {
-                $.ajax({
-                    type: 'delete',
-                    url: site,
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (retorno) {
-                        console.log('success', retorno);
-                        alert('Conta Deletada com sucesso');
-                        window.location = "/auth-login";
+            Swal.fire({
+                title: 'Tem certeza que deseja deletar sua conta?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#218838',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<i class="far fa-trash-alt"></i> Sim, apagar conta',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
 
-                    },
-                    error: function (retorno) {
-                        console.log('error', retorno)
-                        alert("Nâo foi possível atualizar seus dados \n" + retorno)
-                    }
-                })
-            }
-            else {
-                window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
-            }
+                    $.ajax({
+                        type: 'delete',
+                        url: site,
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (retorno) {
+                            console.log('success', retorno);
+                            notificacao(false, '#626262', 'success', 'Conta Apagada')
+                            window.location = "/auth-login";
+
+                        },
+                        error: function (retorno) {
+                            console.log('error', retorno)
+                            notificacao(false, '#ea5455', 'error', 'Não foi possível apagar sua senha')
+                        }
+                    })
+                }
+            })
         }
 
         $(document).ready(function () {

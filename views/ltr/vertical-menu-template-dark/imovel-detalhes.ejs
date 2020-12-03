@@ -61,21 +61,21 @@
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mb-1 mt-1">
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Rua </span>
+                                                        <span class="text-bold-600 ml-50">Rua&nbsp;</span>
                                                         <%= imovel.imovel.street %>
                                                     </div>
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Bairro </span>
+                                                        <span class="text-bold-600 ml-50">Bairro&nbsp;</span>
                                                         <%= imovel.imovel.district %>
                                                     </div>
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mt-1">
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Cidade </span>
+                                                        <span class="text-bold-600 ml-50">Cidade&nbsp;</span>
                                                         <%= imovel.imovel.city %>
                                                     </div>
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Estado </span>
+                                                        <span class="text-bold-600 ml-50">Estado&nbsp;</span>
                                                         <%= imovel.imovel.state %>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                                     <div class="series-info d-flex align-items-center">
                                                         <span class="text-bold-600 ml-50">Condomínio</span>
                                                         <a href="#modalCondominio" data-toggle="modal"
-                                                            data-target="#modalCondominio"> <i
+                                                            data-target="#modalCondominio"><i
                                                                 class="fa fa-info-circle ml-1"
                                                                 aria-hidden="true"></i></a>
                                                     </div>
@@ -155,7 +155,8 @@
                                         </div>
                                     </div>
                                     <div style="margin-top: 26px;">
-                                        <button style="padding-top: 19px; padding-bottom: 19px;" type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
+                                        <button style="padding-top: 19px; padding-bottom: 19px;" type="button"
+                                            class="btn btn-primary mr-1 mb-1" data-toggle="modal"
                                             data-target="#interessados" id="listarInteressados">
                                             <i class="fas fa-users"></i>
                                             Listar Interessados
@@ -694,9 +695,8 @@
     <div class="drag-target"></div>
 
     <footer class="footer footer-static footer-light">
-        <button class="btn btn-danger btn-icon scroll-top"
-            style="left: 30px !important; display: none;" type="button" onclick="deleteImovel()"
-            id="deleteImovel">
+        <button class="btn btn-danger btn-icon scroll-top" style="left: 30px !important; display: none;" type="button"
+            onclick="deleteImovel()" id="deleteImovel">
             Deletar Imóvel
         </button>
         <button class="btn btn-<%= imovel.imovel.avaliable ? 'success' : 'danger' %> btn-icon scroll-top"
@@ -733,9 +733,29 @@
     <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
 
     <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
+
+        function notificacao(confirmButton, modal_color, icon, message) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: confirmButton,
+                timer: 3000,
+                timerProgressBar: true,
+                background: modal_color,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: icon,
+                title: message
+            })
+        }
 
         if (localStorage.getItem("currentUser") == null) {
             $("#avaliar").attr("disabled", "true");
@@ -747,7 +767,7 @@
 
         if (JSON.parse(localStorage.currentUser).id == "<%= imovel.imovel.product.userId %>") {
             $("#tenhointeresse").attr("style", "display: none;");
-            
+
             $("#updateAvaliable").removeAttr('style')
 
             $("#deleteImovel").removeAttr('style')
@@ -764,39 +784,50 @@
                 },
                 datatype: "application/json",
                 success: function (retorno) {
-                    alert('Imóvel Atualizado')
+                    notificacao(false, '#626262', 'success', 'Status do Imóvel Atualizado')
                     document.location.reload(true);
-                    console.log('certo >>> ', retorno)
                 },
                 error: function (retorno) {
+                    notificacao(false, '#d33', 'error', 'Não foi possível alterar o status do imóvel')
                     console.error('error', retorno)
                 }
             })
         }
 
         function deleteImovel() {
-            // @todo Confirmar se quer deletar usando um sweet alert
-            $.ajax({
-                type: 'post',
-                url: 'http://localhost:3000/deleteImovel',
-                data: {
-                    productId: "<%= imovel.imovel.id %>",
-                },
-                datatype: "application/json",
-                success: function (retorno) {
-                    alert('Imóvel Deletado')
-                    window.location = "/imoveis";
-                },
-                error: function (retorno) {
-                    console.error('error', retorno)
+            Swal.fire({
+                title: 'Tem certeza que deseja deletar seu imóvel?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#218838',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<i class="far fa-trash-alt"></i> Sim, apagar',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'http://localhost:3000/deleteImovel',
+                        data: {
+                            productId: "<%= imovel.imovel.id %>",
+                        },
+                        datatype: "application/json",
+                        success: function (retorno) {
+                            notificacao(false, '#626262', 'success', 'Imóvel Deletado')
+                            window.location = "/imoveis";
+                        },
+                        error: function (retorno) {
+                            notificacao(false, '#ea5455', 'error', 'Não foi possível apagar seu imóvel')
+                            console.error('error', retorno)
+                        }
+                    })
                 }
             })
         }
 
         function publicarComentario() {
-            // @todo: verificar se o usuário está logado
             if ($("#comentario").val() == "") {
-
+                notificacao(false, '#626262', 'warning', 'Escreva um comentário para publicar')
             } else {
                 if (localStorage.currentUser) {
                     var id = JSON.parse(localStorage.currentUser).id
@@ -817,7 +848,7 @@
                         }
                     })
                 } else {
-                    alert('Faça login para comentar')
+                    notificacao(false, '#626262', 'warning', 'Faça login para comentar')
                 }
             }
         }
@@ -947,16 +978,16 @@
                     dataType: "application/json",
                     success: function (retorno) {
                         console.log('>>>>> ', retorno)
-                        alert('Avaliação Registrada')
+                        notificacao(false, '#626262', 'success', 'Avaliação Registrada')
                     },
                     error: function (retorno) {
                         console.error('error', retorno)
-                        alert('Avaliação Registrada')
+                        notificacao(false, '#d33', 'error', 'Não foi possível registrar sua avaliação')
                         document.location.reload(true);
                     }
                 })
             } else {
-                alert('Avalie todos os itens')
+                notificacao(false, '#626262', 'info', 'Avalie Todos os Itens')
             }
         }
 
@@ -977,8 +1008,8 @@
                 },
                 datatype: "application/json",
                 success: function (retorno) {
-                    console.log(retorno)
-                    alert('Imóvel Favoritado')
+                    notificacao(false, '#626262', 'success', 'Sucesso')
+                    document.location.reload(true);
                 },
                 error: function (retorno) {
                     console.error('error', retorno)
