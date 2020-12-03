@@ -1,5 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const multer  = require('multer')
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'app-assets/images/portrait/small/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+const upload = multer({ storage })
+
 const userController = require('./controllers/userController');
 const interestedController = require('./controllers/interestedController');
 const commentController = require('./controllers/commentController');
@@ -53,8 +64,20 @@ router.post('/caracteristicas', async (req, res) => {
 })
 
 // Perfil
-router.get('/app-user-edit', (req, res) => {
+router.get('/app-user-edit/:id', async (req, res) => {
+    var user = await userController.findById(req, res)
+    res.locals = { user }
     res.render('ltr/vertical-menu-template-dark/app-user-edit.ejs')
+})
+
+// Avatar
+router.post('/avatar', upload.single("avatar"), async (req, res) => {
+    userController.updateAvatar(req, res)
+
+})
+
+router.post('/deleteAvatar', async (req, res) => {
+    userController.deleteAvatar(req, res)
 })
 
 // Cadastro Imóvel

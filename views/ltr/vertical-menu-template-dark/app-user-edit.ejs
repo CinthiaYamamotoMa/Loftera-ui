@@ -52,12 +52,12 @@
                                         <!-- users edit media object start -->
                                         <div class="media mb-2">
                                             <a class="mr-2 my-25" href="#">
-                                                <img src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
+                                                <img id="imagemUsuario" src="../../../app-assets/images/portrait/small/<%= user.image.deleted ? 'default.png' : user.image.name%>"
                                                     alt="users avatar" class="users-avatar-shadow rounded" height="90"
                                                     width="90">
                                             </a>
                                             <div class="media-body mt-50">
-                                                <h4 class="media-heading" id="nomeUsuario"></h4>
+                                                <h4 class="media-heading" id="nomeUsuario"><%= user.name %></h4>
                                                 <div class="col-12 d-flex mt-1 px-0">
                                                     <form method="post" action="/avatar" enctype="multipart/form-data">
                                                         <div id="editarFoto">
@@ -70,18 +70,18 @@
                                                         <div style="display: none;" id="uploadImagem">
                                                             <input id="foto" type="file" name="avatar" accept="image/*"
                                                             class="btn btn-primary d-none d-sm-block mr-75"></input>
-                                                            
+                                                            <input style="display: none;" type="text" id="userId" name="userId"></input>
+                                                            <button type="submit" style="display: none;" id="salvarFoto" class="btn btn-primary d-none d-sm-block mr-75">
+                                                                <i class="fas fa-upload"></i> Enviar
+                                                            </button>
                                                         </div>
-                                                        
                                                     </form>
-                                                    <button class="btn btn-primary d-none d-sm-block mr-75">
-
-                                                    </button>
-                                                    <a href="#" id="apagarFoto"
+                                                    
+                                                    <button id="apagarFoto" onclick="deleteAvatar()"
                                                         class="btn btn-outline-danger d-none d-sm-block">
                                                         <i class="feather icon-trash-2"></i>
                                                         Apagar
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                                                             <label>Nome Completo</label>
                                                             <input type="text" class="form-control"
                                                                 placeholder="Nome Completo" name="name" id="name"
-                                                                required
+                                                                required value="<%= user.name %>"
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
@@ -111,8 +111,7 @@
                                                             <label>Descrição do Perfil</label>
                                                             <textarea class="form-control" name="description"
                                                                 id="description" required
-                                                                data-validation-required-message="Preencha o campo">
-                                                            </textarea>
+                                                                data-validation-required-message="Preencha o campo"><%= user.description %></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,7 +120,7 @@
                                                         <div class="controls">
                                                             <label>CPF</label>
                                                             <input type="text" class="form-control" name="cpf" id="cpf"
-                                                                required
+                                                                required value="<%= user.cpf %>"
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
@@ -130,13 +129,13 @@
                                                         <div class="controls">
                                                             <label>E-mail</label>
                                                             <input type="email" class="form-control" name="email"
-                                                                id="email" required
+                                                                id="email" required value="<%= user.email %>"
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Celular</label>
-                                                        <input type="text" class="form-control" name="cellPhone"
+                                                        <input type="text" class="form-control" name="cellPhone" value="<%= user.cellPhone %>"
                                                             id="cellPhone">
                                                     </div>
                                                 </div>
@@ -353,28 +352,31 @@
         function buscar_user(userId) {
             //debugger;
             let site = "http://localhost:3000/user/" + userId;
-            $.ajax({
-                type: 'get',
-                url: site,
-                dataType: "json",
-                contentType: "application/json",
-                success: function (retorno) {
-                    console.log('success', retorno);
-                    var userInfo = retorno.data;
-                    $("#name").val(userInfo.name);
-                    $("#gender").val(userInfo.gender);
-                    $("#description").val(userInfo.description);
-                    $("#cpf").val(userInfo.cpf);
-                    $("#email").val(userInfo.email);
-                    $("#cellPhone").val(userInfo.cellPhone);
+            // $.ajax({
+            //     type: 'get',
+            //     url: site,
+            //     dataType: "json",
+            //     contentType: "application/json",
+            //     success: function (retorno) {
+            //         console.log('success', retorno);
+            //         var userInfo = retorno.data;
+            //         $("#name").val(userInfo.name);
+            //         $("#gender").val(userInfo.gender);
+            //         $("#description").val(userInfo.description);
+            //         $("#cpf").val(userInfo.cpf);
+            //         $("#email").val(userInfo.email);
+            //         $("#cellPhone").val(userInfo.cellPhone);
+            //         var image = JSON.parse(localStorage.currentUser).image.name
+            //         console.log(image)
+            //         $("#imagemUsuario").removeAttr('src')
+            //         $("#imagemUsuario").attr('src', `../../../app-assets/images/portrait/small/${image}`)
+            //         $("#nomeUsuario").html(userInfo.name)
 
-                    $("#nomeUsuario").html(userInfo.name)
-
-                },
-                error: function (retorno) {
-                    console.log('error', retorno)
-                }
-            })
+            //     },
+            //     error: function (retorno) {
+            //         console.log('error', retorno)
+            //     }
+            // })
         }
 
         $("#changePassword").click(function (e) {
@@ -416,6 +418,32 @@
         function displayUploadInput() {
             $("#editarFoto").attr("style", "display: none;")
             $("#uploadImagem").removeAttr('style')
+            $("#userId").val(JSON.parse(localStorage.currentUser).id)
+            
+            $("#salvarFoto").removeAttr('style')
+            $("#salvarFoto").attr("style", "margin-top: -44px; left: 412px !important;")
+            $("#apagarFoto").attr("style", "left: 128px; !important;")
+        }
+
+        function deleteAvatar() {
+            $.ajax({
+                type: 'post',
+                url: '/deleteAvatar',
+                data: JSON.stringify({
+                    userId: 1
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (retorno) {
+                    console.log('success', retorno);
+                    alert('Foto Atualizada com sucesso!');
+                    window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
+                },
+                error: function (retorno) {
+                    console.log('error', retorno)
+                    alert("Nâo foi possível atualizar seus dados \n" + retorno)
+                }
+            })
         }
 
         function edit_user_account() {
@@ -437,7 +465,7 @@
                 success: function (retorno) {
                     console.log('success', retorno);
                     alert('Dados Atualizados com sucesso!');
-                    window.location = "/app-user-edit";
+                    window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
 
                 },
                 error: function (retorno) {
@@ -463,7 +491,7 @@
                     if (retorno.data.id != null && retorno.data.id != undefined && retorno.data.id != "") {
                         console.log('success', retorno);
                         alert("Senha Atualizada com sucesso");
-                        window.location = "/app-user-edit";
+                        window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
                     }
                     else {
                         alert(retorno.data);
@@ -503,10 +531,9 @@
                 })
             }
             else {
-                window.location = "/app-user-edit"
+                window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
             }
         }
-
 
         $(document).ready(function () {
             let user = JSON.parse(localStorage.getItem("currentUser"));

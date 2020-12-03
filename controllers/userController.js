@@ -2,7 +2,7 @@ const axios = require('axios').default;
 
 module.exports = {
 
-    store(req, res) {
+    async store(req, res) {
         axios({
             method: 'post',
             url: `http://localhost:3000/users`,
@@ -33,20 +33,59 @@ module.exports = {
             });
     },
 
-    findById(req, res) {
-        axios({
+    async findById(req, res) {
+        var user
+        await axios({
             method: 'get',
             url: `http://localhost:3000/user`,
-            params: { id: req.query.userId}
+            data: { id: req.params.id }
         })
-        .then((retorno) => {
-            res.status(200);
-            console.log('user >>>> ', retorno)
-            res.locals = { user: retorno.data.retorno }
-            res.send(retorno.data.retorno)
+            .then((retorno) => {
+                res.status(200);
+                user = retorno.data.data
+            })
+            .catch((error) => {
+                user = null
+                console.log(error)
+            })
+            return user
+    },
+
+    updateAvatar(req, res) {
+        const { filename } = req.file;
+        const userId = req.body.userId;
+        axios({
+            method: 'post',
+            url: `http://localhost:3000/avatar`,
+            data: {
+                userId: userId,
+                filename: filename
+            }
         })
-        .catch((error) => {
-            console.log(error)
+            .then((retorno) => {
+                res.status(200);
+                res.send(retorno.data.status)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    },
+
+    deleteAvatar(req, res) {
+        const userId = req.body.userId;
+        axios({
+            method: 'post',
+            url: `http://localhost:3000/deleteAvatar`,
+            data: {
+                userId: userId,
+            }
         })
+            .then((retorno) => {
+                res.status(200);
+                res.json(retorno.data.status)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 }
