@@ -2,9 +2,7 @@
   "use strict";
 
   // Chat user list
-  if($('.chat-application .chat-user-list').length > 0){
-    var chat_user_list = new PerfectScrollbar(".chat-user-list");
-  }
+  
 
   // Chat user profile
   if($('.chat-application .profile-sidebar-area .scroll-area').length > 0){
@@ -12,11 +10,7 @@
   }
 
   // Chat area
-  if($('.chat-application .user-chats').length > 0){
-    var chat_user = new PerfectScrollbar(".user-chats", {
-      wheelPropagation: false
-    });
-  }
+  
 
   // User profile right area
   if($('.chat-application .user-profile-sidebar-area').length > 0){
@@ -85,10 +79,7 @@
   });
 
   // autoscroll to bottom of Chat area
-  var chatContainer = $(".user-chats");
-  $(".chat-users-list-wrapper li").on("click", function () {
-    chatContainer.animate({ scrollTop: chatContainer[0].scrollHeight }, 400)
-  });
+ 
 
   // Favorite star click
   $(".chat-application .favorite i").on("click", function(e) {
@@ -118,7 +109,7 @@
   }
 
   // Scroll Chat area
-  $(".user-chats").scrollTop($(".user-chats > .chats").height());
+
 
   // Filter
   $(".chat-application #chat-search").on("keyup", function() {
@@ -156,14 +147,3 @@ $(window).on("resize", function() {
     });
   }
 });
-
-// Add message to chat
-function enter_chat(source) {
-   var message = $(".message").val();
-   if(message != ""){
-  var html = '<div class="chat-content">' + "<p>" + message + "</p>" + "</div>";
-  $(".chat:last-child .chat-body").append(html);
-  $(".message").val("");
-  $(".user-chats").scrollTop($(".user-chats > .chats").height());
-   }
-}
