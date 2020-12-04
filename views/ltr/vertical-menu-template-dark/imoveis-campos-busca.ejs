@@ -77,10 +77,10 @@
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
                             <img class="img-fluid bg-cover rounded-0 w-100"
-                                    src="../../../app-assets/images/profile/user-uploads/logoo-removebg-preview (1).png"
-                                    alt="User Profile Image" style="width: 5% !important;">
+                                src="../../../app-assets/images/profile/user-uploads/logoo-removebg-preview (1).png"
+                                alt="User Profile Image" style="width: 5% !important;">
                             <h2 class="content-header-title float-left mb-0">Loftera
-                                
+
                             </h2>
                         </div>
                     </div>
@@ -127,26 +127,26 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-3 col-12">
+                                                        <div class="col-md-3 col-12" id="tipo">
                                                             <div value="casa" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1 imovelType"><i
+                                                                class="btn btn-icon btn-flat-primary mb-1"><i
                                                                     class="fa fa-home" aria-hidden="true"></i></div>
 
                                                             <div value="apto" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1 imovelType"><i
+                                                                class="btn btn-icon btn-flat-primary mb-1"><i
                                                                     class="fa fa-building-o" aria-hidden="true"></i>
                                                             </div>
 
                                                             <div value="quarto" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1 imovelType"><i
+                                                                class="btn btn-icon btn-flat-primary mb-1"><i
                                                                     class="fa fa-bed" aria-hidden="true"></i></div>
 
                                                         </div>
 
                                                         <div class="col-md-2 col-12" style="right: 92px;">
-                                                            <div id="estrelas" class="mb-2">
+                                                            <div class="mb-2">
                                                                 <ul class="list-unstyled users-list m-0  d-flex align-items-center"
-                                                                    id="limpeza">
+                                                                    id="estrelas">
                                                                     <li><a class="nav-link">Avaliação</a></li>
                                                                     <li data-toggle="tooltip"
                                                                         data-popup="tooltip-custom"
@@ -238,5 +238,39 @@
     <script src="../../../app-assets/js/scripts/components.js"></script>
 
 </body>
+
+<script>
+    var avaliacaoImovel;
+
+    var estrelas = $("#estrelas").children(".pull-up")
+    estrelas.on("click", (event) => {
+        for (i = 0; i < estrelas.length; i++) {
+            removeAttribute(estrelas[i])
+        }
+        var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
+        for (i = 0; i < avaliacao; i++) {
+            addAttribute(estrelas[i]);
+        }
+        avaliacaoImovel = avaliacao
+    })
+
+    var tipo = $("#tipo").children("div")
+    tipo.on("click", (event) => {
+        for (i = 0; i < tipo.length; i++) {
+            $(tipo[i]).removeClass("imovelType")
+        }
+        console.log(event.currentTarget)
+
+        $(event.currentTarget).addClass("imovelType")
+    })
+
+    function addAttribute(clicked) {
+        clicked.setAttribute("style", "color: #7472f0 !important;");
+    }
+
+    function removeAttribute(clicked) {
+        clicked.removeAttribute("style");
+    }
+</script>
 
 </html>
