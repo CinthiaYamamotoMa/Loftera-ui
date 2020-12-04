@@ -103,6 +103,19 @@ router.get('/imovel/interesse/:id', async (req, res) => {
 // Crud Imóvel
 
 
+// Crud Imóvel
+router.get('/imoveis/busca', async (req, res) => {
+    var imoveis = await imovelController.findAll(req, res);
+    res.locals = { imoveis }
+    res.render('ltr/vertical-menu-template-dark/imoveis-busca.ejs')
+})
+
+router.get('/imoveis/buscar', async (req, res) => {
+    var imoveis = await imovelController.findAll(req, res);
+    res.locals = { imoveis }
+    res.render('ltr/vertical-menu-template-dark/imoveis-campos-busca.ejs')
+})
+
 // Visualizar Imóvel
 router.get('/imovel/detalhes/:id', async (req, res) => {
     var imovel = await imovelController.findById(req, res)
