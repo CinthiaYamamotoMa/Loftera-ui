@@ -447,6 +447,7 @@
         }
 
         function deleteAvatar() {
+
             Swal.fire({
                 title: 'Tem certeza que deseja deletar sua foto?',
                 icon: 'question',
@@ -467,6 +468,10 @@
                         contentType: "application/json",
                         success: function (retorno) {
                             console.log('success', retorno);
+                            var user = JSON.parse(localStorage.currentUser)
+                            user.image.name = "default.png"
+                            localStorage.removeItem('currentUser')
+                            localStorage.setItem('currentUser', JSON.stringify(user))
                             notificacao(false, '#626262', 'success', 'Foto Apagada')
                             window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
                         },
