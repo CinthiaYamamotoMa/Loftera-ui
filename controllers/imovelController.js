@@ -36,4 +36,22 @@ module.exports.findAll = async function (req, res) {
     })
     return imoveis
 
+},
+
+module.exports.findPesquisa = async function (req, res) {
+
+    var imoveis
+    await axios({
+        method: 'get',
+        url: `http://localhost:3000/imoveis/busca`,
+        data: req.query.pesquisa
+    })
+    .then((retorno) => {
+        res.status(200);
+        res.send(retorno.data.data)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
 }

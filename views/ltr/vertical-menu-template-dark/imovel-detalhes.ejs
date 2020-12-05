@@ -61,21 +61,21 @@
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mb-1 mt-1">
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Rua </span>
+                                                        <span class="text-bold-600 ml-50">Rua&nbsp;</span>
                                                         <%= imovel.imovel.street %>
                                                     </div>
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Bairro </span>
+                                                        <span class="text-bold-600 ml-50">Bairro&nbsp;</span>
                                                         <%= imovel.imovel.district %>
                                                     </div>
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mt-1">
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Cidade </span>
+                                                        <span class="text-bold-600 ml-50">Cidade&nbsp;</span>
                                                         <%= imovel.imovel.city %>
                                                     </div>
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Estado </span>
+                                                        <span class="text-bold-600 ml-50">Estado&nbsp;</span>
                                                         <%= imovel.imovel.state %>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                                     <div class="series-info d-flex align-items-center">
                                                         <span class="text-bold-600 ml-50">Condomínio</span>
                                                         <a href="#modalCondominio" data-toggle="modal"
-                                                            data-target="#modalCondominio"> <i
+                                                            data-target="#modalCondominio"><i
                                                                 class="fa fa-info-circle ml-1"
                                                                 aria-hidden="true"></i></a>
                                                     </div>
@@ -154,50 +154,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="">
-                                        <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
-                                            data-target="#interessados">
+                                    <div style="margin-top: 26px;">
+                                        <button style="padding-top: 19px; padding-bottom: 19px;" type="button"
+                                            class="btn btn-primary mr-1 mb-1" data-toggle="modal"
+                                            data-target="#interessados" id="listarInteressados">
                                             <i class="fas fa-users"></i>
-                                            Listar Interessados</button>
-
-                                        <div class="modal fade" id="interessados" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable modal-xs modal-dialog-centered"
-                                                role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-primary white">
-                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">
-                                                            Interessados neste imóvel <i class="far fa-heart"></i>
-                                                        </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <% for (var i = 0; i < imovel.imovel.product.interessados.length; i++) { %>
-                                                        <div
-                                                            class="d-flex justify-content-start align-items-center mb-1">
-                                                            <div class="avatar mr-50">
-                                                                <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
-                                                                    alt="avtar img holder" height="35" width="35">
-                                                            </div>
-                                                            <div class="user-page-info">
-                                                                <h6 class="mb-0">
-                                                                    <%= imovel.imovel.product.interessados[i].name %>
-                                                                </h6>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="conversar('<%= imovel.imovel.product.interessados[i].id %>')"
-                                                                class="btn btn-primary btn-icon ml-auto">
-                                                                <i class="far fa-comment-alt"></i>
-                                                            </button>
-                                                        </div>
-                                                        <% } %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            Listar Interessados
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +169,8 @@
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-between pb-0">
                                             <h4>Proprietário</h4>
-                                            <button type="button"
+                                            <button type="button" id="conversar"
+                                                onclick="criar_chat('<%= imovel.imovel.product.user.id %>', '../../../app-assets/images/portrait/small/<%= imovel.imovel.product.user.image.name %>', '<%= imovel.imovel.product.user.name %>')"
                                                 class="btn btn-flat-primary border-primary text-primary mr-1 mb-1"><i
                                                     class="ficon feather icon-message-square"></i> Conversar</button>
                                         </div>
@@ -215,7 +179,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                                         <div class="avatar mr-50">
-                                                            <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
+                                                            <img src="../../../app-assets/images/portrait/small/<%= imovel.imovel.product.user.image.name %>"
                                                                 alt="avtar img holder" height="35" width="35">
                                                         </div>
                                                         <div class="user-page-info">
@@ -282,7 +246,39 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaLimpeza" class="mb-2" style="display: none;">
-                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="limpeza">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -294,7 +290,39 @@
                                                     aria-describedby="example-caption-4"></div>
                                             </div>
                                             <div id="estrelaComunicacao" class="mb-2" style="display: none;">
-                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="comunicacao">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -306,7 +334,39 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaCheckin" class="mb-2" style="display: none;">
-                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="checkin">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -318,7 +378,39 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaPrecisao" class="mb-2" style="display: none;">
-                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="precisao">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -330,7 +422,39 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaLocalizacao" class="mb-2" style="display: none;">
-                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="localizacao">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -342,7 +466,39 @@
                                                 </div>
                                             </div>
                                             <div id="estrelaValor" class="mb-2" style="display: none;">
-                                                <%- include ('../../Partials/avaliacao.ejs'); %>
+                                                <ul class="list-unstyled users-list m-0  d-flex align-items-center"
+                                                    id="valor">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="1" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="2" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="3" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="4" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-placement="bottom" class="pull-up">
+                                                        <a class="nav-link" value="5" data-toggle="tooltip"
+                                                            data-placement="top"><i
+                                                                class="ficon feather icon-star"></i></a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
@@ -351,7 +507,7 @@
                                             Avaliar Imóvel
                                         </button>
                                         <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal"
-                                            id="salvarAvaliacao" style="display: none;">
+                                            id="salvarAvaliacao" onclick="avaliar()" style="display: none;">
                                             <i class="fas fa-save"></i>
                                             Salvar Avaliação
                                         </button>
@@ -373,7 +529,7 @@
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
                                                     <div class="media-left"><span><img class="round"
-                                                                src="../../../app-assets/images/portrait/small/avatar-s-10.jpg"
+                                                                src="../../../app-assets/images/portrait/small/<%= imovel.imovel.product.comments[i].user.image.name %>"
                                                                 alt="avatar" height="40" width="40"></span></div>
                                                     <div class="media-body"
                                                         style="margin-left: 10px; margin-right: 3px;">
@@ -395,7 +551,7 @@
                                                     placeholder="Add Comment"></textarea>
                                                 <label for="label-textarea">Adicionar Comentário</label>
                                             </fieldset>
-                                            <button type="button" onclick="publicarComentario()"
+                                            <button type="button" onclick="publicarComentario()" id="publicar"
                                                 class="btn btn-primary mr-1 mb-1">Publicar</button>
                                         </div>
                                     </div>
@@ -447,135 +603,44 @@
                         </div>
                     </div>
 
+                </section>
 
-                    <div class="row match-height">
-                        <div class="col-lg-4 col-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="card-header">
-                                        <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> Jardim São
-                                            Caetano</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="swiper-fade-effect swiper-container">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/pages/imovel/bedroom.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-19.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-18.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-17.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-16.jpg"
-                                                        alt="banner">
-                                                </div>
-                                            </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination swiper-pagination-white"></div>
-                                            <!-- Add Arrows -->
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="modal fade" id="interessados" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-xs modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary white">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                    Interessados neste imóvel <i class="far fa-heart"></i>
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="card-header">
-                                        <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> Jardim São
-                                            Caetano</h4>
+                            <div class="modal-body">
+                                <% for (var i = 0; i < imovel.imovel.product.interessados.length; i++) { %>
+                                <div class="d-flex justify-content-start align-items-center mb-1">
+                                    <div class="avatar mr-50">
+                                        <img src="../../../app-assets/images/portrait/small/<%= imovel.imovel.product.interessados[i].image.name %>"
+                                            alt="avtar img holder" height="35" width="35">
                                     </div>
-                                    <div class="card-body">
-                                        <div class="swiper-fade-effect swiper-container">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/pages/imovel/bedroom.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-19.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-18.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-17.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-16.jpg"
-                                                        alt="banner">
-                                                </div>
-                                            </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination swiper-pagination-white"></div>
-                                            <!-- Add Arrows -->
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
+                                    <div class="user-page-info">
+                                        <h6 class="mb-0">
+                                            <%= imovel.imovel.product.interessados[i].name %>
+                                        </h6>
                                     </div>
+                                    <button type="button"
+                                        onclick="criar_chat('<%= imovel.imovel.product.interessados[i].id %>', '../../../app-assets/images/portrait/small/<%= imovel.imovel.product.interessados[i].image.name %>', '<%= imovel.imovel.product.interessados[i].name %>')"
+                                        class="btn btn-primary btn-icon ml-auto">
+                                        <i class="far fa-comment-alt"></i>
+                                    </button>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> Jardim São
-                                        Caetano</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="swiper-fade-effect swiper-container">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/pages/imovel/bedroom.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-19.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-18.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-17.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-16.jpg"
-                                                        alt="banner">
-                                                </div>
-                                            </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination swiper-pagination-white"></div>
-                                            <!-- Add Arrows -->
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <% } %>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                </section>
                 <div class="modal fade" id="modalCondominio" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-s modal-dialog-centered" role="document">
@@ -630,10 +695,20 @@
     <div class="drag-target"></div>
 
     <footer class="footer footer-static footer-light">
-        <button class="btn btn-primary btn-icon scroll-top" type="button" onclick="registrarInteresse()">
+        <button class="btn btn-danger btn-icon scroll-top" style="left: 30px !important; display: none;" type="button"
+            onclick="deleteImovel()" id="deleteImovel">
+            Deletar Imóvel
+        </button>
+        <button class="btn btn-<%= imovel.imovel.avaliable ? 'success' : 'danger' %> btn-icon scroll-top"
+            style="left: 30px !important; display: none;" type="button" onclick="updateAvaliable()"
+            id="updateAvaliable">
+            Imóvel <%= imovel.imovel.avaliable ? 'Disponível' : 'Alugado' %> <i
+                class="ficon feather icon-<%= imovel.imovel.avaliable ? 'check' : 'x' %>"></i>
+        </button>
+        <button class="btn btn-primary btn-icon scroll-top" type="button" id="tenhointeresse"
+            onclick="registrarInteresse()">
             Tenho Interesse <i class="ficon feather icon-heart"></i>
         </button>
-        </p>
     </footer>
 
     <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
@@ -658,14 +733,101 @@
     <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
 
     <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-        console.log(JSON.parse(localStorage.currentUser).id)
-        function publicarComentario() {
-            // @todo: verificar se o usuário está logado
-            if ($("#comentario").val() == "") {
 
+        function notificacao(confirmButton, modal_color, icon, message) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: confirmButton,
+                timer: 3000,
+                timerProgressBar: true,
+                background: modal_color,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: icon,
+                title: message
+            })
+        }
+
+        if (localStorage.getItem("currentUser") == null) {
+            $("#avaliar").attr("disabled", "true");
+            $("#publicar").attr("disabled", "true");
+            $("#conversar").attr("disabled", "true");
+            $("#tenhointeresse").attr("disabled", "true");
+            $("#interessados").attr("disabled", "true");
+        }
+
+        if (JSON.parse(localStorage.currentUser).id == "<%= imovel.imovel.product.userId %>") {
+            $("#tenhointeresse").attr("style", "display: none;");
+
+            $("#updateAvaliable").removeAttr('style')
+
+            $("#deleteImovel").removeAttr('style')
+            $("#deleteImovel").attr('style', 'margin-bottom: 45px !important;')
+        }
+
+        function updateAvaliable() {
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:3000/avaliable',
+                data: {
+                    productId: "<%= imovel.imovel.id %>",
+                    avaliable: "<%= imovel.imovel.avaliable %>",
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    notificacao(false, '#626262', 'success', 'Status do Imóvel Atualizado')
+                    document.location.reload(true);
+                },
+                error: function (retorno) {
+                    notificacao(false, '#d33', 'error', 'Não foi possível alterar o status do imóvel')
+                    console.error('error', retorno)
+                }
+            })
+        }
+
+        function deleteImovel() {
+            Swal.fire({
+                title: 'Tem certeza que deseja deletar seu imóvel?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#218838',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<i class="far fa-trash-alt"></i> Sim, apagar',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'http://localhost:3000/deleteImovel',
+                        data: {
+                            productId: "<%= imovel.imovel.id %>",
+                        },
+                        datatype: "application/json",
+                        success: function (retorno) {
+                            notificacao(false, '#626262', 'success', 'Imóvel Deletado')
+                            window.location = "/imoveis";
+                        },
+                        error: function (retorno) {
+                            notificacao(false, '#ea5455', 'error', 'Não foi possível apagar seu imóvel')
+                            console.error('error', retorno)
+                        }
+                    })
+                }
+            })
+        }
+
+        function publicarComentario() {
+            if ($("#comentario").val() == "") {
+                notificacao(false, '#626262', 'warning', 'Escreva um comentário para publicar')
             } else {
                 if (localStorage.currentUser) {
                     var id = JSON.parse(localStorage.currentUser).id
@@ -686,7 +848,7 @@
                         }
                     })
                 } else {
-                    alert('Faça login para comentar')
+                    notificacao(false, '#626262', 'warning', 'Faça login para comentar')
                 }
             }
         }
@@ -709,15 +871,133 @@
             $("#avaliacaoValor").attr('style', 'display:none')
         }
 
-        function avaliar() {
-
+        var avaliacaoImovel = {
+            limpeza: 0,
+            comunicacao: 0,
+            checkin: 0,
+            precisao: 0,
+            localizacao: 0,
+            valor: 0
         }
 
-        function conversar(id) {
-            console.log(id)
+        var limpeza = $("#estrelaLimpeza").children("ul").children()
+        limpeza.on("click", (event) => {
+            for (i = 0; i < limpeza.length; i++) {
+                removeAttribute(limpeza[i])
+            }
+            var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(limpeza[i]);
+            }
+            avaliacaoImovel.limpeza = avaliacao
+        })
+
+        var comunicacao = $("#estrelaComunicacao").children("ul").children()
+        comunicacao.on("click", (event) => {
+            for (i = 0; i < comunicacao.length; i++) {
+                removeAttribute(comunicacao[i])
+            }
+            var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(comunicacao[i]);
+            }
+            avaliacaoImovel.comunicacao = avaliacao
+        })
+
+        var checkin = $("#estrelaCheckin").children("ul").children()
+        checkin.on("click", (event) => {
+            for (i = 0; i < checkin.length; i++) {
+                removeAttribute(checkin[i])
+            }
+            var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(checkin[i]);
+            }
+            avaliacaoImovel.checkin = avaliacao
+        })
+
+        var precisao = $("#estrelaPrecisao").children("ul").children()
+        precisao.on("click", (event) => {
+            for (i = 0; i < precisao.length; i++) {
+                removeAttribute(precisao[i])
+            }
+            var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(precisao[i]);
+            }
+            avaliacaoImovel.precisao = avaliacao
+        })
+
+        var localizacao = $("#estrelaLocalizacao").children("ul").children()
+        localizacao.on("click", (event) => {
+            for (i = 0; i < localizacao.length; i++) {
+                removeAttribute(localizacao[i])
+            }
+            var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(localizacao[i]);
+            }
+            avaliacaoImovel.localizacao = avaliacao
+        })
+
+        var valor = $("#estrelaValor").children("ul").children()
+        valor.on("click", (event) => {
+            for (i = 0; i < valor.length; i++) {
+                removeAttribute(valor[i])
+            }
+            var avaliacao = event.currentTarget.firstElementChild.getAttribute("value")
+            for (i = 0; i < avaliacao; i++) {
+                addAttribute(valor[i]);
+            }
+            avaliacaoImovel.valor = avaliacao
+        })
+
+        function addAttribute(clicked) {
+            clicked.setAttribute("style", "color: #7472f0 !important;");
+        }
+
+        function removeAttribute(clicked) {
+            clicked.removeAttribute("style");
+        }
+
+        function avaliar() {
+            var semAvaliar = 0
+            for (var i in avaliacaoImovel) {
+                if (avaliacaoImovel[i] == 0) {
+                    semAvaliar++
+                }
+            }
+            if (semAvaliar == 0) {
+                $.ajax({
+                    type: 'post',
+                    url: '/avaliar',
+                    data: Object.assign(
+                        { productId: "<%= imovel.imovel.id %>" },
+                        avaliacaoImovel
+                    ),
+                    dataType: "application/json",
+                    success: function (retorno) {
+                        console.log('>>>>> ', retorno)
+                        notificacao(false, '#626262', 'success', 'Avaliação Registrada')
+                    },
+                    error: function (retorno) {
+                        console.error('error', retorno)
+                        notificacao(false, '#d33', 'error', 'Não foi possível registrar sua avaliação')
+                        document.location.reload(true);
+                    }
+                })
+            } else {
+                notificacao(false, '#626262', 'info', 'Avalie Todos os Itens')
+            }
+        }
+
+        function criar_chat(userId, userProfileImage, userName) {
+            localStorage.setItem("currentChatUser", JSON.stringify(userId, userProfileImage, userName));
+            window.location = "/app-chat";
         }
 
         function registrarInteresse() {
+            // @todo Remover interesse
             var id = JSON.parse(localStorage.currentUser).id
             $.ajax({
                 type: 'post',
@@ -728,8 +1008,8 @@
                 },
                 datatype: "application/json",
                 success: function (retorno) {
-                    console.log(retorno)
-                    alert('Imóvel Favoritado')
+                    notificacao(false, '#626262', 'success', 'Sucesso')
+                    document.location.reload(true);
                 },
                 error: function (retorno) {
                     console.error('error', retorno)

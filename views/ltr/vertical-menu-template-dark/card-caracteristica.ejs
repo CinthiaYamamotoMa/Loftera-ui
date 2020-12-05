@@ -27,7 +27,8 @@
                     <div class="row" id="caracteristicas" name="caracteristicas">
                         <% for (var i = 0; i < caracteristicas.length; i++) { %>
                         <div class="col-lg-3 col-md-6 col-sm-12">
-                            <div class="card text-white border-0 box-shadow-0 fonticon-container" id="<%= caracteristicas[i].id %>">
+                            <div class="card text-white border-0 box-shadow-0 fonticon-container"
+                                id="<%= caracteristicas[i].id %>">
                                 <div class="card-content">
                                     <img src="../../../app-assets/images/pages/caracteristicas/<%= caracteristicas[i].image %>"
                                         style="height: 150px;" class="card-img" alt="card-img-6">
@@ -68,7 +69,7 @@
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
-    <!-- END: Theme JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </body>
 
@@ -108,24 +109,48 @@
         return clicked.hasAttribute("style");
     }
 
-    function registrarCaracteristicas() {
-        console.log(selectMediasId)
-        $.ajax({
-            type: 'post',
-            url: 'http://localhost:3000/caracteristicas',
-            data: {
-                caracteristicas: selectMediasId,
-                userId: JSON.parse(localStorage.currentUser).id
-            },
-            datatype: "application/json",
-            success: function (retorno) {
-                alert('Caracteristicas Cadastradas')
-                window.location = `/imoveis`
-            },
-            error: function (retorno) {
-                console.log('error', retorno)
+    function notificacao(confirmButton, modal_color, icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: confirmButton,
+            timer: 3000,
+            timerProgressBar: true,
+            background: modal_color,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
+    }
+
+    function registrarCaracteristicas() {
+        if (selectMediasId == "") {
+            notificacao(false, '#d33', 'error', 'Selecione característica(s)')
+        } else {
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:3000/caracteristicas',
+                data: {
+                    caracteristicas: selectMediasId,
+                    userId: JSON.parse(localStorage.currentUser).id
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    notificacao(false, '#626262', 'success', 'Características Cadastradas')
+                    window.location = `/imoveis`
+                },
+                error: function (retorno) {
+                    notificacao(false, '#d33', 'error', 'Não foi possível cadastrar')
+                    console.log('error', retorno)
+                }
+            })
+        }
     }
 </script>
 

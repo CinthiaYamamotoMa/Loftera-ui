@@ -29,14 +29,14 @@
                                                 class="d-none d-sm-block">Perfil</span>
                                         </a>
                                     </li>
-                                    <!-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link d-flex align-items-center" id="information-tab"
                                             data-toggle="tab" href="#information" aria-controls="information" role="tab"
                                             aria-selected="false">
                                             <i class="feather icon-map-pin mr-25"></i><span
-                                                class="d-none d-sm-block">Endereços</span>
+                                                class="d-none d-sm-block">Endereço</span>
                                         </a>
-                                    </li> -->
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link d-flex align-items-center" id="social-tab" data-toggle="tab"
                                             href="#changePassword" aria-controls="social" role="tab"
@@ -52,26 +52,42 @@
                                         <!-- users edit media object start -->
                                         <div class="media mb-2">
                                             <a class="mr-2 my-25" href="#">
-                                                <img src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
+                                                <img id="imagemUsuario"
+                                                    src="../../../app-assets/images/portrait/small/<%= user.image.deleted ? 'default.png' : user.image.name%>"
                                                     alt="users avatar" class="users-avatar-shadow rounded" height="90"
                                                     width="90">
                                             </a>
                                             <div class="media-body mt-50">
-                                                <h4 class="media-heading">John Doe</h4>
+                                                <h4 class="media-heading" id="nomeUsuario"><%= user.name %></h4>
                                                 <div class="col-12 d-flex mt-1 px-0">
-                                                    <a href="#" id="editarFoto"
-                                                        class="btn btn-primary d-none d-sm-block mr-75">Alterar</a>
-                                                    <a href="#" class="btn btn-primary d-block d-sm-none mr-75"><i
-                                                            class="feather icon-edit-1"></i></a>
-                                                    <a href="#" id="apagarFoto"
-                                                        class="btn btn-outline-danger d-none d-sm-block">Apagar</a>
-                                                    <a href="#" class="btn btn-outline-danger d-block d-sm-none"><i
-                                                            class="feather icon-trash-2"></i></a>
+                                                    <form method="post" action="/avatar" enctype="multipart/form-data">
+                                                        <div id="editarFoto">
+                                                            <a onclick="displayUploadInput()"
+                                                                class="btn btn-primary d-none d-sm-block mr-75">
+                                                                <i class="feather icon-edit-1"></i>
+                                                                Alterar
+                                                            </a>
+                                                        </div>
+                                                        <div style="display: none;" id="uploadImagem">
+                                                            <input id="foto" type="file" name="avatar" accept="image/*"
+                                                                class="btn btn-primary d-none d-sm-block mr-75"></input>
+                                                            <input style="display: none;" type="text" id="userId"
+                                                                name="userId"></input>
+                                                            <button type="submit" style="display: none;" id="salvarFoto"
+                                                                class="btn btn-primary d-none d-sm-block mr-75">
+                                                                <i class="fas fa-upload"></i> Enviar
+                                                            </button>
+                                                        </div>
+                                                    </form>
+
+                                                    <button id="apagarFoto" onclick="deleteAvatar()"
+                                                        class="btn btn-outline-danger d-none d-sm-block">
+                                                        <i class="feather icon-trash-2"></i>
+                                                        Apagar
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- users edit media object ends -->
-                                        <!-- users edit account form start -->
                                         <form novalidate>
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
@@ -79,7 +95,8 @@
                                                         <div class="controls">
                                                             <label>Nome Completo</label>
                                                             <input type="text" class="form-control"
-                                                                placeholder="Nome Completo" name="name" id="name" required
+                                                                placeholder="Nome Completo" name="name" id="name"
+                                                                required value="<%= user.name %>"
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
@@ -97,8 +114,7 @@
                                                             <label>Descrição do Perfil</label>
                                                             <textarea class="form-control" name="description"
                                                                 id="description" required
-                                                                data-validation-required-message="Preencha o campo">
-                                                            </textarea>
+                                                                data-validation-required-message="Preencha o campo"><%= user.description %></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,7 +123,7 @@
                                                         <div class="controls">
                                                             <label>CPF</label>
                                                             <input type="text" class="form-control" name="cpf" id="cpf"
-                                                                required
+                                                                required value="<%= user.cpf %>"
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
@@ -116,14 +132,14 @@
                                                         <div class="controls">
                                                             <label>E-mail</label>
                                                             <input type="email" class="form-control" name="email"
-                                                                id="email" required
+                                                                id="email" required value="<%= user.email %>"
                                                                 data-validation-required-message="Preencha o campo">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Celular</label>
                                                         <input type="text" class="form-control" name="cellPhone"
-                                                            id="cellPhone">
+                                                            value="<%= user.cellPhone %>" id="cellPhone">
                                                     </div>
                                                 </div>
 
@@ -145,7 +161,7 @@
                                         <div class="nav-vertical">
                                             <div class="col-12 col-sm-12">
                                                 <h5 class="mb-1 mt-2 mt-sm-0"><i
-                                                        class="feather icon-map-pin mr-25"></i>Endereços Salvos</h5>
+                                                        class="feather icon-map-pin mr-25"></i>Endereço</h5>
                                             </div>
 
                                             <ul class="nav nav-tabs nav-left flex-column" role="tablist">
@@ -157,7 +173,7 @@
                                                             class="d-none d-sm-block">Faculdade</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a class="nav-link d-flex align-items-center" id="information-tab"
                                                         data-toggle="tab" href="#address2" aria-controls="information"
                                                         role="tab" aria-selected="false">
@@ -180,34 +196,49 @@
                                                         <i class="material-icons mr-25">fitness_center</i><span
                                                             class="d-none d-sm-block">Treino</span>
                                                     </a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                             <!-- users edit Info form start -->
 
                                             <div class="tab-pane active" id="address1" aria-labelledby="account-tab"
                                                 role="tabpanel">
 
-                                                <form novalidate>
+                                                <form novalidate id="faculdade_endereco">
                                                     <div class="row">
+                                                        <div class="col-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <label>Faculdade</label>
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Faculdade"
+                                                                        value="<%= user.faculdade ? user.faculdade.name : '' %>"
+                                                                        id="faculdade" required
+                                                                        data-validation-required-message="Preencha o campo">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>CEP</label>
                                                                     <input type="text" class="form-control"
-                                                                        placeholder="CEP" value="00000-000" required
+                                                                        placeholder="CEP" id="cep" required
+                                                                        value="<%= user.faculdade ? user.faculdade.cep : '' %>"
                                                                         data-validation-required-message="Preencha o campo">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número</label>
-                                                                <input type="text" class="form-control" value="123"
-                                                                    placeholder="Número">
+                                                                <input type="number" id="numero"
+                                                                    value="<%= user.faculdade ? user.faculdade.number : '' %>"
+                                                                    class="form-control" placeholder="Número">
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>Cidade</label>
-                                                                    <input type="text" class="form-control"
-                                                                        value="São paulo" placeholder="Cidade">
+                                                                    <input type="text" id="cidade"
+                                                                        value="<%= user.faculdade ? user.faculdade.city : '' %>"
+                                                                        class="form-control" placeholder="Cidade">
                                                                 </div>
                                                             </div>
 
@@ -216,22 +247,22 @@
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>Rua</label>
-                                                                    <input type="text" class="form-control"
-                                                                        value="Rua das amoras" placeholder="Rua">
+                                                                    <input type="text" id="rua"
+                                                                        value="<%= user.faculdade ? user.faculdade.street : '' %>"
+                                                                        class="form-control" placeholder="Rua">
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label>Bairro</label>
-                                                                <input type="text" class="form-control"
-                                                                    value="Rua das amoras" placeholder="Bairro">
+                                                                <input type="text" id="bairro"
+                                                                    value="<%= user.faculdade ? user.faculdade.district : '' %>"
+                                                                    class="form-control" placeholder="Bairro">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Estado</label>
-                                                                <select class="form-control">
-                                                                    <option>Feminino</option>
-                                                                    <option>Masculino</option>
-                                                                    <option>Outros</option>
+                                                                <select class="form-control" id="estado">
+                                                                    <option value="">Estado</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -241,7 +272,7 @@
                                             </div>
 
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit"
+                                                <button type="submit" onclick="salvarFacul(event)"
                                                     class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Salvar</button>
                                                 <button type="reset" class="btn btn-outline-warning">Desfazer
                                                     Alterações</button>
@@ -267,9 +298,8 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label form="account-new-password">Nova Senha</label>
-                                                            <input type="password" name="newPassword"
-                                                                id="newPassword" class="form-control"
-                                                                placeholder="Nova Senha" >
+                                                            <input type="password" name="newPassword" id="newPassword"
+                                                                class="form-control" placeholder="Nova Senha">
 
                                                         </div>
                                                     </div>
@@ -298,7 +328,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -328,42 +358,72 @@
 
     <script src="../../../app-assets/js/scripts/pages/app-user.js"></script>
     <script src="../../../app-assets/js/scripts/navs/navs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <!-- END: Page JS-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="../../../app-assets/js/scripts/jquery.mask.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script type="text/javascript">
 
+        $("#cellPhone").mask("(00) 00000-0000")
+        $("#cep").mask("00000-000");
+
+        $("#cpf").mask('000.000.000-00', { reverse: true });
+
+        function notificacao(confirmButton, modal_color, icon, message) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: confirmButton,
+                timer: 3000,
+                timerProgressBar: true,
+                background: modal_color,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: icon,
+                title: message
+            })
+        }
 
         function buscar_user(userId) {
             //debugger;
             let site = "http://localhost:3000/user/" + userId;
-            $.ajax({
-                type: 'get',
-                url: site,
-                dataType: "json",
-                contentType: "application/json",
-                success: function (retorno) {
-                    console.log('success', retorno);
-                    var userInfo = retorno.data;
-                    $("#name").val(userInfo.name);
-                    $("#gender").val(userInfo.gender);
-                    $("#description").val(userInfo.description);
-                    $("#cpf").val(userInfo.cpf);
-                    $("#email").val(userInfo.email);
-                    $("#cellPhone").val(userInfo.cellPhone);
+            // $.ajax({
+            //     type: 'get',
+            //     url: site,
+            //     dataType: "json",
+            //     contentType: "application/json",
+            //     success: function (retorno) {
+            //         console.log('success', retorno);
+            //         var userInfo = retorno.data;
+            //         $("#name").val(userInfo.name);
+            //         $("#gender").val(userInfo.gender);
+            //         $("#description").val(userInfo.description);
+            //         $("#cpf").val(userInfo.cpf);
+            //         $("#email").val(userInfo.email);
+            //         $("#cellPhone").val(userInfo.cellPhone);
+            //         var image = JSON.parse(localStorage.currentUser).image.name
+            //         console.log(image)
+            //         $("#imagemUsuario").removeAttr('src')
+            //         $("#imagemUsuario").attr('src', `../../../app-assets/images/portrait/small/${image}`)
+            //         $("#nomeUsuario").html(userInfo.name)
 
-                },
-                error: function (retorno) {
-                    console.log('error', retorno)
-                }
-            })
+            //     },
+            //     error: function (retorno) {
+            //         console.log('error', retorno)
+            //     }
+            // })
         }
 
         $("#changePassword").click(function (e) {
-            console.log('click')
             e.preventDefault();
             $('#reset_password_form').validate({
                 rules: {
@@ -392,18 +452,60 @@
             if (!$("#reset_password_form").valid()) {
                 return;
             } else {
-                console.log('else')
-                //debugger;
                 edit_user_password();
             }
-        })   
+        })
 
-        
+        function displayUploadInput() {
+            $("#editarFoto").attr("style", "display: none;")
+            $("#uploadImagem").removeAttr('style')
+            $("#userId").val(JSON.parse(localStorage.currentUser).id)
 
+            $("#salvarFoto").removeAttr('style')
+            $("#salvarFoto").attr("style", "margin-top: -44px; left: 412px !important;")
+            $("#apagarFoto").attr("style", "left: 128px; !important;")
+        }
+
+        function deleteAvatar() {
+
+            Swal.fire({
+                title: 'Tem certeza que deseja deletar sua foto?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#218838',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<i class="far fa-trash-alt"></i> Sim, apagar',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/deleteAvatar',
+                        data: JSON.stringify({
+                            userId: 1
+                        }),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (retorno) {
+                            console.log('success', retorno);
+                            var user = JSON.parse(localStorage.currentUser)
+                            user.image.name = "default.png"
+                            localStorage.removeItem('currentUser')
+                            localStorage.setItem('currentUser', JSON.stringify(user))
+                            notificacao(false, '#626262', 'success', 'Foto Apagada')
+                            window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
+                        },
+                        error: function (retorno) {
+                            console.log('error', retorno)
+                            notificacao(false, '#ea5455', 'error', 'Não foi possível apagar sua foto')
+                        }
+                    })
+                }
+            })
+        }
 
         function edit_user_account() {
             let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
-            //debugger;
             $.ajax({
                 type: 'put',
                 url: site,
@@ -419,19 +521,18 @@
                 contentType: "application/json",
                 success: function (retorno) {
                     console.log('success', retorno);
-                    alert('Dados Atualizados com sucesso!');
-                    window.location = "/app-user-edit";
+                    notificacao(false, '#626262', 'success', 'Dados Atualizados com sucesso!')
+                    window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
 
                 },
                 error: function (retorno) {
                     console.log('error', retorno)
-                    alert("Nâo foi possível atualizar seus dados \n" + retorno)
+                    notificacao(false, '#ea5455', 'error', 'Não foi possível atualizar seus dados')
                 }
             })
         }
 
         function edit_user_password() {
-            //debugger;
             let site = "http://localhost:3000/usersp/" + JSON.parse(localStorage.getItem("currentUser")).id;
             $.ajax({
                 type: 'put',
@@ -445,11 +546,12 @@
                 success: function (retorno) {
                     if (retorno.data.id != null && retorno.data.id != undefined && retorno.data.id != "") {
                         console.log('success', retorno);
-                        alert("Senha Atualizada com sucesso");
-                        window.location = "/app-user-edit";
+                        notificacao(false, '#626262', 'success', 'Senha Atualizada')
+                        window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
                     }
-                    else{
-                        alert(retorno.data);
+                    else {
+                        notificacao(false, '#ea5455', 'error', 'Não foi possível atualizar sua senha')
+
                         $("#oldPassword").val("");
                         $("#newPassword").val("");
                         $("#confPassword").val("");
@@ -458,45 +560,107 @@
                 },
                 error: function (retorno) {
                     console.log('error', retorno)
-                    alert("Não foi possível atualizar seus dados \n" + retorno.data)
+                    notificacao(false, '#ea5455', 'error', 'Não foi possível atualizar sua senha')
                 }
             })
         }
 
         function user_delete() {
-            //debugger;
-            let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
-            let r = confirm("Gostaria de deletar sua conta?")
-            if (r == true) {
-                $.ajax({
-                    type: 'delete',
-                    url: site,
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (retorno) {
-                        console.log('success', retorno);
-                        alert('Conta Deletada com sucesso');
-                        window.location = "/auth-login";
+            Swal.fire({
+                title: 'Tem certeza que deseja deletar sua conta?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#218838',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<i class="far fa-trash-alt"></i> Sim, apagar conta',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let site = "http://localhost:3000/users/" + JSON.parse(localStorage.getItem("currentUser")).id;
 
-                    },
-                    error: function (retorno) {
-                        console.log('error', retorno)
-                        alert("Nâo foi possível atualizar seus dados \n" + retorno)
-                    }
-                })
-            }
-            else {
-                window.location = "/app-user-edit"
-            }
+                    $.ajax({
+                        type: 'delete',
+                        url: site,
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (retorno) {
+                            console.log('success', retorno);
+                            notificacao(false, '#626262', 'success', 'Conta Apagada')
+                            window.location = "/auth-login";
+
+                        },
+                        error: function (retorno) {
+                            console.log('error', retorno)
+                            notificacao(false, '#ea5455', 'error', 'Não foi possível apagar sua senha')
+                        }
+                    })
+                }
+            })
         }
 
-
-            $(document).ready(function () {
+        $(document).ready(function () {
             let user = JSON.parse(localStorage.getItem("currentUser"));
             let userId = user.id;
             let userPassword = user.password;
             buscar_user(userId);
-            })  
+            popula_estado()
+
+            var estado = "<%= user.faculdade ? user.faculdade.state : 'Estado' %>"
+            console.log(estado)
+            $("#estado").children("option").text(estado).attr('selected', 'selected')
+            $("#estado").trigger("change");
+        })
+
+        function popula_estado() {
+            axios({
+                method: 'get',
+                url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/`,
+            })
+                .then((retorno) => {
+                    var estado = retorno.data
+                    for (i = 0; i <= estado.length; i++) {
+                        $("#estado").append(new Option(estado[i].nome, estado[i].sigla));
+                    }
+                })
+        }
+
+        function limpa_endereco() {
+            $("#rua").val("");
+            $("#bairro").val("");
+            $("#numero").val("");
+            $("#cidade").val("");
+            $("#estado").val("").change();
+        }
+
+        $("#cep").blur(function () {
+            var cep = $(this).val().replace(/\D/g, '');
+            if (cep != "") {
+                var validacep = /^[0-9]{8}$/;
+                if (validacep.test(cep)) {
+                    $("#rua").val("...");
+                    $("#cidade").val("...");
+                    $("#bairro").val("...");
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                        console.log(dados)
+                        if (!("erro" in dados)) {
+                            $("#rua").val(dados.logradouro);
+                            $("#cidade").val(dados.localidade);
+                            $("#bairro").val(dados.bairro);
+                            $("#estado").val(dados.uf).attr('selected', 'selected')
+                            $("#estado").trigger("change");
+                        }
+                        else { limpa_endereco() }
+                    });
+                }
+            }
+            else { limpa_endereco() }
+        });
+
+        function salvarFacul(e) {
+            e.preventDefault()
+            console.log($("#faculdade_endereco").serialize())
+        }
+
     </script>
 
 </body>

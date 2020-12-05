@@ -1,0 +1,204 @@
+<%- include ('../../Partials/headerStyle.ejs'); %>
+
+<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  "
+    data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+
+    <%- include ('../../Partials/header.ejs'); %>
+
+    <%- include ('../../Partials/menu.ejs'); %>
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Eu sou...</h2>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="content-body" style="margin-top: 31px;">
+                <section id="card-caps">
+                    <div class="row" style="place-content: center;" id="role">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card text-white border-0 box-shadow-0 fonticon-container" id="estudante">
+                                <div class="card-content">
+                                    <img src="../../../app-assets/images/pages/role/students.jpg" style="height: 150px;"
+                                        class="card-img" alt="card-img-6">
+                                    <div class="card-img-overlay overflow-hidden overlay-black">
+                                        <h5 class="font-medium-5 text-white text-center">Estudante
+                                        </h5>
+                                        <div class="d-flex justify-content-around mt-2">
+                                            <div class="icon fonticon-container">
+                                                <div class="col-md-4 col-sm-6 col-12">
+                                                    <div class="fonticon-wrap"><i
+                                                            class="fas fa-graduation-cap font-large-2"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card text-white border-0 box-shadow-0 fonticon-container" id="proprietario">
+                                <div class="card-content">
+                                    <img src="../../../app-assets/images/pages/role/proprietario.jpg"
+                                        style="height: 150px;" class="card-img" alt="card-img-6">
+                                    <div class="card-img-overlay overflow-hidden overlay-black">
+                                        <h5 class="font-medium-5 text-white text-center">Proprietário
+                                        </h5>
+                                        <div class="d-flex justify-content-around mt-2">
+                                            <div class="icon fonticon-container">
+                                                <div class="col-md-4 col-sm-6 col-12">
+                                                    <div class="fonticon-wrap"><i class="fas fa-home font-large-2"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" style="place-content: center;">
+
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <p>
+                                O Estudante poderá buscar por imóveis
+                                de acordo com a localização de sua
+                                instituição de ensino e por outros
+                                estudantes com caracteristicas
+                                semelhantes.
+                            </p>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <p>
+                                O Proprietário poderá cadastrar seus imóveis
+                                para disponibilizar para estudantes alugarem.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <footer class="footer footer-static footer-light">
+        <button class="btn btn-primary btn-icon scroll-top" type="button" onclick="registrarRole()">
+            Salvar
+        </button>
+    </footer>
+
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</body>
+
+<script>
+
+    function notificacao(confirmButton, modal_color, icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: confirmButton,
+            timer: 3000,
+            timerProgressBar: true,
+            background: modal_color,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
+    }
+
+    var roles = $("#role").children(".col-lg-4");
+    var role
+
+    roles.on("click", (event) => {
+        var tem = 0
+        for (i = 0; i < roles.length; i++) {
+            if (hasAttribute(roles[i].firstElementChild)) {
+                tem += 1
+            }
+        }
+        if (tem != 0) {
+            for (i = 0; i < roles.length; i++) {
+                removeAttribute(roles[i].firstElementChild)
+            }
+            addAttribute(event.currentTarget.firstElementChild);
+            role = event.currentTarget.firstElementChild
+        } else {
+            for (i = 0; i < roles.length; i++) {
+                addAttribute(event.currentTarget.firstElementChild);
+                role = event.currentTarget.firstElementChild
+            }
+        }
+    })
+
+    function remove(clicked) {
+        removeAttribute(clicked);
+    }
+
+    function add(clicked) {
+        addAttribute(clicked);
+    }
+
+    function addAttribute(clicked) {
+        clicked.setAttribute("style", "border: groove !important; border-color: white !important");
+    }
+
+    function removeAttribute(clicked) {
+        clicked.removeAttribute("style");
+    }
+
+    function hasAttribute(clicked) {
+        return clicked.hasAttribute("style");
+    }
+
+    function registrarRole() {
+        if (role == undefined) {
+            Swal.fire('Selecione uma opção')
+        } else {
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:3000/role',
+                data: {
+                    role: role.getAttribute("id"),
+                    userId: JSON.parse(localStorage.currentUser).id
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    notificacao(false, '#626262', 'success', 'Conta Cadastrada')
+                    window.location = `/imoveis`
+                },
+                error: function (retorno) {
+                    notificacao(false, '#d33', 'error', 'Não foi possível cadastrar sua conta')
+                    console.log('error', retorno)
+                }
+            })
+        }
+    }
+</script>
+
+</html>

@@ -19,7 +19,6 @@ module.exports.findAll = async function (req, res) {
 }
 
 module.exports.store = async function (req, res) {
-    console.log(req)
     axios({
         method: 'post',
         url: `http://localhost:3000/caracteristicas`,

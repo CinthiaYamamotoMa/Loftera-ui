@@ -1,10 +1,22 @@
 const express = require('express');
 const router = express.Router();
+const multer  = require('multer')
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'app-assets/images/portrait/small/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+const upload = multer({ storage })
+
 const userController = require('./controllers/userController');
 const interestedController = require('./controllers/interestedController');
 const commentController = require('./controllers/commentController');
 const imovelController = require('./controllers/imovelController');
 const psychographicController = require('./controllers/psychographicController');
+const ratingController = require('./controllers/ratingController');
 
 var passport = require('passport');
 var { ensureAuthenticated, forwardAuthenticated } = require('./controllers/authController')
@@ -42,13 +54,30 @@ router.get('/card-caracteristica', async (req, res) => {
     res.render('ltr/vertical-menu-template-dark/card-caracteristica.ejs')
 })
 
+// Cadastro de tipo de conta
+router.get('/role', async (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/role.ejs')
+})
+
 router.post('/caracteristicas', async (req, res) => {
     psychographicController.store(req, res)
 })
 
 // Perfil
-router.get('/app-user-edit', (req, res) => {
+router.get('/app-user-edit/:id', async (req, res) => {
+    var user = await userController.findById(req, res)
+    res.locals = { user }
     res.render('ltr/vertical-menu-template-dark/app-user-edit.ejs')
+})
+
+// Avatar
+router.post('/avatar', upload.single("avatar"), async (req, res) => {
+    userController.updateAvatar(req, res)
+
+})
+
+router.post('/deleteAvatar', async (req, res) => {
+    userController.deleteAvatar(req, res)
 })
 
 // Cadastro Imóvel
@@ -74,6 +103,21 @@ router.get('/imovel/interesse/:id', async (req, res) => {
 // Crud Imóvel
 
 
+// Crud Imóvel
+router.get('/imoveis/busca', async (req, res) => {
+    await imovelController.findPesquisa(req, res);
+})
+
+router.get('/imoveis/result', async (req, res) => {
+    var imoveis = JSON.parse(req.query.data)
+    res.locals = { imoveis }
+    res.render('ltr/vertical-menu-template-dark/imoveis-busca.ejs')
+})
+
+router.get('/imoveis/buscar', async (req, res) => {
+    res.render('ltr/vertical-menu-template-dark/imoveis-campos-busca.ejs')
+})
+
 // Visualizar Imóvel
 router.get('/imovel/detalhes/:id', async (req, res) => {
     var imovel = await imovelController.findById(req, res)
@@ -89,7 +133,12 @@ router.get('/users/:id', async (req, res) => {
 })
 
 router.post('/interesse', async (req, res) => {
-    var imovel = await interestedController.storeInteressados(req, res)
+    await interestedController.storeInteressados(req, res)
+})
+
+// Avaliar Imóvel
+router.post('/avaliar', async (req, res) => {
+    await ratingController.store(req, res)
 })
 
 // ********** POST ************
