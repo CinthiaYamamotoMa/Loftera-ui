@@ -96,16 +96,19 @@
                                         <div class="">
                                             <div class="card-body">
                                                 <div
-                                                    class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12">
-                                                    <button type="button" value="casa" disabled
-                                                        class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-home"
-                                                            aria-hidden="true"></i></button>
-                                                    <button type="button" value="apto" disabled
-                                                        class="btn btn-icon btn-flat-primary mb-1"><i
-                                                            class="fa fa-building-o" aria-hidden="true"></i></button>
-                                                    <button type="button" value="quarto" disabled
-                                                        class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-bed"
-                                                            aria-hidden="true"></i></button>
+                                                    class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12" id="tipo">
+                                                    <div value="1" style="margin-right: 10px;"
+                                                                class="btn btn-icon btn-flat-primary mb-1"><i
+                                                                    class="fa fa-home" aria-hidden="true"></i></div>
+
+                                                            <div value="2" style="margin-right: 10px;"
+                                                                class="btn btn-icon btn-flat-primary mb-1"><i
+                                                                    class="fa fa-building-o" aria-hidden="true"></i>
+                                                            </div>
+
+                                                            <div value="3" style="margin-right: 10px;"
+                                                                class="btn btn-icon btn-flat-primary mb-1"><i
+                                                                    class="fa fa-bed" aria-hidden="true"></i></div>
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mb-1">
                                                     <div class="series-info d-flex align-items-center">
@@ -424,15 +427,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix blue-grey lighten-2 mb-0"><span
-                class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a
-                    class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio"
-                    target="_blank">Pixinvent,</a>All rights Reserved</span><span
-                class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
-                    class="feather icon-heart pink"></i></span>
-            <button class="btn btn-primary btn-icon scroll-top" type="button"><i
-                    class="feather icon-arrow-up"></i></button>
-        </p>
+        
     </footer>
     <!-- END: Footer-->
 
@@ -479,6 +474,25 @@
     <!-- END: Page JS-->
 
 </body>
-<!-- END: Body-->
+<script>
+    var tipoImovel
+    var tipo = $("#tipo").children("div")
+    tipo.on("click", (event) => {
+        for (i = 0; i < tipo.length; i++) {
+            $(tipo[i]).removeClass("imovelType")
+        }
+        tipoImovel = event.currentTarget.getAttribute('value')
+
+        $(event.currentTarget).addClass("imovelType")
+    })
+
+    function addAttribute(clicked) {
+        clicked.setAttribute("style", "color: #7472f0 !important;");
+    }
+
+    function removeAttribute(clicked) {
+        clicked.removeAttribute("style");
+    }
+</script>
 
 </html>

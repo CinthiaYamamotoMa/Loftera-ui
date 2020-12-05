@@ -113,11 +113,11 @@
                                                     <label for="local">Raio (km)</label>
                                                 </div>
                                             </div>
-                                            <div id="faculdade" style="margin-right: 10px;"
-                                                class="btn btn-primary mb-1">
+                                            <button onclick="preenche_facul(event)" id="faculdade"
+                                                style="margin-right: 10px;" class="btn btn-primary mb-1">
                                                 <i class="fas fa-graduation-cap"></i>
                                                 Faculdade
-                                            </div>
+                                            </button>
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body">
@@ -323,7 +323,7 @@
                 icon: 'info',
                 title: 'Preencha um dos campos'
             })
-        } else if (pesquisa.local == ""){
+        } else if (pesquisa.local == "") {
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -357,6 +357,50 @@
                 }
             })
         }
+    }
+
+    $(document).ready(() => {
+        if (localStorage.getItem("currentUser") == undefined) {
+            $("#faculdade").attr('disabled', 'true')
+        }
+    })
+
+    function preenche_facul(e) {
+        e.preventDefault()
+        $.ajax({
+            type: 'get',
+            url: 'http://localhost:3000/facul',
+            data: {
+                id: JSON.parse(localStorage.currentUser).id
+            },
+            datatype: "application/json",
+            success: function (retorno) {
+                if (retorno.data.faculdade == null) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        background: '#d33',
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Ainda não há uma faculdade cadastrada'
+                    })
+                } else {
+                    $("#local").val(retorno.data.faculdade.street);
+                }
+            },
+            error: function (retorno) {
+                console.error('error', retorno)
+            }
+        })
     }
 </script>
 
