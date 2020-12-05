@@ -604,12 +604,11 @@
             let userPassword = user.password;
             buscar_user(userId);
             popula_estado()
-            if ('<%= user.faculdade %>') {
-                var estado = '<%= user.faculdade.state %>'
-                console.log(estado)
-                $("#estado").children("option").text(estado).attr('selected', 'selected')
-                $("#estado").trigger("change");
-            }
+
+            var estado = "<%= user.faculdade ? user.faculdade.state : 'Estado' %>"
+            console.log(estado)
+            $("#estado").children("option").text(estado).attr('selected', 'selected')
+            $("#estado").trigger("change");
         })
 
         function popula_estado() {

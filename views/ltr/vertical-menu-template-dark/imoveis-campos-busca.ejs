@@ -113,8 +113,8 @@
                                                     <label for="local">Raio (km)</label>
                                                 </div>
                                             </div>
-                                            <button onclick="preenche_facul(event)" id="faculdade" style="margin-right: 10px;"
-                                                class="btn btn-primary mb-1">
+                                            <button onclick="preenche_facul(event)" id="faculdade"
+                                                style="margin-right: 10px;" class="btn btn-primary mb-1">
                                                 <i class="fas fa-graduation-cap"></i>
                                                 Faculdade
                                             </button>
@@ -375,7 +375,27 @@
             },
             datatype: "application/json",
             success: function (retorno) {
-                $("#local").val(retorno.data.faculdade.street);
+                if (retorno.data.faculdade == null) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        background: '#d33',
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Ainda não há uma faculdade cadastrada'
+                    })
+                } else {
+                    $("#local").val(retorno.data.faculdade.street);
+                }
             },
             error: function (retorno) {
                 console.error('error', retorno)
