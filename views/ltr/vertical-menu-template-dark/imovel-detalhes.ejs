@@ -170,7 +170,7 @@
                                         <div class="card-header d-flex justify-content-between pb-0">
                                             <h4>Proprietário</h4>
                                             <button type="button" id="conversar"
-                                                onclick="criar_chat('<%= imovel.imovel.product.user.id %>', '../../../app-assets/images/portrait/small/avatar-s-5.jpg', '<%= imovel.imovel.product.user.name %>')"
+                                                onclick="criar_chat('<%= imovel.imovel.product.user.id %>', '../../../app-assets/images/portrait/small/<%= imovel.imovel.product.user.image.name %>', '<%= imovel.imovel.product.user.name %>')"
                                                 class="btn btn-flat-primary border-primary text-primary mr-1 mb-1"><i
                                                     class="ficon feather icon-message-square"></i> Conversar</button>
                                         </div>
@@ -179,7 +179,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                                         <div class="avatar mr-50">
-                                                            <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
+                                                            <img src="../../../app-assets/images/portrait/small/<%= imovel.imovel.product.user.image.name %>"
                                                                 alt="avtar img holder" height="35" width="35">
                                                         </div>
                                                         <div class="user-page-info">
@@ -529,7 +529,7 @@
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
                                                     <div class="media-left"><span><img class="round"
-                                                                src="../../../app-assets/images/portrait/small/avatar-s-10.jpg"
+                                                                src="../../../app-assets/images/portrait/small/<%= imovel.imovel.product.comments[i].user.image.name %>"
                                                                 alt="avatar" height="40" width="40"></span></div>
                                                     <div class="media-body"
                                                         style="margin-left: 10px; margin-right: 3px;">
@@ -621,7 +621,7 @@
                                 <% for (var i = 0; i < imovel.imovel.product.interessados.length; i++) { %>
                                 <div class="d-flex justify-content-start align-items-center mb-1">
                                     <div class="avatar mr-50">
-                                        <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
+                                        <img src="../../../app-assets/images/portrait/small/<%= imovel.imovel.product.interessados[i].image.name %>"
                                             alt="avtar img holder" height="35" width="35">
                                     </div>
                                     <div class="user-page-info">
@@ -630,7 +630,7 @@
                                         </h6>
                                     </div>
                                     <button type="button"
-                                        onclick="criar_chat('<%= imovel.imovel.product.interessados[i].id %>', '../../../app-assets/images/portrait/small/avatar-s-5.jpg', '<%= imovel.imovel.product.interessados[i].name %>')"
+                                        onclick="criar_chat('<%= imovel.imovel.product.interessados[i].id %>', '../../../app-assets/images/portrait/small/<%= imovel.imovel.product.interessados[i].image.name %>', '<%= imovel.imovel.product.interessados[i].name %>')"
                                         class="btn btn-primary btn-icon ml-auto">
                                         <i class="far fa-comment-alt"></i>
                                     </button>

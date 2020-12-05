@@ -29,14 +29,14 @@
                                                 class="d-none d-sm-block">Perfil</span>
                                         </a>
                                     </li>
-                                    <!-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link d-flex align-items-center" id="information-tab"
                                             data-toggle="tab" href="#information" aria-controls="information" role="tab"
                                             aria-selected="false">
                                             <i class="feather icon-map-pin mr-25"></i><span
-                                                class="d-none d-sm-block">Endereços</span>
+                                                class="d-none d-sm-block">Endereço</span>
                                         </a>
-                                    </li> -->
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link d-flex align-items-center" id="social-tab" data-toggle="tab"
                                             href="#changePassword" aria-controls="social" role="tab"
@@ -161,7 +161,7 @@
                                         <div class="nav-vertical">
                                             <div class="col-12 col-sm-12">
                                                 <h5 class="mb-1 mt-2 mt-sm-0"><i
-                                                        class="feather icon-map-pin mr-25"></i>Endereços Salvos</h5>
+                                                        class="feather icon-map-pin mr-25"></i>Endereço</h5>
                                             </div>
 
                                             <ul class="nav nav-tabs nav-left flex-column" role="tablist">
@@ -173,7 +173,7 @@
                                                             class="d-none d-sm-block">Faculdade</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a class="nav-link d-flex align-items-center" id="information-tab"
                                                         data-toggle="tab" href="#address2" aria-controls="information"
                                                         role="tab" aria-selected="false">
@@ -196,34 +196,49 @@
                                                         <i class="material-icons mr-25">fitness_center</i><span
                                                             class="d-none d-sm-block">Treino</span>
                                                     </a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                             <!-- users edit Info form start -->
 
                                             <div class="tab-pane active" id="address1" aria-labelledby="account-tab"
                                                 role="tabpanel">
 
-                                                <form novalidate>
+                                                <form novalidate id="faculdade_endereco">
                                                     <div class="row">
+                                                        <div class="col-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <label>Faculdade</label>
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Faculdade"
+                                                                        value="<%= user.faculdade ? user.faculdade.name : '' %>"
+                                                                        id="faculdade" required
+                                                                        data-validation-required-message="Preencha o campo">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>CEP</label>
                                                                     <input type="text" class="form-control"
-                                                                        placeholder="CEP" value="00000-000" required
+                                                                        placeholder="CEP" id="cep" required
+                                                                        value="<%= user.faculdade ? user.faculdade.cep : '' %>"
                                                                         data-validation-required-message="Preencha o campo">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número</label>
-                                                                <input type="text" class="form-control" value="123"
-                                                                    placeholder="Número">
+                                                                <input type="number" id="numero"
+                                                                    value="<%= user.faculdade ? user.faculdade.number : '' %>"
+                                                                    class="form-control" placeholder="Número">
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>Cidade</label>
-                                                                    <input type="text" class="form-control"
-                                                                        value="São paulo" placeholder="Cidade">
+                                                                    <input type="text" id="cidade"
+                                                                        value="<%= user.faculdade ? user.faculdade.city : '' %>"
+                                                                        class="form-control" placeholder="Cidade">
                                                                 </div>
                                                             </div>
 
@@ -232,22 +247,22 @@
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>Rua</label>
-                                                                    <input type="text" class="form-control"
-                                                                        value="Rua das amoras" placeholder="Rua">
+                                                                    <input type="text" id="rua"
+                                                                        value="<%= user.faculdade ? user.faculdade.street : '' %>"
+                                                                        class="form-control" placeholder="Rua">
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label>Bairro</label>
-                                                                <input type="text" class="form-control"
-                                                                    value="Rua das amoras" placeholder="Bairro">
+                                                                <input type="text" id="bairro"
+                                                                    value="<%= user.faculdade ? user.faculdade.district : '' %>"
+                                                                    class="form-control" placeholder="Bairro">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Estado</label>
-                                                                <select class="form-control">
-                                                                    <option>Feminino</option>
-                                                                    <option>Masculino</option>
-                                                                    <option>Outros</option>
+                                                                <select class="form-control" id="estado">
+                                                                    <option value="">Estado</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -257,7 +272,7 @@
                                             </div>
 
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit"
+                                                <button type="submit" onclick="salvarFacul(event)"
                                                     class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Salvar</button>
                                                 <button type="reset" class="btn btn-outline-warning">Desfazer
                                                     Alterações</button>
@@ -346,9 +361,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="../../../app-assets/js/scripts/jquery.mask.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script type="text/javascript">
+
+        $("#cellPhone").mask("(00) 00000-0000")
+        $("#cep").mask("00000-000");
+
+        $("#cpf").mask('000.000.000-00', { reverse: true });
 
         function notificacao(confirmButton, modal_color, icon, message) {
             const Toast = Swal.mixin({
@@ -401,7 +424,6 @@
         }
 
         $("#changePassword").click(function (e) {
-            console.log('click')
             e.preventDefault();
             $('#reset_password_form').validate({
                 rules: {
@@ -430,8 +452,6 @@
             if (!$("#reset_password_form").valid()) {
                 return;
             } else {
-                console.log('else')
-                //debugger;
                 edit_user_password();
             }
         })
@@ -513,7 +533,6 @@
         }
 
         function edit_user_password() {
-            //debugger;
             let site = "http://localhost:3000/usersp/" + JSON.parse(localStorage.getItem("currentUser")).id;
             $.ajax({
                 type: 'put',
@@ -584,7 +603,65 @@
             let userId = user.id;
             let userPassword = user.password;
             buscar_user(userId);
-        })  
+            popula_estado()
+            if ('<%= user.faculdade %>') {
+                var estado = '<%= user.faculdade.state %>'
+                console.log(estado)
+                $("#estado").children("option").text(estado).attr('selected', 'selected')
+                $("#estado").trigger("change");
+            }
+        })
+
+        function popula_estado() {
+            axios({
+                method: 'get',
+                url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/`,
+            })
+                .then((retorno) => {
+                    var estado = retorno.data
+                    for (i = 0; i <= estado.length; i++) {
+                        $("#estado").append(new Option(estado[i].nome, estado[i].sigla));
+                    }
+                })
+        }
+
+        function limpa_endereco() {
+            $("#rua").val("");
+            $("#bairro").val("");
+            $("#numero").val("");
+            $("#cidade").val("");
+            $("#estado").val("").change();
+        }
+
+        $("#cep").blur(function () {
+            var cep = $(this).val().replace(/\D/g, '');
+            if (cep != "") {
+                var validacep = /^[0-9]{8}$/;
+                if (validacep.test(cep)) {
+                    $("#rua").val("...");
+                    $("#cidade").val("...");
+                    $("#bairro").val("...");
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                        console.log(dados)
+                        if (!("erro" in dados)) {
+                            $("#rua").val(dados.logradouro);
+                            $("#cidade").val(dados.localidade);
+                            $("#bairro").val(dados.bairro);
+                            $("#estado").val(dados.uf).attr('selected', 'selected')
+                            $("#estado").trigger("change");
+                        }
+                        else { limpa_endereco() }
+                    });
+                }
+            }
+            else { limpa_endereco() }
+        });
+
+        function salvarFacul(e) {
+            e.preventDefault()
+            console.log($("#faculdade_endereco").serialize())
+        }
+
     </script>
 
 </body>
