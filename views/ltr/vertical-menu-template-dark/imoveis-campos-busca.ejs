@@ -103,12 +103,25 @@
                         <div class="d-flex justify-content-end align-items-center profile-header-nav">
                             <div class="row" style="margin-top: -628px;">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Buscar Imóveis</h4>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="card-body">
-                                            <form class="form">
+                                    <form class="form" id="pesquisa">
+                                        <div class="card-header">
+                                            <h4 class="card-title" style="margin-top: -15px;">Buscar Imóveis</h4>
+                                            <div class="col-md-2 col-12">
+                                                <div class="form-label-group" style="left: -234px">
+                                                    <input type="number" id="raio" class="form-control" name="raio"
+                                                        placeholder="Raio (km)">
+                                                    <label for="local">Raio (km)</label>
+                                                </div>
+                                            </div>
+                                            <div id="faculdade" style="margin-right: 10px;"
+                                                class="btn btn-primary mb-1">
+                                                <i class="fas fa-graduation-cap"></i>
+                                                Faculdade
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+
                                                 <div class="form-body">
 
                                                     <div class="row">
@@ -128,16 +141,16 @@
                                                         </div>
 
                                                         <div class="col-md-3 col-12" id="tipo">
-                                                            <div value="casa" style="margin-right: 10px;"
+                                                            <div value="1" style="margin-right: 10px;"
                                                                 class="btn btn-icon btn-flat-primary mb-1"><i
                                                                     class="fa fa-home" aria-hidden="true"></i></div>
 
-                                                            <div value="apto" style="margin-right: 10px;"
+                                                            <div value="2" style="margin-right: 10px;"
                                                                 class="btn btn-icon btn-flat-primary mb-1"><i
                                                                     class="fa fa-building-o" aria-hidden="true"></i>
                                                             </div>
 
-                                                            <div value="quarto" style="margin-right: 10px;"
+                                                            <div value="3" style="margin-right: 10px;"
                                                                 class="btn btn-icon btn-flat-primary mb-1"><i
                                                                     class="fa fa-bed" aria-hidden="true"></i></div>
 
@@ -195,15 +208,19 @@
 
                                                         <div class="col-md-1 col-12">
                                                             <button type="submit" class="btn btn-primary mr-1 mb-1"
+                                                                onclick="buscar(event)"
                                                                 style="margin-top: -9px; right: 57px;"><i
                                                                     class="fas fa-search"></i> Buscar</button>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
 
+                                                    </div>
                                                 </div>
-                                            </form>
+
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -236,11 +253,12 @@
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </body>
 
 <script>
-    var avaliacaoImovel;
+    var avaliacaoImovel = "";
 
     var estrelas = $("#estrelas").children(".pull-up")
     estrelas.on("click", (event) => {
@@ -253,13 +271,13 @@
         }
         avaliacaoImovel = avaliacao
     })
-
+    var tipoImovel
     var tipo = $("#tipo").children("div")
     tipo.on("click", (event) => {
         for (i = 0; i < tipo.length; i++) {
             $(tipo[i]).removeClass("imovelType")
         }
-        console.log(event.currentTarget)
+        tipoImovel = event.currentTarget.getAttribute('value')
 
         $(event.currentTarget).addClass("imovelType")
     })
@@ -270,6 +288,75 @@
 
     function removeAttribute(clicked) {
         clicked.removeAttribute("style");
+    }
+
+    function buscar(e) {
+        e.preventDefault()
+        var vazios = 0
+        var pesquisa = {
+            local: $('#local').val(),
+            raio: $('#raio').val(),
+            max: $('#valorMax').val(),
+            avaliacao: avaliacaoImovel,
+            tipo: tipoImovel,
+        }
+        for (var i in pesquisa) {
+            if (pesquisa[i] == "" || pesquisa[i] == undefined) {
+                vazios++
+            }
+        }
+        if (vazios == 5) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#626262',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'info',
+                title: 'Preencha um dos campos'
+            })
+        } else if (pesquisa.local == ""){
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#626262',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'info',
+                title: 'Preencha a localização'
+            })
+        } else {
+            $.ajax({
+                type: 'get',
+                url: '/imoveis/busca',
+                data: {
+                    pesquisa
+                },
+                datatype: "application/json",
+                success: function (retorno) {
+                    window.location = `/imoveis/result?data=${encodeURIComponent(JSON.stringify(retorno))}`;
+                },
+                error: function (retorno) {
+                    console.error('error', retorno)
+                }
+            })
+        }
     }
 </script>
 
