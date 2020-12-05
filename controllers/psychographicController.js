@@ -46,6 +46,7 @@ module.exports.findUsers = async function (req, res) {
     await axios({
         method: 'get',
         url: `http://localhost:3000/findUsers`,
+        params: { id: req.params.id }
     })
     .then((retorno) => {
         res.status(200);

@@ -82,10 +82,9 @@ router.get('/imovel/detalhes/:id', async (req, res) => {
 })
 
 // Usuários semelhantes
-router.get('/users', async (req, res) => {
+router.get('/users/:id', async (req, res) => {
     var users = await psychographicController.findUsers(req, res)
     res.locals = { users }
-    console.log(users)
     res.render('ltr/vertical-menu-template-dark/usersSemelhantes.ejs')
 })
 
