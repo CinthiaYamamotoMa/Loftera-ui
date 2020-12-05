@@ -105,14 +105,16 @@ router.get('/imovel/interesse/:id', async (req, res) => {
 
 // Crud Imóvel
 router.get('/imoveis/busca', async (req, res) => {
-    var imoveis = await imovelController.findAll(req, res);
+    await imovelController.findPesquisa(req, res);
+})
+
+router.get('/imoveis/result', async (req, res) => {
+    var imoveis = JSON.parse(req.query.data)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-busca.ejs')
 })
 
 router.get('/imoveis/buscar', async (req, res) => {
-    var imoveis = await imovelController.findAll(req, res);
-    res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-campos-busca.ejs')
 })
 
