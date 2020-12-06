@@ -15,6 +15,10 @@
                         <li class="nav-item d-none d-lg-block"><a class="nav-link" onclick="listarInteressados()"
                                 data-toggle="tooltip" data-placement="top" title="Favoritados"><i
                                     class="ficon feather icon-heart pink"></i></a></li>
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" onclick="listarSemelhantes()"
+                            data-toggle="tooltip" data-placement="top" title="Encontrar Usuários Semelhantes"><i
+                                class="ficon feather icon-users pink"></i></a></li>
+
                         <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/imoveis/buscar"
                             data-toggle="tooltip" data-placement="top" title="Buscar Imóveis"><i
                                 class="ficon feather icon-search pink"></i></a></li>
@@ -250,6 +254,15 @@
             window.location = `/imovel/interesse/${id}`
         } else {
             Swal.fire('Faça Login')
+        }
+    }
+
+    function listarSemelhantes() {
+        if (localStorage.getItem("currentUser") != undefined) {
+            var id = JSON.parse(localStorage.currentUser).id
+            window.location = `/users/${id}`
+        } else {
+            alert('Faça login para encontrar outros usuários')
         }
     }
 

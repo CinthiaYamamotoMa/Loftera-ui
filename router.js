@@ -125,6 +125,13 @@ router.get('/imovel/detalhes/:id', async (req, res) => {
     res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
 })
 
+// Usuários semelhantes
+router.get('/users/:id', async (req, res) => {
+    var users = await psychographicController.findUsers(req, res)
+    res.locals = { users }
+    res.render('ltr/vertical-menu-template-dark/usersSemelhantes.ejs')
+})
+
 router.post('/interesse', async (req, res) => {
     await interestedController.storeInteressados(req, res)
 })
