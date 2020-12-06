@@ -64,7 +64,7 @@ module.exports = {
         })
             .then((retorno) => {
                 res.status(200);
-                res.send(retorno.data.status)
+                res.send(retorno.data)
             })
             .catch((error) => {
                 console.log(error)
