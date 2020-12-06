@@ -93,7 +93,7 @@
                             <% for (var i = 0; i < users.length; i++) { %>
                             <div class="d-flex justify-content-start align-items-center mb-1">
                                 <div class="avatar mr-50">
-                                    <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg"
+                                    <img src="../../../app-assets/images/portrait/small/<%= users[i].image.name %>"
                                         alt="avtar img holder" height="35" width="35">
                                 </div>
                                 <div class="user-page-info">
@@ -101,7 +101,7 @@
                                         <%= users[i].name %>
                                     </h6>
                                 </div>
-                                <button type="button" onclick="conversar('<%= users[i].id %>')"
+                                <button type="button" onclick="criar_chat('<%= users[i].id %>', '../../../app-assets/images/portrait/small/<%= users[i].image.name %>', '<%= users[i].name %>')"
                                     class="btn btn-primary btn-icon ml-auto">
                                     <i class="far fa-comment-alt"></i>
                                 </button>
@@ -126,10 +126,14 @@
 
 </body>
 <script>
-    // function criar_chat() {
-    //     localStorage.setItem("currentChatUser", JSON.stringify(id_do_usuario_clicado, avatar_do_usuario_clicado, nome_do_usuario_clicado));
-    //     window.location = "/app-chat";
-    // }
+    function criar_chat(userId, userProfileImage, userName) {
+        let userChat = new Object();
+        userChat.id = userId;
+        userChat.avatar = userProfileImage;
+        userChat.name  = userName;
+        localStorage.setItem("currentChatUser", JSON.stringify(userChat));
+        window.location = "/app-chat";
+    }
 </script>
 
 </html>
