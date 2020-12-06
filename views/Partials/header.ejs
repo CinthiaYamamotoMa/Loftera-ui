@@ -8,17 +8,19 @@
                                 class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                     class="ficon feather icon-menu"></i></a></li>
                     </ul>
-                    <ul class="nav navbar-nav bookmark-icons" style="display: none;" id="chatAndInterested" name="chatAndInterested">
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/app-chat"
+                    <ul class="nav navbar-nav bookmark-icons">
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/app-chat" style="display: none;" id="chat"
                                 data-toggle="tooltip" data-placement="top" title="Chat"><i
                                     class="ficon feather icon-message-square"></i></a></li>
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link" onclick="listarInteressados()"
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" onclick="listarInteressados()" style="display: none;" id="favoritos"
                                 data-toggle="tooltip" data-placement="top" title="Favoritados"><i
                                     class="ficon feather icon-heart pink"></i></a></li>
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link" onclick="listarSemelhantes()"
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" onclick="listarSemelhantes()" style="display: none;" id="users"
                             data-toggle="tooltip" data-placement="top" title="Encontrar Usuários Semelhantes"><i
                                 class="ficon feather icon-users pink"></i></a></li>
-
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/imovel/cadastro" style="display: none;" id="cadastroImovel"
+                            data-toggle="tooltip" data-placement="top" title="Cadastrar Imóvel">
+                            <i class="ficon fas fa-home"></i></a></li>
                         <li class="nav-item d-none d-lg-block"><a class="nav-link" href="/imoveis/buscar"
                             data-toggle="tooltip" data-placement="top" title="Buscar Imóveis"><i
                                 class="ficon feather icon-search pink"></i></a></li>
@@ -231,9 +233,14 @@
                 user.image.name = user.image.name
             }
             $("#imagemUsuario").attr('src', `../../../app-assets/images/portrait/small/${user.image.name}`)
-
-            $("#chatAndInterested").removeAttr('style')
-
+            if(user.role == 'estudante') {
+                $("#favoritos").removeAttr('style')
+                $("#users").removeAttr('style')
+            }
+            if(user.role == 'proprietario') {
+                $("#cadastroImovel").removeAttr('style')
+            }
+            $("#chat").removeAttr('style')
         }
     }
 

@@ -29,7 +29,7 @@
                                                 class="d-none d-sm-block">Perfil</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" id="faculdade">
                                         <a class="nav-link d-flex align-items-center" id="information-tab"
                                             data-toggle="tab" href="#information" aria-controls="information" role="tab"
                                             aria-selected="false">
@@ -609,6 +609,10 @@
             console.log(estado)
             $("#estado").children("option").text(estado).attr('selected', 'selected')
             $("#estado").trigger("change");
+
+            if (JSON.parse(localStorage.currentUser).role == 'proprietario') {
+                $("#faculdade").attr('style', 'display: none;')
+            }
         })
 
         function popula_estado() {
