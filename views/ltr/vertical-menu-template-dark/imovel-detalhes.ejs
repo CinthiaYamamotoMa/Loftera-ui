@@ -992,7 +992,11 @@
         }
 
         function criar_chat(userId, userProfileImage, userName) {
-            localStorage.setItem("currentChatUser", JSON.stringify(userId, userProfileImage, userName));
+            let userChat = new Object();
+            userChat.id = userId;
+            userChat.avatar = userProfileImage;
+            userChat.name  = userName;
+            localStorage.setItem("currentChatUser", JSON.stringify(userChat));
             window.location = "/app-chat";
         }
 
