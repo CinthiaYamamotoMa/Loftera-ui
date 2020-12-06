@@ -95,7 +95,6 @@ router.get('/imoveis', async (req, res) => {
 // Imóveis de Interesse
 router.get('/imovel/interesse/:id', async (req, res) => {
     var imoveis = await interestedController.findInteressados(req, res);
-    console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
 })
@@ -134,6 +133,10 @@ router.get('/users/:id', async (req, res) => {
 
 router.post('/interesse', async (req, res) => {
     await interestedController.storeInteressados(req, res)
+})
+
+router.post('/removeInteresse', async (req, res) => {
+    await interestedController.removeInteresse(req, res)
 })
 
 // Avaliar Imóvel

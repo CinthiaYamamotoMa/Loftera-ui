@@ -707,7 +707,7 @@
         </button>
         <button class="btn btn-primary btn-icon scroll-top" type="button" id="tenhointeresse"
             onclick="registrarInteresse()">
-            Tenho Interesse <i class="ficon feather icon-heart"></i>
+            <i class="ficon feather icon-heart"></i>
         </button>
     </footer>
 
@@ -1001,19 +1001,37 @@
         }
 
         function registrarInteresse() {
-            // @todo Remover interesse
+
             var id = JSON.parse(localStorage.currentUser).id
+            var url = '/interesse'
+            var interessado = true
+            var interessados = '<%- JSON.stringify(imovel.imovel.product.interessados) %>'
+            interessados = JSON.parse(interessados)
+            for(i = 0; i < interessados.length; i++) {
+                if(interessados[i].id == id) {
+                    url = '/removeInteresse'
+                    interessado = false
+                }
+            }
             $.ajax({
                 type: 'post',
-                url: '/interesse',
+                url: url,
                 data: {
                     userId: id,
                     productId: "<%= imovel.imovel.id %>"
                 },
                 datatype: "application/json",
                 success: function (retorno) {
-                    notificacao(false, '#626262', 'success', 'Sucesso')
-                    document.location.reload(true);
+                    console.log(retorno)
+                    if(interessado) {
+                        notificacao(false, '#626262', 'success', 'Interesse Registrado')
+                    } else {
+                        notificacao(false, '#626262', 'success', 'Interesse Removido')
+                    }
+                    
+                    setTimeout(function(){ 
+                        document.location.reload(true);
+                    }, 1000);
                 },
                 error: function (retorno) {
                     console.error('error', retorno)
