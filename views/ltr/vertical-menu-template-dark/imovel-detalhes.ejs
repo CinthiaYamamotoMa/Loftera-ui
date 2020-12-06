@@ -596,7 +596,7 @@
                                         <h4>Localização</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div id="basic-map" class="height-400"></div>
+                                        <div id="mapa" class="height-400"></div>
                                     </div>
                                 </div>
                             </div>
@@ -729,13 +729,38 @@
     <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
     <script src="../../../app-assets/js/scripts/extensions/swiper.js"></script>
 
-    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBgjNW0WA93qphgZW-joXVR6VC3IiYFjfo"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE"></script>
     <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
 
     <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE&callback=inicializar">
+        </script>
     <script>
+
+        var local = '<%= imovel.imovel.cep %>'
+        $.ajax({
+            type: 'get',
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${local}&key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE`,
+            datatype: "application/json",
+            success: function (retorno) {
+                console.log(retorno.results[0].geometry.location)
+                var coordenadas = retorno.results[0].geometry.location
+                var mapa = new google.maps.Map(document.getElementById('mapa'), {
+                    zoom: 19,
+                    center: coordenadas
+                });
+                var marker = new google.maps.Marker({
+                    position: coordenadas,
+                    map: mapa,
+                    title: 'Imovel'
+                });
+            },
+            error: function (retorno) {
+                console.error('error', retorno)
+            }
+        })
 
         function notificacao(confirmButton, modal_color, icon, message) {
             const Toast = Swal.mixin({
@@ -995,7 +1020,7 @@
             let userChat = new Object();
             userChat.id = userId;
             userChat.avatar = userProfileImage;
-            userChat.name  = userName;
+            userChat.name = userName;
             localStorage.setItem("currentChatUser", JSON.stringify(userChat));
             window.location = "/app-chat";
         }
@@ -1007,8 +1032,8 @@
             var interessado = true
             var interessados = '<%- JSON.stringify(imovel.imovel.product.interessados) %>'
             interessados = JSON.parse(interessados)
-            for(i = 0; i < interessados.length; i++) {
-                if(interessados[i].id == id) {
+            for (i = 0; i < interessados.length; i++) {
+                if (interessados[i].id == id) {
                     url = '/removeInteresse'
                     interessado = false
                 }
@@ -1023,13 +1048,13 @@
                 datatype: "application/json",
                 success: function (retorno) {
                     console.log(retorno)
-                    if(interessado) {
+                    if (interessado) {
                         notificacao(false, '#626262', 'success', 'Interesse Registrado')
                     } else {
                         notificacao(false, '#626262', 'success', 'Interesse Removido')
                     }
-                    
-                    setTimeout(function(){ 
+
+                    setTimeout(function () {
                         document.location.reload(true);
                     }, 1000);
                 },
