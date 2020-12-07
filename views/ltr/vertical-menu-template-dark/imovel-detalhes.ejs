@@ -734,9 +734,8 @@
 
     <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE&callback=inicializar">
-        </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE">
+    </script>
     <script>
 
         var local = '<%= imovel.imovel.cep %>'
@@ -756,6 +755,21 @@
                     map: mapa,
                     title: 'Imovel'
                 });
+                // const R = 6371; // metres
+                // const φ1 = coordenadas.lat * Math.PI / 180; // φ, λ in radians
+                // const φ2 = -23.597469900000 * Math.PI / 180;
+                // const Δφ = (-23.597469900000 - coordenadas.lat) * Math.PI / 180;
+                // const Δλ = (-46.562920200000 - coordenadas.lng) * Math.PI / 180;
+
+                // const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                //     Math.cos(φ1) * Math.cos(φ2) *
+                //     Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+                // const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+                // const d = R * c; // in metres
+
+                // console.log(d)
+ 
             },
             error: function (retorno) {
                 console.error('error', retorno)
