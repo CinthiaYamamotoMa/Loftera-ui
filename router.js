@@ -95,7 +95,6 @@ router.get('/imoveis', async (req, res) => {
 // Imóveis de Interesse
 router.get('/imovel/interesse/:id', async (req, res) => {
     var imoveis = await interestedController.findInteressados(req, res);
-    console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
 })
@@ -125,8 +124,19 @@ router.get('/imovel/detalhes/:id', async (req, res) => {
     res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
 })
 
+// Usuários semelhantes
+router.get('/users/:id', async (req, res) => {
+    var users = await psychographicController.findUsers(req, res)
+    res.locals = { users }
+    res.render('ltr/vertical-menu-template-dark/usersSemelhantes.ejs')
+})
+
 router.post('/interesse', async (req, res) => {
     await interestedController.storeInteressados(req, res)
+})
+
+router.post('/removeInteresse', async (req, res) => {
+    await interestedController.removeInteresse(req, res)
 })
 
 // Avaliar Imóvel

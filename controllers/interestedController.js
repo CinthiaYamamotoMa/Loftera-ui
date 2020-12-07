@@ -35,3 +35,20 @@ module.exports.storeInteressados = async function (req, res) {
             console.log(error)
         })
 }
+
+module.exports.removeInteresse = async function (req, res) {
+    let site = "http://localhost:3000/";
+    await axios({
+        method: 'post',
+        url: site + 'removeInteresse',
+        params: { userId: req.body.userId,
+        productId: req.body.productId }
+    })
+        .then((retorno) => {
+            res.status(200);
+            res.json({ success: true });
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}

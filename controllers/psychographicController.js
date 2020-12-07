@@ -21,7 +21,7 @@ module.exports.findAll = async function (req, res) {
 module.exports.store = async function (req, res) {
     axios({
         method: 'post',
-        url: `http://localhost:9000/caracteristicas`,
+        url: `http://localhost:3000/caracteristicas`,
         data: req.body
     })
         .then((retorno) => {
@@ -37,4 +37,22 @@ module.exports.store = async function (req, res) {
             }
         });
 
+}
+
+module.exports.findUsers = async function (req, res) {
+
+    var caracteristicas
+    await axios({
+        method: 'get',
+        url: `http://localhost:3000/findUsers`,
+        params: { id: req.params.id }
+    })
+    .then((retorno) => {
+        res.status(200);
+        caracteristicas = retorno.data.data
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+    return caracteristicas
 }

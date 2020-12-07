@@ -189,8 +189,16 @@
                 },
                 datatype: "application/json",
                 success: function (retorno) {
-                    notificacao(false, '#626262', 'success', 'Conta Cadastrada')
-                    window.location = `/imoveis`
+                    if (retorno.data.role == 'estudante') {
+                        window.location = `/card-caracteristica`
+                    } else {
+                        window.location = `/imoveis/buscar`
+                    }
+                    var user = JSON.parse(localStorage.currentUser)
+                    user.role = retorno.data.role
+                    localStorage.removeItem('currentUser')
+                    localStorage.setItem('currentUser', JSON.stringify(user))
+                    notificacao(false, '#626262', 'success', 'Sucesso')
                 },
                 error: function (retorno) {
                     notificacao(false, '#d33', 'error', 'Não foi possível cadastrar sua conta')
