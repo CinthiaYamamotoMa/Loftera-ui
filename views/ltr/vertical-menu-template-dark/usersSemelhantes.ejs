@@ -85,13 +85,13 @@
             </div>
             <div class="row">
 
-                <div class="content-body">
-
-                    <div class="row">
+                <div class="content-body col-md-9 col-12 mb-2">
+                    <% for (var i = 0; i < users.length; i++) { %>
+                    <div class="card mb-1">
+                        
                         <div class="modal-body">
-
-                            <% for (var i = 0; i < users.length; i++) { %>
-                            <div class="d-flex justify-content-start align-items-center mb-1">
+                            
+                            <div class="d-flex justify-content-start align-items-center">
                                 <div class="avatar mr-50">
                                     <img src="../../../app-assets/images/portrait/small/<%= users[i].image.name %>"
                                         alt="avtar img holder" height="35" width="35">
@@ -106,10 +106,19 @@
                                     <i class="far fa-comment-alt"></i>
                                 </button>
                             </div>
-                            <% } %>
+                            
 
                         </div>
+                        
                     </div>
+                    <% } %>
+                </div>
+                <div class="content-body col-md-3 col-12 mb-2">
+                    <p>
+                        Usuários Semelhantes são os usuários que possuem
+                        características iguais as que foram cadastradas
+                        por você após a criação de conta
+                    </p>
                 </div>
             </div>
         </div>
