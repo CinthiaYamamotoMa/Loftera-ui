@@ -73,7 +73,6 @@ router.get('/app-user-edit/:id', async (req, res) => {
 // Avatar
 router.post('/avatar', upload.single("avatar"), async (req, res) => {
     userController.updateAvatar(req, res)
-
 })
 
 router.post('/deleteAvatar', async (req, res) => {

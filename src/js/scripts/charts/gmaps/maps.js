@@ -15,18 +15,18 @@ $(window).on("load", function(){
     // Basic Map
     // ------------------------------
 
-    map = new GMaps({
-        div: '#basic-map',
-        lat: 9.0820,
-        lng: 8.6753,
-        zoom: 7
-    });
-    map.addMarker({
-        lat: 9.0765,
-        lng: 7.3986,
-        title: 'Marker1',
-        draggable: true,
-    });
+    // map = new GMaps({
+    //     div: '#basic-map',
+    //     lat: -23.597469900000,
+    //     lng: -46.562920200000,
+    //     zoom: 7
+    // });
+    // map.addMarker({
+    //     lat: -23.597469900000,
+    //     lng: -46.562920200000,
+    //     title: 'Marker1',
+    //     draggable: true,
+    // });
 
     // Info Window
     // ------------------------------
