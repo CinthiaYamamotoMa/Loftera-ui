@@ -11,6 +11,8 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage })
 
+const attributesController = require('./controllers/attributesController');
+const rulesController = require('./controllers/rulesController');
 const userController = require('./controllers/userController');
 const interestedController = require('./controllers/interestedController');
 const commentController = require('./controllers/commentController');
@@ -73,7 +75,6 @@ router.get('/app-user-edit/:id', async (req, res) => {
 // Avatar
 router.post('/avatar', upload.single("avatar"), async (req, res) => {
     userController.updateAvatar(req, res)
-
 })
 
 router.post('/deleteAvatar', async (req, res) => {
@@ -81,7 +82,10 @@ router.post('/deleteAvatar', async (req, res) => {
 })
 
 // Cadastro Imóvel
-router.get('/imovel/cadastro', (req, res) => {
+router.get('/imovel/cadastro', async (req, res) => {
+    var regras = await rulesController.findAll(req, res);
+    var comodidades = await attributesController.findAll(req, res);
+    res.locals = { regras, comodidades }
     res.render('ltr/vertical-menu-template-dark/imovel-cadastro.ejs')
 })
 
@@ -95,7 +99,6 @@ router.get('/imoveis', async (req, res) => {
 // Imóveis de Interesse
 router.get('/imovel/interesse/:id', async (req, res) => {
     var imoveis = await interestedController.findInteressados(req, res);
-    console.log(imoveis)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-interessados.ejs')
 })
@@ -125,8 +128,19 @@ router.get('/imovel/detalhes/:id', async (req, res) => {
     res.render('ltr/vertical-menu-template-dark/imovel-detalhes.ejs')
 })
 
+// Usuários semelhantes
+router.get('/users/:id', async (req, res) => {
+    var users = await psychographicController.findUsers(req, res)
+    res.locals = { users }
+    res.render('ltr/vertical-menu-template-dark/usersSemelhantes.ejs')
+})
+
 router.post('/interesse', async (req, res) => {
     await interestedController.storeInteressados(req, res)
+})
+
+router.post('/removeInteresse', async (req, res) => {
+    await interestedController.removeInteresse(req, res)
 })
 
 // Avaliar Imóvel

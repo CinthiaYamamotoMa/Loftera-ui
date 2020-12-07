@@ -299,6 +299,7 @@
             max: $('#valorMax').val(),
             avaliacao: avaliacaoImovel,
             tipo: tipoImovel,
+            coordenadas: {}
         }
         for (var i in pesquisa) {
             if (pesquisa[i] == "" || pesquisa[i] == undefined) {
@@ -344,23 +345,34 @@
         } else {
             $.ajax({
                 type: 'get',
-                url: '/imoveis/busca',
-                data: {
-                    pesquisa
-                },
+                url: `https://maps.googleapis.com/maps/api/geocode/json?address=${pesquisa.local}&key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE`,
                 datatype: "application/json",
-                success: function (retorno) {
-                    window.location = `/imoveis/result?data=${encodeURIComponent(JSON.stringify(retorno))}`;
-                },
-                error: function (retorno) {
-                    console.error('error', retorno)
-                }
             })
+                .done((retorno) => {
+                    pesquisa.coordenadas = retorno.results[0].geometry.location
+                    $.ajax({
+                        type: 'get',
+                        url: '/imoveis/busca',
+                        data: {
+                            pesquisa
+                        },
+                        datatype: "application/json",
+                        success: function (retorno) {
+                            window.location = `/imoveis/result?data=${encodeURIComponent(JSON.stringify(retorno))}`;
+                        },
+                        error: function (retorno) {
+                            console.error('error', retorno)
+                        }
+                    })
+                })
         }
     }
 
     $(document).ready(() => {
         if (localStorage.getItem("currentUser") == undefined) {
+            $("#faculdade").attr('disabled', 'true')
+        }
+        if (JSON.parse(localStorage.currentUser).role == 'proprietario') {
             $("#faculdade").attr('disabled', 'true')
         }
     })

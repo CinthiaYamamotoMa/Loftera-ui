@@ -170,7 +170,7 @@
                                         <div class="card-header d-flex justify-content-between pb-0">
                                             <h4>Proprietário</h4>
                                             <button type="button" id="conversar"
-                                                onclick="criar_chat('<%= imovel.imovel.product.user.id %>', '../../../app-assets/images/portrait/small/<%= imovel.imovel.product.user.image.name %>', '<%= imovel.imovel.product.user.name %>')"
+                                                onclick="criar_chat('<%= imovel.imovel.product.user.id %>', '<%= imovel.imovel.product.user.image.name %>', '<%= imovel.imovel.product.user.name %>')"
                                                 class="btn btn-flat-primary border-primary text-primary mr-1 mb-1"><i
                                                     class="ficon feather icon-message-square"></i> Conversar</button>
                                         </div>
@@ -596,7 +596,7 @@
                                         <h4>Localização</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div id="basic-map" class="height-400"></div>
+                                        <div id="mapa" class="height-400"></div>
                                     </div>
                                 </div>
                             </div>
@@ -630,7 +630,7 @@
                                         </h6>
                                     </div>
                                     <button type="button"
-                                        onclick="criar_chat('<%= imovel.imovel.product.interessados[i].id %>', '../../../app-assets/images/portrait/small/<%= imovel.imovel.product.interessados[i].image.name %>', '<%= imovel.imovel.product.interessados[i].name %>')"
+                                        onclick="criar_chat('<%= imovel.imovel.product.interessados[i].id %>', '<%= imovel.imovel.product.interessados[i].image.name %>', '<%= imovel.imovel.product.interessados[i].name %>')"
                                         class="btn btn-primary btn-icon ml-auto">
                                         <i class="far fa-comment-alt"></i>
                                     </button>
@@ -707,7 +707,7 @@
         </button>
         <button class="btn btn-primary btn-icon scroll-top" type="button" id="tenhointeresse"
             onclick="registrarInteresse()">
-            Tenho Interesse <i class="ficon feather icon-heart"></i>
+            <i class="ficon feather icon-heart"></i>
         </button>
     </footer>
 
@@ -729,13 +729,52 @@
     <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
     <script src="../../../app-assets/js/scripts/extensions/swiper.js"></script>
 
-    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBgjNW0WA93qphgZW-joXVR6VC3IiYFjfo"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE"></script>
     <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
 
     <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE">
+    </script>
     <script>
+
+        var local = '<%= imovel.imovel.cep %>'
+        $.ajax({
+            type: 'get',
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${local}&key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE`,
+            datatype: "application/json",
+            success: function (retorno) {
+                console.log(retorno.results[0].geometry.location)
+                var coordenadas = retorno.results[0].geometry.location
+                var mapa = new google.maps.Map(document.getElementById('mapa'), {
+                    zoom: 19,
+                    center: coordenadas
+                });
+                var marker = new google.maps.Marker({
+                    position: coordenadas,
+                    map: mapa,
+                    title: 'Imovel'
+                });
+                // const R = 6371; // metres
+                // const φ1 = coordenadas.lat * Math.PI / 180; // φ, λ in radians
+                // const φ2 = -23.597469900000 * Math.PI / 180;
+                // const Δφ = (-23.597469900000 - coordenadas.lat) * Math.PI / 180;
+                // const Δλ = (-46.562920200000 - coordenadas.lng) * Math.PI / 180;
+
+                // const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                //     Math.cos(φ1) * Math.cos(φ2) *
+                //     Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+                // const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+                // const d = R * c; // in metres
+
+                // console.log(d)
+ 
+            },
+            error: function (retorno) {
+                console.error('error', retorno)
+            }
+        })
 
         function notificacao(confirmButton, modal_color, icon, message) {
             const Toast = Swal.mixin({
@@ -992,24 +1031,46 @@
         }
 
         function criar_chat(userId, userProfileImage, userName) {
-            localStorage.setItem("currentChatUser", JSON.stringify(userId, userProfileImage, userName));
+            let userChat = new Object();
+            userChat.id = userId;
+            userChat.avatar = userProfileImage;
+            userChat.name = userName;
+            localStorage.setItem("currentChatUser", JSON.stringify(userChat));
             window.location = "/app-chat";
         }
 
         function registrarInteresse() {
-            // @todo Remover interesse
+
             var id = JSON.parse(localStorage.currentUser).id
+            var url = '/interesse'
+            var interessado = true
+            var interessados = '<%- JSON.stringify(imovel.imovel.product.interessados) %>'
+            interessados = JSON.parse(interessados)
+            for (i = 0; i < interessados.length; i++) {
+                if (interessados[i].id == id) {
+                    url = '/removeInteresse'
+                    interessado = false
+                }
+            }
             $.ajax({
                 type: 'post',
-                url: '/interesse',
+                url: url,
                 data: {
                     userId: id,
                     productId: "<%= imovel.imovel.id %>"
                 },
                 datatype: "application/json",
                 success: function (retorno) {
-                    notificacao(false, '#626262', 'success', 'Sucesso')
-                    document.location.reload(true);
+                    console.log(retorno)
+                    if (interessado) {
+                        notificacao(false, '#626262', 'success', 'Interesse Registrado')
+                    } else {
+                        notificacao(false, '#626262', 'success', 'Interesse Removido')
+                    }
+
+                    setTimeout(function () {
+                        document.location.reload(true);
+                    }, 1000);
                 },
                 error: function (retorno) {
                     console.error('error', retorno)

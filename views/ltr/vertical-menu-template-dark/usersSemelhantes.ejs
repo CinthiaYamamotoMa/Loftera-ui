@@ -1,0 +1,148 @@
+<%- include ('../../Partials/headerStyle.ejs'); %>
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 17px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 13px;
+        width: 13px;
+        left: 1px;
+        bottom: 2px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(13px);
+        -ms-transform: translateX(13px);
+        transform: translateX(13px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 17px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
+
+<body class="vertical-layout vertical-menu-modern dark-layout 2-columns navbar-floating footer-static  "
+    data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+
+    <%- include ('../../Partials/header.ejs'); %>
+
+    <%- include ('../../Partials/menu.ejs'); %>
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Usuários Semelhantes</h2>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="content-body col-md-9 col-12 mb-2">
+                    <% for (var i = 0; i < users.length; i++) { %>
+                    <div class="card mb-1">
+                        
+                        <div class="modal-body">
+                            
+                            <div class="d-flex justify-content-start align-items-center">
+                                <div class="avatar mr-50">
+                                    <img src="../../../app-assets/images/portrait/small/<%= users[i].image.name %>"
+                                        alt="avtar img holder" height="35" width="35">
+                                </div>
+                                <div class="user-page-info">
+                                    <h6 class="mb-0">
+                                        <%= users[i].name %>
+                                    </h6>
+                                </div>
+                                <button type="button" onclick="criar_chat('<%= users[i].id %>', '<%= users[i].image.name %>', '<%= users[i].name %>')"
+                                    class="btn btn-primary btn-icon ml-auto">
+                                    <i class="far fa-comment-alt"></i>
+                                </button>
+                            </div>
+                            
+
+                        </div>
+                        
+                    </div>
+                    <% } %>
+                </div>
+                <div class="content-body col-md-3 col-12 mb-2">
+                    <p>
+                        Usuários Semelhantes são os usuários que possuem
+                        características iguais as que foram cadastradas
+                        por você após a criação de conta
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="sidenav-overlay"></div>
+        <div class="drag-target"></div>
+
+        <footer class="footer footer-static footer-light"></footer>
+
+        <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+
+        <script src="../../../app-assets/js/core/app-menu.js"></script>
+        <script src="../../../app-assets/js/core/app.js"></script>
+        <script src="../../../app-assets/js/scripts/components.js"></script>
+
+</body>
+<script>
+    function criar_chat(userId, userProfileImage, userName) {
+        let userChat = new Object();
+        userChat.id = userId;
+        userChat.avatar = userProfileImage;
+        userChat.name  = userName;
+        localStorage.setItem("currentChatUser", JSON.stringify(userChat));
+        window.location = "/app-chat";
+    }
+</script>
+
+</html>

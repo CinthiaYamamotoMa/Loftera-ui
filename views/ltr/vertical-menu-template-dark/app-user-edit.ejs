@@ -29,7 +29,7 @@
                                                 class="d-none d-sm-block">Perfil</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" id="faculdade">
                                         <a class="nav-link d-flex align-items-center" id="information-tab"
                                             data-toggle="tab" href="#information" aria-controls="information" role="tab"
                                             aria-selected="false">
@@ -60,25 +60,28 @@
                                             <div class="media-body mt-50">
                                                 <h4 class="media-heading" id="nomeUsuario"><%= user.name %></h4>
                                                 <div class="col-12 d-flex mt-1 px-0">
-                                                    <form method="post" action="/avatar" enctype="multipart/form-data">
-                                                        <div id="editarFoto">
-                                                            <a onclick="displayUploadInput()"
-                                                                class="btn btn-primary d-none d-sm-block mr-75">
-                                                                <i class="feather icon-edit-1"></i>
-                                                                Alterar
-                                                            </a>
-                                                        </div>
-                                                        <div style="display: none;" id="uploadImagem">
+
+                                                    <div id="editarFoto">
+                                                        <a onclick="displayUploadInput()"
+                                                            class="btn btn-primary d-none d-sm-block mr-75">
+                                                            <i class="feather icon-edit-1"></i>
+                                                            Alterar
+                                                        </a>
+                                                    </div>
+                                                    <div style="display: none;" id="uploadImagem">
+                                                        <form enctype="multipart/form-data" id="updateAvatar">
                                                             <input id="foto" type="file" name="avatar" accept="image/*"
                                                                 class="btn btn-primary d-none d-sm-block mr-75"></input>
                                                             <input style="display: none;" type="text" id="userId"
                                                                 name="userId"></input>
-                                                            <button type="submit" style="display: none;" id="salvarFoto"
+                                                            <button onclick="updateAvatar(event)" style="display: none;"
+                                                                id="salvarFoto"
                                                                 class="btn btn-primary d-none d-sm-block mr-75">
                                                                 <i class="fas fa-upload"></i> Enviar
                                                             </button>
-                                                        </div>
-                                                    </form>
+                                                        </form>
+                                                    </div>
+
 
                                                     <button id="apagarFoto" onclick="deleteAvatar()"
                                                         class="btn btn-outline-danger d-none d-sm-block">
@@ -466,6 +469,33 @@
             $("#apagarFoto").attr("style", "left: 128px; !important;")
         }
 
+        function updateAvatar(event) {
+            var fd = new FormData($("#updateAvatar").get(0));
+            console.log(fd)
+            $.ajax({
+                url: '/avatar',
+                data: fd,
+                dataType: 'json',
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                success: function (retorno) {
+                    var user = JSON.parse(localStorage.currentUser)
+                    user.image.name = retorno.data.name
+                    localStorage.removeItem('currentUser')
+                    localStorage.setItem('currentUser', JSON.stringify(user))
+                    notificacao(false, '#626262', 'success', 'Foto Alterada')
+                    setTimeout(function () {
+                        document.location.reload(true);
+                    }, 1000);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
+            event.preventDefault();
+        }
+
         function deleteAvatar() {
 
             Swal.fire({
@@ -493,7 +523,9 @@
                             localStorage.removeItem('currentUser')
                             localStorage.setItem('currentUser', JSON.stringify(user))
                             notificacao(false, '#626262', 'success', 'Foto Apagada')
-                            window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
+                            setTimeout(function () {
+                                document.location.reload(true);
+                            }, 1000);
                         },
                         error: function (retorno) {
                             console.log('error', retorno)
@@ -609,6 +641,10 @@
             console.log(estado)
             $("#estado").children("option").text(estado).attr('selected', 'selected')
             $("#estado").trigger("change");
+
+            if (JSON.parse(localStorage.currentUser).role == 'proprietario') {
+                $("#faculdade").attr('style', 'display: none;')
+            }
         })
 
         function popula_estado() {
