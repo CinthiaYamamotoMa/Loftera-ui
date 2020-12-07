@@ -11,6 +11,8 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage })
 
+const attributesController = require('./controllers/attributesController');
+const rulesController = require('./controllers/rulesController');
 const userController = require('./controllers/userController');
 const interestedController = require('./controllers/interestedController');
 const commentController = require('./controllers/commentController');
@@ -80,7 +82,10 @@ router.post('/deleteAvatar', async (req, res) => {
 })
 
 // Cadastro Imóvel
-router.get('/imovel/cadastro', (req, res) => {
+router.get('/imovel/cadastro', async (req, res) => {
+    var regras = await rulesController.findAll(req, res);
+    var comodidades = await attributesController.findAll(req, res);
+    res.locals = { regras, comodidades }
     res.render('ltr/vertical-menu-template-dark/imovel-cadastro.ejs')
 })
 

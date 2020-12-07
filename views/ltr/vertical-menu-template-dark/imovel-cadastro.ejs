@@ -24,7 +24,7 @@
                                     <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Endereço</h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="card-body">
+                                    <div class="card-body" style="height: 296px;">
                                         <form class="form">
                                             <div class="form-body">
                                                 <div class="row">
@@ -94,21 +94,21 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="card">
                                         <div class="">
-                                            <div class="card-body">
-                                                <div
-                                                    class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12" id="tipo">
+                                            <div class="card-body" style="margin-left: -11px;">
+                                                <div class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12"
+                                                    id="tipo">
                                                     <div value="1" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1"><i
-                                                                    class="fa fa-home" aria-hidden="true"></i></div>
+                                                        class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-home"
+                                                            aria-hidden="true"></i></div>
 
-                                                            <div value="2" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1"><i
-                                                                    class="fa fa-building-o" aria-hidden="true"></i>
-                                                            </div>
+                                                    <div value="2" style="margin-right: 10px;"
+                                                        class="btn btn-icon btn-flat-primary mb-1"><i
+                                                            class="fa fa-building-o" aria-hidden="true"></i>
+                                                    </div>
 
-                                                            <div value="3" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1"><i
-                                                                    class="fa fa-bed" aria-hidden="true"></i></div>
+                                                    <div value="3" style="margin-right: 10px;"
+                                                        class="btn btn-icon btn-flat-primary mb-1"><i class="fa fa-bed"
+                                                            aria-hidden="true"></i></div>
                                                 </div>
                                                 <div class="chart-info d-flex justify-content-between mb-1">
                                                     <div class="series-info d-flex align-items-center">
@@ -123,7 +123,8 @@
                                                     <div class="series-info d-flex align-items-center">
                                                         <span class="text-bold-600 ml-50">Condomínio</span>
                                                         <a href="#modalCondominio" data-toggle="modal"
-                                                            data-target="#modalCondominio"> <i class="fa fa-info-circle ml-1"
+                                                            data-target="#modalCondominio"> <i
+                                                                class="fa fa-info-circle ml-1"
                                                                 aria-hidden="true"></i></a>
                                                     </div>
                                                     <div class="col-md-6 col-3">
@@ -146,8 +147,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="card border-primary text-primary">
                                         <div class="card-content">
                                             <div class="card-body text-center">
@@ -160,75 +159,84 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card" style="height: 341px;">
+                                        <div class="card-content">
+                                            <div class="card-header">
+                                                <h4>Regras</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="col-lg-12 col-12" style="margin-left: -10px;" id="regras">
+                                                    <% for (var i = 0; i < regras.length; i++) { %>
+                                                    <div class="chart-info d-flex justify-content-between">
+                                                        <div class="series-info d-flex align-items-center">
+                                                            <i class="<%= regras[i].icon %>"></i>
+                                                            <span
+                                                                class="text-bold-600 ml-50"><%= regras[i].name %></span>
+                                                        </div>
+                                                        <small class="secondary media-heading">
+                                                            <li class="d-inline-block">
+                                                                <fieldset>
+                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                        <input type="checkbox" value="false"
+                                                                            id="<%= regras[i].id %>">
+                                                                        <span class="vs-checkbox" style="margin-right: -15px;">
+                                                                            <span class="vs-checkbox--check">
+                                                                                <i
+                                                                                    class="vs-icon feather icon-check"></i>
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </li>
+                                                        </small>
+                                                    </div>
+                                                    <% } %>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="row match-height">
                         <div class="col-lg-4 col-12">
-                            <div class="card">
+                            <div class="card" style="height: 253px;">
                                 <div class="card-content">
                                     <div class="card-header">
                                         <h4>Comodidades</h4>
                                     </div>
 
                                     <div class="card-body">
-                                        <div class="col-lg-12 col-12">
+                                        <div class="col-lg-12 col-12 scrollable-container"
+                                            style="max-height: 167px; display: block;" id="comodidades">
+                                            <% for (var i = 0; i < comodidades.length; i++) { %>
                                             <div class="chart-info d-flex justify-content-between">
                                                 <div class="series-info d-flex align-items-center">
-                                                    <!-- <i class="fas fa-wifi"></i> -->
-                                                    <div class="btn-group">
-                                                        <div class="dropdown">
-                                                            <button
-                                                                class="btn btn-flat-primary dropdown-toggle mr-1 mb-1"
-                                                                type="button" id="dropdownMenuButton100"
-                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false">
-                                                                Primary
-                                                            </button>
-                                                            <div class="dropdown-menu"
-                                                                aria-labelledby="dropdownMenuButton100">
-                                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                                <a class="dropdown-item" href="#">Option 3</a>
+                                                    <i class="<%= comodidades[i].icon %>"></i>
+                                                    <span class="text-bold-600 ml-50"><%= comodidades[i].name %></span>
+                                                </div>
+                                                <small class="secondary media-heading">
+                                                    <li class="d-inline-block mr-2">
+                                                        <fieldset>
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <input type="checkbox" value="false"
+                                                                    id="<%= comodidades[i].id %>">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <small class="secondary media-heading">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
-                                                            class="fas fa-close"></i></button>
-                                                </small>
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-utensils"></i>
-                                                    <span class="text-bold-600 ml-50">Cozinha</span>
-                                                </div>
-                                                <small class="secondary media-heading">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
-                                                            class="fas fa-close"></i></button>
+                                                        </fieldset>
+                                                    </li>
                                                 </small>
 
                                             </div>
-                                            <div class="chart-info d-flex justify-content-between mb-75">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-swimmer"></i>
-                                                    <span class="text-bold-600 ml-50">Piscina</span>
-                                                </div>
-                                                <small class="secondary media-heading">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
-                                                            class="fas fa-close"></i></button>
-                                                </small>
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between mb-75">
-                                                <button type="button"
-                                                    class="btn btn-icon btn-icon rounded-circle btn-primary mr-1 mb-1"><i
-                                                        class="fa fa-plus"></i></button>
-                                            </div>
+                                            <% } %>
                                             <hr>
                                         </div>
                                     </div>
@@ -236,128 +244,22 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-12">
-                            <div class="card">
+                            <div class="card" style="height: 245px;">
                                 <div class="card-content">
                                     <div class="card-header">
                                         <h4>Fotos</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div class="swiper-fade-effect swiper-container">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide">
-                                                    <div class="chart-info d-flex justify-content-between mb-75">
-                                                        <button type="file"
-                                                            class="btn btn-icon btn-icon rounded-circle btn-primary mr-1 mb-1"><i
-                                                                class="fa fa-upload"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-19.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-18.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-17.jpg"
-                                                        alt="banner">
-                                                </div>
-                                                <div class="swiper-slide"> <img class="img-fluid"
-                                                        src="../../../app-assets/images/banner/banner-16.jpg"
-                                                        alt="banner">
-                                                </div>
-                                            </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination swiper-pagination-white"></div>
-                                            <!-- Add Arrows -->
+                                        <div class="swiper-fade-effect swiper-container" style="margin-top: 35px;">
+                                            <!-- <div class="swiper-wrapper"> -->
+                                                <form enctype="multipart/form-data" id="imagens">
+                                                    <input id="foto" type="file" name="foto" accept="image/*"
+                                                        class="btn btn-primary d-none d-sm-block mr-75"></input>
+                                                </form>
+                                            <!-- <div class="swiper-pagination swiper-pagination-white"></div>
                                             <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
+                                            <div class="swiper-button-prev"></div> -->
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row match-height">
-                        <div class="col-lg-4 col-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="card-header">
-                                        <h4>Regras</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="col-lg-12 col-12">
-                                            <div class="chart-info d-flex justify-content-between">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <!-- <i class="fas fa-wifi"></i> -->
-                                                    <div class="btn-group">
-                                                        <div class="dropdown">
-                                                            <button
-                                                                class="btn btn-flat-primary dropdown-toggle mr-1 mb-1"
-                                                                type="button" id="dropdownMenuButton100"
-                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false">
-                                                                Primary
-                                                            </button>
-                                                            <div class="dropdown-menu"
-                                                                aria-labelledby="dropdownMenuButton100">
-                                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                                <a class="dropdown-item" href="#">Option 3</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <small class="secondary media-heading">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
-                                                            class="fas fa-close"></i></button>
-                                                </small>
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-utensils"></i>
-                                                    <span class="text-bold-600 ml-50">Cozinha</span>
-                                                </div>
-                                                <small class="secondary media-heading">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
-                                                            class="fas fa-close"></i></button>
-                                                </small>
-
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between mb-75">
-                                                <div class="series-info d-flex align-items-center">
-                                                    <i class="fas fa-swimmer"></i>
-                                                    <span class="text-bold-600 ml-50">Piscina</span>
-                                                </div>
-                                                <small class="secondary media-heading">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-icon rounded-circle btn-flat-success mr-1 mb-1"><i
-                                                            class="fas fa-close"></i></button>
-                                                </small>
-                                            </div>
-                                            <div class="chart-info d-flex justify-content-between mb-75">
-                                                <button type="button"
-                                                    class="btn btn-icon btn-icon rounded-circle btn-primary mr-1 mb-1"><i
-                                                        class="fa fa-plus"></i></button>
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="card-header">
-                                        <h4>Localização</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="basic-map" class="height-400"></div>
                                     </div>
                                 </div>
                             </div>
@@ -387,9 +289,9 @@
                             </div>
                             <div class="modal-body">
                                 <div class="d-flex justify-content-start align-items-center mb-1 text-white">
-                                    Valor sujeito a alteração conforme deliberações condominiais, 
-                                    podendo, ainda, variar de acordo com as despesas fixas e 
-                                    eventuais do condomínio (ex.: água, luz, conservação e 
+                                    Valor sujeito a alteração conforme deliberações condominiais,
+                                    podendo, ainda, variar de acordo com as despesas fixas e
+                                    eventuais do condomínio (ex.: água, luz, conservação e
                                     manutenção do prédio, entre outros).
                                 </div>
                             </div>
@@ -411,7 +313,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="d-flex justify-content-start align-items-center mb-1 text-white">
-                                    O IPTU é um imposto municipal cujo valor é 
+                                    O IPTU é um imposto municipal cujo valor é
                                     determinado pela prefeitura.
                                 </div>
                             </div>
@@ -427,7 +329,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        
+
     </footer>
     <!-- END: Footer-->
 
@@ -455,23 +357,15 @@
     <script src="../../../app-assets/js/scripts/extensions/swiper.js"></script>
 
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
 
-    <!-- BEGIN: Page Vendor JS-->
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBgjNW0WA93qphgZW-joXVR6VC3IiYFjfo"></script>
     <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
-    <!-- END: Page Vendor JS-->
 
-    <!-- BEGIN: Theme JS-->
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
-    <!-- END: Theme JS-->
 
-    <!-- BEGIN: Page JS-->
     <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
-
-    <!-- END: Page JS-->
 
 </body>
 <script>
