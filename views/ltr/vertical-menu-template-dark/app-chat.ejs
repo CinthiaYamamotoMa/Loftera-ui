@@ -68,13 +68,8 @@
                             <span class="close-icon">
                                 <i class="feather icon-x"></i>
                             </span>
-                            <div class="header-profile-sidebar">
-                                <div class="avatar">
-                                    <img src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
-                                        alt="user_avatar" height="70" width="70">
-                                    <span class="avatar-status-online avatar-status-lg"></span>
-                                </div>
-                                <h4 class="chat-user-name">John Doe</h4>
+                            <div class="header-profile-sidebar" id="myChatProfile" id="myChatProfile">
+
                             </div>
                         </header>
                         <div class="profile-sidebar-area">
@@ -152,16 +147,13 @@
                         <div class="chat-fixed-search">
                             <div class="d-flex align-items-center">
                                 <div class="sidebar-profile-toggle position-relative d-inline-flex">
-                                    <div class="avatar">
-                                        <img src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
-                                            alt="user_avatar" height="40" width="40">
-                                        <span class="avatar-status-online"></span>
+                                    <div class="avatar" id="myAvatar" name="myAvatar">
                                     </div>
                                     <div class="bullet-success bullet-sm position-absolute"></div>
                                 </div>
                                 <fieldset class="form-group position-relative has-icon-left mx-1 my-0 w-100">
                                     <input type="text" class="form-control round" id="chat-search"
-                                        placeholder="Search or start a new chat">
+                                        placeholder="Procure suas conversas...">
                                     <div class="form-control-position">
                                         <i class="feather icon-search"></i>
                                     </div>
@@ -171,7 +163,7 @@
                         <div id="users-list" class="chat-user-list list-group position-relative">
                             <h3 class="primary p-1 mb-0">Chats</h3>
                             <ul id="chat_demo" class="chat-users-list-wrapper media-list">
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -212,9 +204,7 @@
                                 </span>
                                 <div class="header-profile-sidebar">
                                     <div class="avatar">
-                                        <img src="../../../app-assets/images/portrait/small/avatar-s-1.jpg"
-                                            alt="user_avatar" height="70" width="70">
-                                        <span class="avatar-status-busy avatar-status-lg"></span>
+
                                     </div>
                                     <h4 class="chat-user-name">Felecia Rower</h4>
                                 </div>
@@ -240,7 +230,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        
+
     </footer>
     <!-- END: Footer-->
     <!-- <script src="/__/firebase/8.1.1/firebase-app.js"></script> -->
@@ -282,15 +272,20 @@
         var array_of_sender = [];
         var array_of_message = [];
         var chatAtual = "";
+        var paramChatId = '';
+        var activeChat = "";
+
 
         function criar(remetenteId, remetente, avatar, datahora, mensagem) {
-            let param_id_chat = "id='chat_" + remetenteId + "'";
+            //debugger;
+            let param_id_chat = "id='chat_" + remetenteId + "'" + ",'" + encodeURI(remetente) + "','" + avatar + "'";
             let param_abrir_chat = "abrir_chat('" + remetenteId + "'," + param_id_chat + ")";
+
 
             $("#chat_demo").append('<li ' + param_id_chat + ' onclick=' + param_abrir_chat + '>' +
                 '<div class="pr-1">' +
                 '    <span class="avatar m-0 avatar-md"><img class="media-object rounded-circle"' +
-                '            src="../../../app-assets/images/portrait/small/avatar-s-3.jpg"' +
+                '            src="../../../app-assets/images/portrait/small/' + avatar + '"' +
                 '            height="42" width="42" alt="Generic placeholder image">' +
                 '        <i></i>' +
                 '    </span>' +
@@ -306,6 +301,7 @@
                 '    </div>' +
                 '</div>' +
                 '</li>');
+
             if ($('.chat-application .chat-user-list').length > 0) {
                 var chat_user_list = new PerfectScrollbar(".chat-user-list");
             }
@@ -314,32 +310,20 @@
 
         }
 
-        $(document).ready(function () {
-            conectar();
-            user = JSON.parse(localStorage.getItem("currentUser"));
-            db.collection("user_" + user.id).orderBy('sequencia')
-                .onSnapshot(function (snapshot) {
-                    snapshot.docChanges().forEach(function (change) {
-                        if (change.type === "added") {
-                            let doc = change.doc.data();
-                            addRemetente(doc);
-                            array_of_message.push(doc);
-                            $("#current_chat").append(addMessage(doc.mensagem, doc.direcao));
 
 
-                        }
-                    });
-                });
-        });
+        function addRemetente(message, forceCreate) {
 
-        function addRemetente(message) {
             for (i = 0; i < array_of_sender.length; i++) {
                 if (message.remetenteId == array_of_sender[i]) {
                     return;
                 }
             }
-            array_of_sender.push(message.remetenteId);
-            criar(message.remetenteId, message.remetente, '', message.datahora, message.mensagem);
+
+            if (message.direcao != "ENVIADA") {
+                array_of_sender.push(message.remetenteId);
+                criar(message.remetenteId, message.remetente, message.avatar, message.datahora, message.mensagem);
+            }
 
         }
 
@@ -362,15 +346,20 @@
             }
         }
 
-        function abrir_chat(remetenteId, Element) {
-            //debugger;
+        function abrir_chat(remetenteId, Element, userName, avatar) {
+            activeChat = remetenteId;
 
 
             let msg_of_sender = [];
             msg_of_sender = array_of_message.filter(value => {
-                if (value.remetenteId == remetenteId)
+                if (value.remetenteId == remetenteId || value.remetenteId == "user_" + user.id)
                     return value;
             });
+
+            let chats = $("#chat_demo").children();
+            for (let index = 0; index<chats.length; index++){
+                $(chats[index]).removeClass('active');
+            }
 
             if ($('#' + Element).hasClass('active')) {
                 $('#' + Element).removeClass('active');
@@ -386,26 +375,27 @@
                 $('.active-chat').addClass('d-none');
             }
 
-            mountChat("a", msg_of_sender, remetenteId)
+            mountChat(Element, msg_of_sender, remetenteId, userName, avatar)
         }
 
 
-        function mountChat(element, msgs, remetenteId) {
+        function mountChat(element, msgs, remetenteId, userName, avatar) {
             $("#active_chat").empty();
-            $("#active_chat").append(mountNavBar());
+            $("#active_chat").append(mountNavBar(element, userName, avatar));
             $("#active_chat").append(mountMessages(msgs));
             if ($('.chat-application .user-chats').length > 0) {
                 var chat_user = new PerfectScrollbar(".user-chats", {
                     wheelPropagation: false
                 });
             }
-            $("#active_chat").append(mountMessageForm(remetenteId));
+            $("#active_chat").append(mountMessageForm());
             $(".user-chats").scrollTop($(".user-chats > .chats").height());
             var chatContainer = $(".user-chats");
             $(".chat-users-list-wrapper li").on("click", function () {
                 chatContainer.animate({ scrollTop: chatContainer[0].scrollHeight }, 400)
             });
-            
+
+
 
 
 
@@ -413,23 +403,29 @@
         }
 
         function mountMessages(msg) {
+            //debugger;
             let messageString = "";
             let lado = "";
             messageString =
                 '<div class="user-chats" > ' +
                 '<div class="chats" id="current_chat"> ';
+            if (msg != null && msg != "" && msg != undefined && msg != []) {
+                for (let x = 0; x < msg.length; x++) {
+                    messageString += addMessage(msg[x].mensagem, msg[x].direcao, msg[x].avatar)
+                }
+                messageString += '</div> ' +
+                    '</div>';
 
-            for (let x = 0; x < msg.length; x++) {
-                messageString += addMessage(msg[x].mensagem, msg[x].direcao)
+                return messageString;
             }
-            messageString += '</div> ' +
-                '</div>';
-
-            return messageString;
+            else {
+                messageString += '</div> ' +
+                    '</div>';
+                return messageString
+            };
         }
 
-        function addMessage(mensagem, direcao) {
-
+        function addMessage(mensagem, direcao, avatar) {
             let lado = "";
             if (direcao == "ENVIADA") {
                 lado = "";
@@ -441,7 +437,7 @@
                 '<div class="chat-avatar"> ' +
                 '<a class="avatar m-0" data-toggle="tooltip" href="#" ' +
                 'data-placement="right" title="" data-original-title=""> ' +
-                '<img src="../../../app-assets/images/portrait/small/avatar-s-1.jpg" ' +
+                '<img src="../../../app-assets/images/portrait/small/' + avatar + '"' +
                 'alt="avatar" height="40" width="40" /> ' +
                 '</a> ' +
                 '</div> ' +
@@ -455,9 +451,11 @@
 
 
             return msgNova;
+
         }
 
-        function mountNavBar() {
+        function mountNavBar(element, name, avatar) {
+            //debugger;
             let navBar =
                 '<div class="chat_navbar">' +
                 '<header class="chat_header d-flex justify-content-between align-items-center p-1">' +
@@ -465,11 +463,11 @@
                 '<div class="sidebar-toggle d-block d-lg-none mr-1"><i' +
                 'class="feather icon-menu font-large-1"></i></div>' +
                 '<div class="avatar user-profile-toggle m-0 m-0 mr-1">' +
-                '<img src="../../../app-assets/images/portrait/small/avatar-s-1.jpg"' +
+                '<img src="../../../app-assets/images/portrait/small/' + avatar + '"' +
                 'alt="" height="40" width="40" />' +
                 '<span class="avatar-status-busy"></span>' +
                 '</div>' +
-                '<h6 class="mb-0">Felecia Rower</h6>' +
+                '<h6 class="mb-0">' + decodeURI(name) + '</h6>' +
                 '</div>' +
                 '<span class="favorite"><i class="feather icon-star font-medium-5"></i></span>' +
                 '</header>' +
@@ -478,30 +476,32 @@
 
         }
 
-        function mountMessageForm(remetenteId) {
+        function mountMessageForm() {
             let MessageForm =
                 '<div class="chat-app-form">' +
-                '<form class="chat-app-input d-flex"' +
+                '<form class="chat-app-input d-flex autocomplete="off"' +
                 'action="javascript:void(0);">' +
                 '<input type="text" class="form-control message mr-1 ml-50" id="iconLeft4-1"' +
                 'placeholder="Digite sua mensagem..." id="msg_form" name="msg_form">' +
-                '<button type="button" class="btn btn-primary send" onclick="enter_chat(remetenteId);"><i' +
+                '<button type="button" class="btn btn-primary send" onclick="enter_chat();"><i' +
                 'class="fa fa-paper-plane-o d-lg-none"></i> <span' +
                 'lass="d-none d-lg-block">Enviar</span></button>' +
                 '</form>' +
-                //'</div>' +
                 '</div>';
+
             return MessageForm;
         }
 
-        function enter_chat(remetenteId) {
+        function enter_chat() {
+            //debugger;
             var message = $(".message").val();
             if (message != "") {
                 let fila = "user_" + user.id;
                 var msg = new Object();
                 msg.remetenteId = remetenteId;
-                msg.remetente = "Novo";
+                msg.remetente = user.name;
                 msg.mensagem = message;
+                msg.avatar = user.image.name;
                 msg.datahora = $.format.date(Date.now(), "dd/MM/yyyy HH:mm:ss");
                 msg.sequencia = (new Date()).getTime();
                 msg.direcao = "ENVIADA";
@@ -513,11 +513,12 @@
                         alert("Erro ao enviar a mensagem:" + error);
                     });
 
-                fila = remetenteId;
+                fila = activeChat;
                 msg.remetenteId = "user_" + user.id;
                 msg.remetente = user.name;
                 msg.mensagem = message;
                 msg.datahora = $.format.date(Date.now(), "dd/MM/yyyy HH:mm:ss");
+                msg.avatar = user.image.name;
                 msg.sequencia = (new Date()).getTime();
                 msg.direcao = "RECEBIDA";
                 db.collection(fila).add(msg)
@@ -527,6 +528,7 @@
                     .catch(function (error) {
                         alert("Erro ao enviar a mensagem:" + error);
                     });
+                localStorage.removeItem("currentChatUser");            
                 $(".message").val("");
 
                 //                var html = '<div class="chat-content">' + "<p>" + message + "</p>" + "</div>";
@@ -551,6 +553,63 @@
             }
 
         }
+
+        function chamar_chat() {
+            if (localStorage.getItem("currentChatUser") != null) {
+                msg_of_sender = [];
+                userChat = JSON.parse(localStorage.getItem("currentChatUser"));
+                activeChat = "user_" + userChat.id;
+                $('.start-chat-area').addClass('d-none');
+                $('.active-chat').removeClass('d-none');
+                mountChat("chat_user_" + userChat.id, msg_of_sender, "user_" + userChat.id, userChat.name, userChat.avatar)
+                let x = new Object();
+                x.remetenteId = "user_" + userChat.id;
+                x.remetente = userChat.name;
+                x.avatar = userChat.avatar;
+                x.direcao = "RECEBIDA";
+                x.mensagem = "";
+                x.datahora = "";
+                addRemetente(x, true);
+            }
+            else {
+                return;
+            }
+        }
+
+        $(document).ready(function () {
+            conectar();
+            user = JSON.parse(localStorage.getItem("currentUser"));
+            let chatProfilePic = '<img src="../../../app-assets/images/portrait/small/' + user.image.name + '"' +
+                'alt="user_avatar" height="40" width="40">' +
+                '<span class="avatar-status-online"></span>';
+            let chatProfileInfo = '<div class="avatar">' +
+                '<img src="../../../app-assets/images/portrait/small/' + user.image.name + '"' +
+                'alt="user_avatar" height="70" width="70">' +
+                '<span class="avatar-status-online avatar-status-lg"></span>' +
+                '</div>' +
+                '<h4 class="chat-user-name">' + user.name + '</h4>';
+            $("#myAvatar").append(chatProfilePic);
+            $("#myChatProfile").append(chatProfileInfo);
+            db.collection("user_" + user.id).orderBy('sequencia')
+                .onSnapshot(function (snapshot) {
+                    snapshot.docChanges().forEach(function (change) {
+                        if (change.type === "added") {
+                            let doc = change.doc.data();
+                            addRemetente(doc, false);
+                            array_of_message.push(doc);
+                            if (doc.remetenteId == activeChat) {
+                                $("#current_chat").append(addMessage(doc.mensagem, doc.direcao, doc.avatar));
+                            }
+                            $($($($("#chat_"+ doc.remetenteId).children()[1]).children()[0]).children()[1]).html(doc.mensagem);
+
+                        }
+                    });
+                });
+
+            chamar_chat();
+
+        });
+
 
 
 

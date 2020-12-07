@@ -32,14 +32,14 @@
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="name" name="name"
-                                                                        class="form-control" placeholder="Nome Completo">
+                                                                        class="form-control"
+                                                                        placeholder="Nome Completo">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
-                                                                    <input type="text" id="cpf"
-                                                                        class="form-control" name="cpf"
-                                                                        placeholder="CPF">
+                                                                    <input type="text" id="cpf" class="form-control"
+                                                                        name="cpf" placeholder="CPF">
                                                                 </div>
                                                             </div>
 
@@ -54,12 +54,11 @@
                                                                     </select>
                                                                 </fieldset>
                                                             </div>
-                                                            
+
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
-                                                                    <input type="email" id="email"
-                                                                        name="email" class="form-control"
-                                                                        placeholder="E-mail">
+                                                                    <input type="email" id="email" name="email"
+                                                                        class="form-control" placeholder="E-mail">
                                                                 </div>
                                                             </div>
 
@@ -81,8 +80,7 @@
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <textarea type="text" id="description"
-                                                                        placeholder="Descrição"
-                                                                        class="form-control"
+                                                                        placeholder="Descrição" class="form-control"
                                                                         name="description"></textarea>
                                                                 </div>
                                                             </div>
@@ -96,14 +94,16 @@
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="question" name="question"
-                                                                        class="form-control" placeholder="Pergunta para Recuperação de Senha">
+                                                                        class="form-control"
+                                                                        placeholder="Pergunta para Recuperação de Senha">
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 col-12">
                                                                 <div class="form-label-group">
                                                                     <input type="text" id="answer" name="answer"
-                                                                        class="form-control" placeholder="Resposta para Recuperação de Senha">
+                                                                        class="form-control"
+                                                                        placeholder="Resposta para Recuperação de Senha">
                                                                 </div>
                                                             </div>
 
@@ -115,8 +115,7 @@
                                                                         <fieldset class="checkbox">
                                                                             <div
                                                                                 class="vs-checkbox-con vs-checkbox-primary">
-                                                                                <input type="checkbox"
-                                                                                    id="terms_of_use"
+                                                                                <input type="checkbox" id="terms_of_use"
                                                                                     name="terms_of_use">
                                                                                 <span class="vs-checkbox">
                                                                                     <span class="vs-checkbox--check">
@@ -124,7 +123,8 @@
                                                                                             class="vs-icon feather icon-check"></i>
                                                                                     </span>
                                                                                 </span>
-                                                                                <span class=""> Concordo em disponibilizar meus dados</span>
+                                                                                <span class=""> Concordo em
+                                                                                    disponibilizar meus dados</span>
                                                                             </div>
                                                                         </fieldset>
                                                                     </div>
@@ -264,9 +264,23 @@
                 datatype: "application/json",
                 success: function (retorno) {
                     console.log('success', retorno)
-                    window.location = `/auth-login`
+                    let site = "http://localhost:3000/";
+                    $.ajax({
+                        type: 'post',
+                        url: site + 'auth',
+                        data: JSON.stringify({ email: $("#email").val(), password: $("#password").val() }),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (retorno) {
+                            if (retorno.user != null && retorno.user != undefined && retorno.user != "") {
+                                localStorage.setItem("currentUser", JSON.stringify(retorno.user));
+                                console.log('success', retorno);
+                                window.location = "/role";
+                            }
+                        },
+                    })
                 },
-                error: function(retorno) {
+                error: function (retorno) {
                     console.log('error', retorno)
                 }
             })
