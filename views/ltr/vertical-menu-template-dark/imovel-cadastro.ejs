@@ -25,12 +25,12 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form">
+                                        <form class="form" id="form_endereco" name="form_endereco">
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="form-label-group">
-                                                            <input type="text" id="cep" class="form-control"
+                                                            <input type="number" id="cep" class="form-control"
                                                                 placeholder="CEP" name="cep">
                                                             <label for="cep">CEP</label>
                                                         </div>
@@ -92,68 +92,71 @@
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <div class="card">
-                                        <div class="">
-                                            <div class="card-body">
-                                                <div
-                                                    class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12" id="tipo">
-                                                    <div value="1" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1"><i
-                                                                    class="fa fa-home" aria-hidden="true"></i></div>
+                                    <form id="form_produto" name="form_produto">
+                                        <div class="card">
+                                            <div class="">
+                                                <div class="card-body">
+                                                    <div class="chart-info d-flex justify-content-between mb-1 col-lg-12 col-md-12 col-sm-12"
+                                                        id="tipo">
+                                                        <div value="1" style="margin-right: 10px;"
+                                                            class="btn btn-icon btn-flat-primary mb-1"><i
+                                                                class="fa fa-home" aria-hidden="true"></i></div>
 
-                                                            <div value="2" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1"><i
-                                                                    class="fa fa-building-o" aria-hidden="true"></i>
-                                                            </div>
+                                                        <div value="2" style="margin-right: 10px;"
+                                                            class="btn btn-icon btn-flat-primary mb-1"><i
+                                                                class="fa fa-building-o" aria-hidden="true"></i>
+                                                        </div>
 
-                                                            <div value="3" style="margin-right: 10px;"
-                                                                class="btn btn-icon btn-flat-primary mb-1"><i
-                                                                    class="fa fa-bed" aria-hidden="true"></i></div>
-                                                </div>
-                                                <div class="chart-info d-flex justify-content-between mb-1">
-                                                    <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Aluguel</span>
+                                                        <div value="3" style="margin-right: 10px;"
+                                                            class="btn btn-icon btn-flat-primary mb-1"><i
+                                                                class="fa fa-bed" aria-hidden="true"></i></div>
                                                     </div>
-                                                    <div class="col-md-6 col-3">
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            placeholder="R$ 2700">
+                                                    <div class="chart-info d-flex justify-content-between mb-1">
+                                                        <div class="series-info d-flex align-items-center">
+                                                            <span class="text-bold-600 ml-50">Aluguel</span>
+                                                        </div>
+                                                        <div class="col-md-6 col-3">
+                                                            <input class="form-control form-control-sm" type="text"
+                                                                name="aluguel" id="aluguel" placeholder="R$ 2700,00">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="chart-info d-flex justify-content-between mb-1">
-                                                    <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">Condomínio</span>
-                                                        <a href="#modalCondominio" data-toggle="modal"
-                                                            data-target="#modalCondominio"> <i class="fa fa-info-circle ml-1"
-                                                                aria-hidden="true"></i></a>
+                                                    <div class="chart-info d-flex justify-content-between mb-1">
+                                                        <div class="series-info d-flex align-items-center">
+                                                            <span class="text-bold-600 ml-50">Condomínio</span>
+                                                            <a href="#modalCondominio" data-toggle="modal"
+                                                                data-target="#modalCondominio"> <i
+                                                                    class="fa fa-info-circle ml-1"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                        <div class="col-md-6 col-3">
+                                                            <input class="form-control form-control-sm" type="text"
+                                                                name="condominio" id="condominio" placeholder="R$ 498">
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6 col-3">
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            placeholder="R$ 498">
-                                                    </div>
-                                                </div>
-                                                <div class="chart-info d-flex justify-content-between">
-                                                    <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">IPTU</span>
-                                                        <a href="#modalIptu" data-toggle="modal"
-                                                            data-target="#modalIptu"> <i class="fa fa-info-circle"
-                                                                aria-hidden="true"></i></a>
-                                                    </div>
-                                                    <div class="col-md-6 col-3">
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            placeholder="R$ 30">
+                                                    <div class="chart-info d-flex justify-content-between">
+                                                        <div class="series-info d-flex align-items-center">
+                                                            <span class="text-bold-600 ml-50">IPTU</span>
+                                                            <a href="#modalIptu" data-toggle="modal"
+                                                                data-target="#modalIptu"> <i class="fa fa-info-circle"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                        <div class="col-md-6 col-3">
+                                                            <input class="form-control form-control-sm" type="text"
+                                                                name="iptu" id="iptu" placeholder="R$ 30">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="card border-primary text-primary">
                                         <div class="card-content">
                                             <div class="card-body text-center">
-                                                <div class="text-center">
+                                                <div class="text-center" name="total" id="total">
                                                     <h6>- Valor Total -</h6>
-                                                    <h2 class="text-primary"><i class="fas fa-dollar-sign"></i> 1200
+                                                    <h2 class="text-primary"><i class="fas fa-dollar-sign"></i>
                                                         </h1>
                                                 </div>
                                             </div>
@@ -161,7 +164,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="row match-height">
@@ -365,7 +368,8 @@
                     </div>
                     <div class="row col-lg-6 col-6 justify-content-between">
                         <div class="chart-info d-flex mb-1">
-                            <button type="button" class="btn btn-primary mr-1 mb-1">
+                            <button type="button" id="btnSalvar" name="btnSalvar" onclick="submit_form()"
+                                class="btn btn-primary mr-1 mb-1">
                                 Salvar
                             </button>
                         </div>
@@ -387,9 +391,9 @@
                             </div>
                             <div class="modal-body">
                                 <div class="d-flex justify-content-start align-items-center mb-1 text-white">
-                                    Valor sujeito a alteração conforme deliberações condominiais, 
-                                    podendo, ainda, variar de acordo com as despesas fixas e 
-                                    eventuais do condomínio (ex.: água, luz, conservação e 
+                                    Valor sujeito a alteração conforme deliberações condominiais,
+                                    podendo, ainda, variar de acordo com as despesas fixas e
+                                    eventuais do condomínio (ex.: água, luz, conservação e
                                     manutenção do prédio, entre outros).
                                 </div>
                             </div>
@@ -411,7 +415,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="d-flex justify-content-start align-items-center mb-1 text-white">
-                                    O IPTU é um imposto municipal cujo valor é 
+                                    O IPTU é um imposto municipal cujo valor é
                                     determinado pela prefeitura.
                                 </div>
                             </div>
@@ -427,7 +431,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        
+
     </footer>
     <!-- END: Footer-->
 
@@ -474,8 +478,14 @@
     <!-- END: Page JS-->
 
 </body>
-<script>
-    var tipoImovel
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="../../../app-assets/js/scripts/jquery.mask.js"></script>
+<script type="text/javascript">
+    var imovelInfo = new Object();
+    var user;
+    var tipoImovel;
     var tipo = $("#tipo").children("div")
     tipo.on("click", (event) => {
         for (i = 0; i < tipo.length; i++) {
@@ -493,6 +503,195 @@
     function removeAttribute(clicked) {
         clicked.removeAttribute("style");
     }
+
+    function submit_form() {
+        console.log('click')
+        $('#form_produto').validate({
+            rules: {
+                aluguel: {
+                    required: true,
+                },
+                condominio: {
+                    required: true,
+                },
+                iptu: {
+                    required: true
+                }
+            },
+            messages: {
+                aluguel: {
+                    aluguel: "O campo aluguel é obrigatório.",
+                },
+                condominio: {
+                    required: "O campo condominio é obrigatório.",
+                },
+                iptu: {
+                    required: "O campo iptu é obrigatório."
+                }
+            }
+        });
+
+        if (!$("#form_produto").valid()) {
+            $('#aluguel').focus();
+            return;
+        }
+        else {
+
+            $('#form_endereco').validate({
+                rules: {
+                    cep: {
+                        required: true,
+                        minlength: 8
+                    },
+                    rua: {
+                        required: true
+                    },
+                    numero: {
+                        required: true
+                    },
+                    bairro: {
+                        required: true
+                    },
+                    cidade: {
+                        required: true
+                    },
+                    estado: {
+                        required: true
+                    }
+                },
+                messages: {
+                    cep: {
+                        aluguel: "O campo Cep é obrigatório.",
+                        minlength: "O campo CEP deve conter 8 digitos",
+                    },
+                    rua: {
+                        required: "O campo Rua é obrigatório.",
+                    },
+                    numero: {
+                        required: "O campo numero é obrigatório.",
+                    },
+                    bairro: {
+                        required: "O campo bairro é obrigatório",
+                    },
+                    cidade: {
+                        required: "o campo cidade é obrigatório",
+                    },
+                    estado: {
+                        required: "o campo estado é obrigatório"
+                    }
+                }
+            });
+
+            if (!$("#form_endereco").valid()) {
+                $("#cep").focus();
+                return;
+            }
+            else {
+                create_product();
+
+            }
+        };
+    }
+
+    function create_product() {
+        let site = "http://localhost:3000";
+        console.log('chegou aqui >>>>> ', $('#form_produto').serialize())
+        $.ajax({
+            type: 'post',
+            url: site + '/imoveis',
+            data: JSON.stringify({
+                aluguel: $("#aluguel").val(),
+                condo: $("#aluguel").val(),
+                iptu: $("#iptu").val(),
+                userId: user.id
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (retorno) {
+                console.log('success', retorno)
+                localStorage.setItem("createdProduct", JSON.stringify(retorno.data));
+                vincular_endereco();
+
+            },
+            error: function (retorno) {
+                console.log('error', retorno)
+            }
+        })
+
+    }
+
+    function vincular_endereco() {
+        let site = "http://localhost:3000";
+        imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
+        console.log('chegou aqui >>>>> ', $('#form_endereco').serialize())
+        $.ajax({
+            type: 'post',
+            url: site + '/endereco',
+            data: JSON.stringify({
+                cep: $("#cep").val(),
+                state: $("#estado").val(),
+                city: $("#cidade").val(),
+                district: $("#bairro").val(),
+                street: $("#rua").val(),
+                number: $("#numero").val(),
+                complement: $("#complemento").val(),
+                avaliable: 1,
+                deleted: 0,
+                productId:  imovelInfo.id,
+                addressTypeId: tipoImovel
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (retorno) {
+                //console.log('success', retorno)
+                gravar_avaliacao();
+
+            },
+            error: function (retorno) {
+                console.log('error', retorno)
+            }
+        })
+
+    }
+
+    function gravar_avaliacao(){
+        let site = "http://localhost:3000";
+        imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
+        console.log('chegou aqui >>>>> ', $('#form_endereco').serialize())
+        $.ajax({
+            type: 'post',
+            url: site + '/avaliacao',
+            data: JSON.stringify({
+                limpeza: 5,
+                comunicacao: 5,
+                checkin: 5,
+                precisao: 5,
+                localizacao: 5,
+                valor: 5,
+                qtdAvaliacoes: 1,
+                productId:  imovelInfo.id
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (retorno) {
+              window.location="/imovel/cadastro";
+
+            },
+            error: function (retorno) {
+                console.log('error', retorno)
+            }
+        })
+
+
+    }
+
+
+    $(document).ready(function () {
+        $('#aluguel').mask('00000,00');
+        $('#condominio').mask('00000,00');
+        $('#iptu').mask('00000,00',);
+        user = JSON.parse(localStorage.getItem("currentUser"));
+    });
 </script>
 
 </html>
