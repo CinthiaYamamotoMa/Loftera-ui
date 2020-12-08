@@ -11,6 +11,16 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage })
 
+const storageProduct = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'app-assets/images/products/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+const uploadProduct = multer({ storageProduct })
+
 const attributesController = require('./controllers/attributesController');
 const rulesController = require('./controllers/rulesController');
 const userController = require('./controllers/userController');
@@ -75,6 +85,11 @@ router.get('/app-user-edit/:id', async (req, res) => {
 // Avatar
 router.post('/avatar', upload.single("avatar"), async (req, res) => {
     userController.updateAvatar(req, res)
+})
+
+//Produto
+router.post('/product', uploadProduct.single("product"), async (req, res) => {
+    userController.storeProductImage(req, res)
 })
 
 router.post('/deleteAvatar', async (req, res) => {

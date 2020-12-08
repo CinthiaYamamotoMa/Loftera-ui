@@ -116,8 +116,7 @@
                                                             <span class="text-bold-600 ml-50">Aluguel</span>
                                                         </div>
                                                         <div class="col-md-6 col-3">
-                                                            <input class="form-control form-control-sm" type="text"
-                                                                placeholder="R$ 2700">
+                                                            <input class="form-control form-control-sm" type="text">
                                                         </div>
                                                     </div>
                                                     <div class="chart-info d-flex justify-content-between mb-1">
@@ -184,7 +183,7 @@
                                                                     <div class="vs-checkbox-con vs-checkbox-primary"
                                                                         style="margin-right: -15px;">
                                                                         <input type="checkbox" value="false"
-                                                                            id="<%= regras[i].id %>">
+                                                                            id="<%='rule_'+ regras[i].id %>">
                                                                         <span class="vs-checkbox">
                                                                             <span class="vs-checkbox--check">
                                                                                 <i
@@ -229,7 +228,7 @@
                                                         <fieldset>
                                                             <div class="vs-checkbox-con vs-checkbox-primary">
                                                                 <input type="checkbox" value="false"
-                                                                    id="<%= comodidades[i].id %>">
+                                                                    id="<%='com_' + comodidades[i].id %>">
                                                                 <span class="vs-checkbox">
                                                                     <span class="vs-checkbox--check">
                                                                         <i class="vs-icon feather icon-check"></i>
@@ -259,7 +258,7 @@
                                             <!-- <div class="swiper-wrapper"> -->
                                             <form enctype="multipart/form-data" id="imagens">
                                                 <input id="foto" type="file" name="foto" accept="image/*"
-                                                    class="btn btn-primary d-none d-sm-block mr-75"></input>
+                                                enctype="multipart/form-data"  class="btn btn-primary d-none d-sm-block mr-75"></input>
                                             </form>
                                             <!-- <div class="swiper-pagination swiper-pagination-white"></div>
                                             <div class="swiper-button-next"></div>
@@ -371,6 +370,7 @@
     var imovelInfo = new Object();
     var user;
     var tipoImovel
+    var total = 0;
     var tipo = $("#tipo").children("div")
     tipo.on("click", (event) => {
         for (i = 0; i < tipo.length; i++) {
@@ -531,7 +531,6 @@
     function gravar_avaliacao() {
         let site = "http://localhost:3000";
         imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
-        console.log('chegou aqui >>>>> ', $('#form_endereco').serialize())
         $.ajax({
             type: 'post',
             url: site + '/avaliacao',
@@ -548,13 +547,100 @@
             dataType: "json",
             contentType: "application/json",
             success: function (retorno) {
-                window.location = "/imovel/cadastro";
             },
             error: function (retorno) {
                 console.log('error', retorno)
             }
         })
     }
+
+    function gravar_comodidades() {
+        let site = "http://localhost:3000";
+        imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
+        let x = new Object();
+        x.comodidades = [];
+        for(z = 1; z<=27; z++){
+            if ($('#com_'+z).is(":checked")){
+                x.comodidades.push(z);
+
+            }
+        }
+        x.productId = imovelInfo.id;
+        $.ajax({
+            type: 'post',
+            url: site + '/attribute',
+            data: JSON.stringify(x),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (retorno) {
+            },
+            error: function (retorno) {
+                console.log('error', retorno)
+            }
+        })
+    }
+
+
+    function gravar_regras() {
+        let site = "http://localhost:3000";
+        imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
+        let f = new Object();
+        f.regras = [];
+        for(h = 1; h<=4; z++){
+            if ($('#com_'+z).is(":checked")){
+                f.comodidades.push(h);
+
+            }
+        }
+        x.productId = imovelInfo.id;
+        $.ajax({
+            type: 'post',
+            url: site + '/rule',
+            data: JSON.stringify(f),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (retorno) {
+
+            },
+            error: function (retorno) {
+                console.log('error', retorno)
+            }
+        })
+    }
+
+
+
+    function storeProductImage(event) {
+            var fd = new FormData($("#foto").get(0));
+            console.log(fd)
+            $.ajax({
+                url: '/product',
+                data: fd,
+                dataType: 'json',
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                success: function (retorno) {
+                    var imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
+                    imovelInfo.image.name = retorno.data.name;
+                    localStorage.removeItem('createdProcut')
+                    localStorage.setItem('createdProduct', JSON.stringify(imovelInfo))
+                    notificacao(false, '#626262', 'success', 'Foto Alterada')
+                    setTimeout(function () {
+                        document.location.reload(true);
+                    }, 1000);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
+            event.preventDefault();
+        }
+
+
+
+
+
     $(document).ready(function () {
         $('#aluguel').mask('00000,00');
         $('#condominio').mask('00000,00');

@@ -33,6 +33,26 @@ module.exports = {
             });
     },
 
+   storeProductImage(req, res) {
+        const { filename } = req.file;
+        const productId = req.body.productId;
+        axios({
+            method: 'post',
+            url: `http://localhost:3000/product`,
+            data: {
+                productId: productId,
+                filename: filename
+            }
+        })
+            .then((retorno) => {
+                res.status(200);
+                res.send(retorno.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    },
+
     async findById(req, res) {
         var user
         await axios({
