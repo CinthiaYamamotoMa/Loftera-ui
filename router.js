@@ -93,7 +93,6 @@ router.get('/imovel/cadastro', async (req, res) => {
 router.get('/imoveis/:id', async (req, res) => {
     var imoveis = await imovelController.findAllByUserId(req, res);
     res.locals = { imoveis }
-    console.log(imoveis)
     res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
 })
 
@@ -118,7 +117,7 @@ router.get('/imoveis/result', async (req, res) => {
     res.render('ltr/vertical-menu-template-dark/imoveis-busca.ejs')
 })
 
-router.get('/imoveis/buscar', async (req, res) => {
+router.get('/busca', async (req, res) => {
     res.render('ltr/vertical-menu-template-dark/imoveis-campos-busca.ejs')
 })
 
