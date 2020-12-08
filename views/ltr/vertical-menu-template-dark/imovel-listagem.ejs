@@ -165,18 +165,18 @@
                                 <h5 class="card-title text-white">
                                     <div class="float-left">
                                         <p class="font-medium-2 mb-1">R$
-                                            <%= (Number(imoveis[i].product.aluguel)+Number(imoveis[i].product.condo)+Number(imoveis[i].product.iptu)) %>
+                                            <%= (Number(imoveis[i].aluguel)+Number(imoveis[i].condo)+Number(imoveis[i].iptu)) %>
                                         </p>
                                     </div>
                                     <div class="float-right">
                                         <p class="font-medium-2 mb-0"><i class="fa fa-star" aria-hidden="true"></i>
                                             <%- JSON.stringify(Number(
-                                                    ((Number(imoveis[i].product.rating.limpeza)/Number(imoveis[i].product.rating.qtdAvaliacoes)
-                                                    +Number(imoveis[i].product.rating.comunicacao)/Number(imoveis[i].product.rating.qtdAvaliacoes)
-                                                    +Number(imoveis[i].product.rating.checkin)/Number(imoveis[i].product.rating.qtdAvaliacoes)
-                                                    +Number(imoveis[i].product.rating.precisao)/Number(imoveis[i].product.rating.qtdAvaliacoes)
-                                                    +Number(imoveis[i].product.rating.localizacao)/Number(imoveis[i].product.rating.qtdAvaliacoes)
-                                                    +Number(imoveis[i].product.rating.valor)/Number(imoveis[i].product.rating.qtdAvaliacoes)
+                                                    ((Number(imoveis[i].rating.limpeza)/Number(imoveis[i].rating.qtdAvaliacoes)
+                                                    +Number(imoveis[i].rating.comunicacao)/Number(imoveis[i].rating.qtdAvaliacoes)
+                                                    +Number(imoveis[i].rating.checkin)/Number(imoveis[i].rating.qtdAvaliacoes)
+                                                    +Number(imoveis[i].rating.precisao)/Number(imoveis[i].rating.qtdAvaliacoes)
+                                                    +Number(imoveis[i].rating.localizacao)/Number(imoveis[i].rating.qtdAvaliacoes)
+                                                    +Number(imoveis[i].rating.valor)/Number(imoveis[i].rating.qtdAvaliacoes)
                                                     )/6).toFixed(1))) %></p>
                                     </div>
                                 </h5>

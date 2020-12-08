@@ -20,6 +20,24 @@ module.exports.findById = async function (req, res){
 
 },
 
+module.exports.findAllByUserId  = async function (req, res) {
+    var imoveis
+    await axios({
+        method: 'get',
+        url: `http://localhost:3000/meusImoveis`,
+        params: { userId: req.params.id }
+    })
+    .then((retorno) => {
+        res.status(200);
+        imoveis = retorno.data.data
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+    return imoveis
+
+},
+
 module.exports.findAll = async function (req, res) {
 
     var imoveis

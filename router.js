@@ -90,9 +90,10 @@ router.get('/imovel/cadastro', async (req, res) => {
 })
 
 // Listagem Imóvel
-router.get('/imoveis', async (req, res) => {
-    var imoveis = await imovelController.findAll(req, res);
+router.get('/imoveis/:id', async (req, res) => {
+    var imoveis = await imovelController.findAllByUserId(req, res);
     res.locals = { imoveis }
+    console.log(imoveis)
     res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
 })
 
