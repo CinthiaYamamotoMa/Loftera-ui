@@ -259,8 +259,9 @@
                                     <div class="card-body">
                                         <div class="swiper-fade-effect swiper-container" style="margin-top: 35px;">
                                             <form enctype="multipart/form-data" id="imagens">
-                                                <input type="file" id="foto" name="foto" multiple />
-                                                <input type="text" id="imovelId" name="imovelId" style="display: none;" />
+                                                <input type="file" id="foto" class="btn btn-primary d-none d-sm-block mr-75" name="foto" multiple />
+                                                <input type="text" id="imovelId" name="imovelId"
+                                                    style="display: none;" />
                                             </form>
                                         </div>
                                     </div>
@@ -376,6 +377,7 @@
     var tipoImovel
     var total;
     var tipo = $("#tipo").children("div")
+
     tipo.on("click", (event) => {
         for (i = 0; i < tipo.length; i++) {
             $(tipo[i]).removeClass("imovelType")
@@ -392,6 +394,42 @@
     function removeAttribute(clicked) {
         clicked.removeAttribute("style");
     }
+
+    function popula_estado() {
+        axios({
+            method: 'get',
+            url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/`,
+        })
+            .then((retorno) => {
+                var estado = retorno.data
+                for (i = 0; i <= estado.length; i++) {
+                    $("#estado").append(new Option(estado[i].nome, estado[i].sigla));
+                }
+            })
+    }
+
+    $("#cep").blur(function () {
+        var cep = $(this).val().replace(/\D/g, '');
+        if (cep != "") {
+            var validacep = /^[0-9]{8}$/;
+            if (validacep.test(cep)) {
+                $("#rua").val("...");
+                $("#cidade").val("...");
+                $("#bairro").val("...");
+                $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                    if (!("erro" in dados)) {
+                        $("#rua").val(dados.logradouro);
+                        $("#cidade").val(dados.localidade);
+                        $("#bairro").val(dados.bairro);
+                        $("#estado").val(dados.uf).attr('selected', 'selected')
+                        $("#estado").trigger("change");
+                    }
+                    else { limpa_endereco() }
+                });
+            }
+        }
+        else { limpa_endereco() }
+    });
 
     function submit_form() {
         console.log('click')
@@ -651,7 +689,7 @@
             contentType: false,
             success: function (retorno) {
                 console.log('success', retorno)
-                
+
                 notificacao(false, '#626262', 'success', 'Imóvel Criado')
                 setTimeout(function () {
                     window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
@@ -665,15 +703,12 @@
     };
 
     function totalizar() {
-        total = parseInt($("#aluguel").val()) + parseInt($("#condominio").val()) + parseInt($("#iptu").val());
+        total = parseFloat($("#aluguel").val()) + parseFloat($("#condominio").val()) + parseFloat($("#iptu").val());
         $("#total").empty();
         $("#total").append('$ ' + total);
     }
 
     $(document).ready(function () {
-        $('#aluguel').mask('#.##0,00', { reverse: true });
-        $('#condominio').mask('#.##0,00', { reverse: true });
-        $('#iptu').mask('#.##0,00', { reverse: true });
         user = JSON.parse(localStorage.getItem("currentUser"));
     });
 </script>

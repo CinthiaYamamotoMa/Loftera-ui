@@ -280,7 +280,7 @@
     function meusImoveis() {
         if (localStorage.getItem("currentUser") != undefined) {
             var id = JSON.parse(localStorage.currentUser).id
-            window.location = `/imoveis/${id}`
+            window.location = `/meusImoveis/${id}`
         } else {
             alert('Faça login para encontrar outros usuários')
         }
