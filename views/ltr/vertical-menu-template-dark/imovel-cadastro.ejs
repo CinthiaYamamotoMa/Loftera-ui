@@ -116,7 +116,8 @@
                                                             <span class="text-bold-600 ml-50">Aluguel</span>
                                                         </div>
                                                         <div class="col-md-6 col-3">
-                                                            <input class="form-control form-control-sm" type="text">
+                                                            <input class="form-control form-control-sm" type="text"
+                                                            name="aluguel" id="aluguel">
                                                         </div>
                                                     </div>
                                                     <div class="chart-info d-flex justify-content-between mb-1">
@@ -128,7 +129,8 @@
                                                                     aria-hidden="true"></i></a>
                                                         </div>
                                                         <div class="col-md-6 col-3">
-                                                            <input class="form-control form-control-sm" type="text" name="condominio" id="condominio">
+                                                            <input class="form-control form-control-sm" type="text"
+                                                                name="condominio" id="condominio">
                                                         </div>
                                                     </div>
                                                     <div class="chart-info d-flex justify-content-between">
@@ -139,7 +141,8 @@
                                                                     aria-hidden="true"></i></a>
                                                         </div>
                                                         <div class="col-md-6 col-3">
-                                                            <input class="form-control form-control-sm" type="text" name="iptu" id="iptu">
+                                                            <input class="form-control form-control-sm" type="text"
+                                                                name="iptu" id="iptu" onfocusout="totalizar()">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -150,11 +153,10 @@
                                     <div class="card border-primary text-primary">
                                         <div class="card-content">
                                             <div class="card-body text-center">
-                                                <div class="text-center" id="total" name="total">
-
+                                                <div class="text-center" >
                                                     <h6>- Valor Total -</h6>
-                                                    <h2 class="text-primary"><i class="fas fa-dollar-sign"></i>
-                                                        </h2>
+                                                    <h2 class="text-primary"id="total" name="total"><i class="fas fa-dollar-sign" ></i>
+                                                    </h2>
                                                 </div>
                                             </div>
                                         </div>
@@ -258,7 +260,8 @@
                                             <!-- <div class="swiper-wrapper"> -->
                                             <form enctype="multipart/form-data" id="imagens">
                                                 <input id="foto" type="file" name="foto" accept="image/*"
-                                                enctype="multipart/form-data"  class="btn btn-primary d-none d-sm-block mr-75"></input>
+                                                    enctype="multipart/form-data"
+                                                    class="btn btn-primary d-none d-sm-block mr-75" multiple></input>
                                             </form>
                                             <!-- <div class="swiper-pagination swiper-pagination-white"></div>
                                             <div class="swiper-button-next"></div>
@@ -363,14 +366,18 @@
 
 </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="../../../app-assets/js/scripts/jquery.mask.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
+    var foto = document.getElementById('foto');
+    var fileList = [];
     var imovelInfo = new Object();
     var user;
     var tipoImovel
-    var total = 0;
+    var total;
     var tipo = $("#tipo").children("div")
     tipo.on("click", (event) => {
         for (i = 0; i < tipo.length; i++) {
@@ -481,7 +488,7 @@
             url: site + '/imoveis',
             data: JSON.stringify({
                 aluguel: $("#aluguel").val(),
-                condo: $("#aluguel").val(),
+                condo: $("#condominio").val(),
                 iptu: $("#iptu").val(),
                 userId: user.id
             }),
@@ -491,6 +498,7 @@
                 console.log('success', retorno)
                 localStorage.setItem("createdProduct", JSON.stringify(retorno.data));
                 vincular_endereco();
+
             },
             error: function (retorno) {
                 console.log('error', retorno)
@@ -547,6 +555,7 @@
             dataType: "json",
             contentType: "application/json",
             success: function (retorno) {
+                gravar_regras();
             },
             error: function (retorno) {
                 console.log('error', retorno)
@@ -559,8 +568,8 @@
         imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
         let x = new Object();
         x.comodidades = [];
-        for(z = 1; z<=27; z++){
-            if ($('#com_'+z).is(":checked")){
+        for (z = 1; z <= 27; z++) {
+            if ($('#com_' + z).is(":checked")) {
                 x.comodidades.push(z);
 
             }
@@ -573,6 +582,8 @@
             dataType: "json",
             contentType: "application/json",
             success: function (retorno) {
+                //alert('comodidades gravadas');
+                storeProductImage(fileList);
             },
             error: function (retorno) {
                 console.log('error', retorno)
@@ -586,13 +597,13 @@
         imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
         let f = new Object();
         f.regras = [];
-        for(h = 1; h<=4; z++){
-            if ($('#com_'+z).is(":checked")){
-                f.comodidades.push(h);
+        for (h = 1; h <= 4; h++) {
+            if ($('#rule_' + h).is(":checked")) {
+                f.regras.push(h);
 
             }
         }
-        x.productId = imovelInfo.id;
+        f.productId = imovelInfo.id;
         $.ajax({
             type: 'post',
             url: site + '/rule',
@@ -600,7 +611,10 @@
             dataType: "json",
             contentType: "application/json",
             success: function (retorno) {
-
+                //alert('regras gravadas');
+                fileList.forEach(function (file) {
+                   gravar_comodidades();
+                });
             },
             error: function (retorno) {
                 console.log('error', retorno)
@@ -610,33 +624,42 @@
 
 
 
-    function storeProductImage(event) {
-            var fd = new FormData($("#foto").get(0));
-            console.log(fd)
-            $.ajax({
-                url: '/product',
-                data: fd,
-                dataType: 'json',
-                type: 'POST',
-                processData: false,
-                contentType: false,
-                success: function (retorno) {
-                    var imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
-                    imovelInfo.image.name = retorno.data.name;
-                    localStorage.removeItem('createdProcut')
-                    localStorage.setItem('createdProduct', JSON.stringify(imovelInfo))
-                    notificacao(false, '#626262', 'success', 'Foto Alterada')
-                    setTimeout(function () {
-                        document.location.reload(true);
-                    }, 1000);
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error: ' + error.message);
-                }
-            });
-            event.preventDefault();
-        }
+    function storeProductImage(file) {
+        imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
+        var formData = new FormData();
+        formData.set('filename', file);
+        formData.append('productId', imovelInfo.id);
+        $.ajax({
+            type: 'POST',
+            url: '/product',
+            data: formData,
+            dataType: 'json',
+            contentType: "application/json",
+            processData: false,
+            contentType: false,
+            success: function (retorno) {
+                var imovelInfo = JSON.parse(localStorage.getItem("createdProduct"));
+                imovelInfo.image.name = retorno.data.name;
+                localStorage.removeItem('createdProcut')
+                localStorage.setItem('createdProduct', JSON.stringify(imovelInfo))
+                notificacao(false, '#626262', 'success', 'Fotos adicionadas')
+                setTimeout(function () {
+                    document.location.reload(true);
+                }, 1000);
+                alert("deu bom");
+            },
+            error: function (xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+        });
+        event.preventDefault();
+    };
 
+    function totalizar(){
+        total = parseInt($("#aluguel").val()) + parseInt($("#condominio").val()) + parseInt($("#iptu").val());
+        $("#total").empty();
+        $("#total").append(total);
+    }
 
 
 
@@ -646,6 +669,12 @@
         $('#condominio').mask('00000,00');
         $('#iptu').mask('00000,00',);
         user = JSON.parse(localStorage.getItem("currentUser"));
+        foto.addEventListener('change', function (evnt) {
+            fileList = [];
+            for (var i = 0; i < foto.files.length; i++) {
+                fileList.push(foto.files[i]);
+            }
+        });
     });
 </script>
 

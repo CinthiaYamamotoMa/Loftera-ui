@@ -34,14 +34,14 @@ module.exports = {
     },
 
    storeProductImage(req, res) {
-        const { filename } = req.file;
+        const { nomeArquivo }  = req.file;
         const productId = req.body.productId;
         axios({
             method: 'post',
             url: `http://localhost:3000/product`,
             data: {
                 productId: productId,
-                filename: filename
+                filename: nomeArquivo
             }
         })
             .then((retorno) => {

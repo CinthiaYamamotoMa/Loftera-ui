@@ -19,7 +19,7 @@ const storageProduct = multer.diskStorage({
         cb(null, Date.now() + file.originalname)
     }
 })
-const uploadProduct = multer({ storageProduct })
+const uploadProduct = multer({ storageProduct });
 
 const attributesController = require('./controllers/attributesController');
 const rulesController = require('./controllers/rulesController');
