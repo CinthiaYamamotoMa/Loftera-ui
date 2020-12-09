@@ -208,6 +208,39 @@
 
                                                 <form novalidate id="faculdade_endereco">
                                                     <div class="row">
+                                                        <div class="col-12 col-sm-12" style="display: none">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <label>Id</label>
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="id" value="<%= user.id %>"
+                                                                        id="userId" name="userId" required
+                                                                        data-validation-required-message="Preencha o campo">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-sm-12" style="display: none">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <label>Latitude</label>
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="id" value="<%= user.latitude %>"
+                                                                        id="latitude" name="latitude"
+                                                                        data-validation-required-message="Preencha o campo">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-sm-12" style="display: none">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <label>Longitude</label>
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="id" value="<%= user.longitude %>"
+                                                                        id="longitude" name="longitude"
+                                                                        data-validation-required-message="Preencha o campo">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-12 col-sm-12">
                                                             <div class="form-group">
                                                                 <div class="controls">
@@ -215,7 +248,7 @@
                                                                     <input type="text" class="form-control"
                                                                         placeholder="Faculdade"
                                                                         value="<%= user.faculdade ? user.faculdade.name : '' %>"
-                                                                        id="faculdade" required
+                                                                        id="name" name="name" required
                                                                         data-validation-required-message="Preencha o campo">
                                                                 </div>
                                                             </div>
@@ -225,21 +258,21 @@
                                                                 <div class="controls">
                                                                     <label>CEP</label>
                                                                     <input type="text" class="form-control"
-                                                                        placeholder="CEP" id="cep" required
+                                                                        placeholder="CEP" id="cep" name="cep" required
                                                                         value="<%= user.faculdade ? user.faculdade.cep : '' %>"
                                                                         data-validation-required-message="Preencha o campo">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número</label>
-                                                                <input type="number" id="numero"
+                                                                <input type="number" id="number" name="number"
                                                                     value="<%= user.faculdade ? user.faculdade.number : '' %>"
                                                                     class="form-control" placeholder="Número">
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>Cidade</label>
-                                                                    <input type="text" id="cidade"
+                                                                    <input type="text" id="city" name="city"
                                                                         value="<%= user.faculdade ? user.faculdade.city : '' %>"
                                                                         class="form-control" placeholder="Cidade">
                                                                 </div>
@@ -250,7 +283,7 @@
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label>Rua</label>
-                                                                    <input type="text" id="rua"
+                                                                    <input type="text" id="street" name="street"
                                                                         value="<%= user.faculdade ? user.faculdade.street : '' %>"
                                                                         class="form-control" placeholder="Rua">
                                                                 </div>
@@ -258,28 +291,30 @@
 
                                                             <div class="form-group">
                                                                 <label>Bairro</label>
-                                                                <input type="text" id="bairro"
+                                                                <input type="text" id="district" name="district"
                                                                     value="<%= user.faculdade ? user.faculdade.district : '' %>"
                                                                     class="form-control" placeholder="Bairro">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Estado</label>
-                                                                <select class="form-control" id="estado">
+                                                                <select class="form-control" id="state" name="state">
                                                                     <option value="">Estado</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div
+                                                        class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
+                                                        <button type="submit" onclick="salvarFacul(event)"
+                                                            class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Salvar</button>
+                                                        <button type="reset" class="btn btn-outline-warning">Desfazer
+                                                            Alterações</button>
+                                                    </div>
                                                 </form>
-                                                <!-- users edit account form ends -->
                                             </div>
 
-                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit" onclick="salvarFacul(event)"
-                                                    class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Salvar</button>
-                                                <button type="reset" class="btn btn-outline-warning">Desfazer
-                                                    Alterações</button>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="changePassword" aria-labelledby="social-tab"
@@ -639,8 +674,8 @@
 
             var estado = "<%= user.faculdade ? user.faculdade.state : 'Estado' %>"
             console.log(estado)
-            $("#estado").children("option").text(estado).attr('selected', 'selected')
-            $("#estado").trigger("change");
+            $("#state").children("option").text(estado).attr('selected', 'selected')
+            $("#state").trigger("change");
 
             if (JSON.parse(localStorage.currentUser).role == 'proprietario') {
                 $("#faculdade").attr('style', 'display: none;')
@@ -655,17 +690,17 @@
                 .then((retorno) => {
                     var estado = retorno.data
                     for (i = 0; i <= estado.length; i++) {
-                        $("#estado").append(new Option(estado[i].nome, estado[i].sigla));
+                        $("#state").append(new Option(estado[i].nome, estado[i].sigla));
                     }
                 })
         }
 
         function limpa_endereco() {
-            $("#rua").val("");
-            $("#bairro").val("");
-            $("#numero").val("");
-            $("#cidade").val("");
-            $("#estado").val("").change();
+            $("#street").val("");
+            $("#district").val("");
+            $("#number").val("");
+            $("#city").val("");
+            $("#state").val("").change();
         }
 
         $("#cep").blur(function () {
@@ -673,17 +708,16 @@
             if (cep != "") {
                 var validacep = /^[0-9]{8}$/;
                 if (validacep.test(cep)) {
-                    $("#rua").val("...");
-                    $("#cidade").val("...");
-                    $("#bairro").val("...");
+                    $("#street").val("...");
+                    $("#city").val("...");
+                    $("#district").val("...");
                     $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
-                        console.log(dados)
                         if (!("erro" in dados)) {
-                            $("#rua").val(dados.logradouro);
-                            $("#cidade").val(dados.localidade);
-                            $("#bairro").val(dados.bairro);
-                            $("#estado").val(dados.uf).attr('selected', 'selected')
-                            $("#estado").trigger("change");
+                            $("#street").val(dados.logradouro);
+                            $("#city").val(dados.localidade);
+                            $("#district").val(dados.bairro);
+                            $("#state").val(dados.uf).attr('selected', 'selected')
+                            $("#state").trigger("change");
                         }
                         else { limpa_endereco() }
                     });
@@ -694,7 +728,34 @@
 
         function salvarFacul(e) {
             e.preventDefault()
-            console.log($("#faculdade_endereco").serialize())
+            $.ajax({
+                type: 'get',
+                url: `https://maps.googleapis.com/maps/api/geocode/json?address=${$("#cep").val()}&key=AIzaSyAajnzIlUy_7lAOHZe9PyC3RFX80lqC2fE`,
+                datatype: "application/json",
+                success: function (retorno) {
+                    console.log(retorno.results[0].geometry.location)
+                    var coordenadas = retorno.results[0].geometry.location
+                    $("#latitude").val(coordenadas.lat);
+                    $("#longitude").val(coordenadas.lng);
+                    $.ajax({
+                        type: 'post',
+                        url: 'http://localhost:3000/facul',
+                        data: $("#faculdade_endereco").serialize(),
+                        datatype: "application/json",
+                        success: function (retorno) {
+                            console.log(retorno)
+                            document.location.reload(true);
+                        },
+                        error: function (retorno) {
+                            console.error('error', retorno)
+                        }
+                    })
+                },
+                error: function (retorno) {
+                    console.error('error', retorno)
+                }
+            })
+
         }
 
     </script>

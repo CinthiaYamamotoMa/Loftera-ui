@@ -212,13 +212,13 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12 col-12 scrollable-container">
-                                            <% for (var i = 0; i < imovel.imovel.product.attributes.length; i++) { %>
+                                            <% for (var i = 0; i < imovel.imovel.product.comodidade.length; i++) { %>
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
                                                     <i
-                                                        class="<%= imovel.imovel.product.attributes[i].icon %> text-success"></i>
+                                                        class="<%= imovel.imovel.product.comodidade[i].icon %> text-success"></i>
                                                     <span class="text-bold-600 ml-50">
-                                                        <%= imovel.imovel.product.attributes[i].name %>
+                                                        <%= imovel.imovel.product.comodidade[i].name %>
                                                     </span>
                                                 </div>
                                             </div>
@@ -570,13 +570,13 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12 col-12">
-                                            <% for (var i = 0; i < imovel.imovel.product.rules.length; i++) { %>
+                                            <% for (var i = 0; i < imovel.imovel.product.regra.length; i++) { %>
                                             <div class="chart-info d-flex justify-content-between mb-1">
                                                 <div class="series-info d-flex align-items-center">
                                                     <i
-                                                        class="<%= imovel.imovel.product.rules[i].icon %> text-success"></i>
+                                                        class="<%= imovel.imovel.product.regra[i].icon %> text-success"></i>
                                                     <span class="text-bold-600 ml-50">
-                                                        <%= imovel.imovel.product.rules[i].name %>
+                                                        <%= imovel.imovel.product.regra[i].name %>
                                                         <i class="fas fa-check"></i></span>
                                                 </div>
                                             </div>
