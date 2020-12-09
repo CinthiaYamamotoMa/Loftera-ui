@@ -1,11 +1,13 @@
 <%- include ('../../Partials/headerStyle.ejs'); %>
 
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
-    
-<body class="vertical-layout vertical-menu-modern dark-layout 1-column navbar-floating footer-static bg-full-screen-image blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="dark-layout">
+<link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
+<link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
+<link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
+
+<body
+    class="vertical-layout vertical-menu-modern dark-layout 1-column navbar-floating footer-static bg-full-screen-image blank-page blank-page"
+    data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="dark-layout">
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -16,10 +18,13 @@
             <div class="content-body">
                 <section class="row flexbox-container">
                     <div class="col-xl-8 col-11 d-flex justify-content-center">
-                        <div class="card bg-authentication rounded-0 mb-0" style="filter: drop-shadow(2px 4px 6px black);">
+                        <div class="card bg-authentication rounded-0 mb-0"
+                            style="filter: drop-shadow(2px 4px 6px black);">
                             <div class="row m-0" style="width: 701px; background-color: white;">
-                                <div class="col-lg-5 d-lg-block d-none text-center align-self-center px-1 py-0" style="background-color: white;">
-                                    <img src="../../../app-assets/images/pages/Loftera-Logo.png" style="max-width: 280px;" alt="branding logo">
+                                <div class="col-lg-5 d-lg-block d-none text-center align-self-center px-1 py-0"
+                                    style="background-color: white;">
+                                    <img src="../../../app-assets/images/pages/Loftera-Logo.png"
+                                        style="max-width: 280px;" alt="branding logo">
                                 </div>
                                 <div class="col-lg-7 col-12 p-0">
                                     <div class="card rounded-0 mb-0 px-2">
@@ -30,9 +35,11 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body pt-1">
-                                                <form id="login"  method="POST">
-                                                    <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input type="text" class="form-control" id="email" placeholder="E-mail" required>
+                                                <form id="login" method="POST">
+                                                    <fieldset
+                                                        class="form-label-group form-group position-relative has-icon-left">
+                                                        <input type="text" class="form-control" id="email"
+                                                            placeholder="E-mail" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
@@ -40,13 +47,15 @@
                                                     </fieldset>
 
                                                     <fieldset class="form-label-group position-relative has-icon-left">
-                                                        <input type="password" class="form-control" id="password" placeholder="Senha" required>
+                                                        <input type="password" class="form-control" id="password"
+                                                            placeholder="Senha" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-lock"></i>
                                                         </div>
                                                         <label for="user-password">Senha</label>
                                                     </fieldset>
-                                                    <div class="form-group d-flex justify-content-between align-items-center">
+                                                    <div
+                                                        class="form-group d-flex justify-content-between align-items-center">
                                                         <div class="text-left">
                                                             <!-- <fieldset class="checkbox">
                                                                 <div class="vs-checkbox-con vs-checkbox-primary">
@@ -60,11 +69,14 @@
                                                                 </div>
                                                             </fieldset> -->
                                                         </div>
-                                                        <div class="text-right"><a href="auth-forgot-password" class="card-link">Esqueceu a senha?</a></div>
+                                                        <div class="text-right"><a href="auth-forgot-password"
+                                                                class="card-link">Esqueceu a senha?</a></div>
                                                     </div>
-                                                    
-                                                    <a href="auth-register" class="btn btn-outline-primary float-left btn-inline">Cadastre-se</a>
-                                                    <button type="button" class="btn btn-primary float-right btn-inline" onclick="login()">Login</button>
+
+                                                    <a href="auth-register"
+                                                        class="btn btn-outline-primary float-left btn-inline">Cadastre-se</a>
+                                                    <button type="button" class="btn btn-primary float-right btn-inline"
+                                                        onclick="login()">Login</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -88,41 +100,80 @@
             </div>
         </div>
     </div>
- 
+
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
 
     <script src="../../../app-assets/js/core/app-menu.js"></script>
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
         function login() {
             let site = "http://localhost:3000/";
             $.ajax({
                 type: 'post',
-                url: site+'auth',
-                data : JSON.stringify( { email : $("#email").val(), password : $("#password").val()}),
+                url: site + 'auth',
+                data: JSON.stringify({ email: $("#email").val(), password: $("#password").val() }),
                 dataType: "json",
                 contentType: "application/json",
                 success: function (retorno) {
-                    if(retorno.user != null && retorno.user != undefined && retorno.user != "") {
+                    if (retorno.user != null && retorno.user != undefined && retorno.user != "") {
                         localStorage.setItem("currentUser", JSON.stringify(retorno.user));
                         console.log('success', retorno);
-                        window.location = "/role";
+                        if (retorno.user.role == 'estudante') {
+                            window.location = "/busca";
+                        } else {
+                            window.location = `/meusImoveis/${retorno.user.id}`;
+                        }
+
                     }
-                    else{
-                        alert("usuário não encontrado");
+                    else {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            background: '#d33',
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Usuário não encontrado'
+                        })
                         window.location = "/auth-login";
                     }
 
                 },
-                error: function(retorno) {
+                error: function (retorno) {
+                    const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            background: '#d33',
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Usuário não encontrado'
+                        })
                     console.log('error', retorno)
                 }
             })
         }
     </script>
-    
+
 </body>
 <!-- END: Body-->
 
