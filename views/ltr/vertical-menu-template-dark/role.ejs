@@ -192,7 +192,7 @@
                     if (retorno.data.role == 'estudante') {
                         window.location = `/card-caracteristica`
                     } else {
-                        window.location = `/imoveis/buscar`
+                        window.location = `/busca`
                     }
                     var user = JSON.parse(localStorage.currentUser)
                     user.role = retorno.data.role

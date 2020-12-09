@@ -349,15 +349,17 @@
                 datatype: "application/json",
             })
                 .done((retorno) => {
+                    console.log(pesquisa)
                     pesquisa.coordenadas = retorno.results[0].geometry.location
                     $.ajax({
                         type: 'get',
-                        url: '/imoveis/busca',
+                        url: '/search',
                         data: {
                             pesquisa
                         },
                         datatype: "application/json",
                         success: function (retorno) {
+                            console.log(retorno)
                             window.location = `/imoveis/result?data=${encodeURIComponent(JSON.stringify(retorno))}`;
                         },
                         error: function (retorno) {
