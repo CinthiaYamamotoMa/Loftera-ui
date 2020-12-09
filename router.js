@@ -89,13 +89,6 @@ router.get('/imovel/cadastro', async (req, res) => {
     res.render('ltr/vertical-menu-template-dark/imovel-cadastro.ejs')
 })
 
-// Listagem Imóvel
-router.get('/imoveis/:id', async (req, res) => {
-    var imoveis = await imovelController.findAllByUserId(req, res);
-    res.locals = { imoveis }
-    res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
-})
-
 // Imóveis de Interesse
 router.get('/imovel/interesse/:id', async (req, res) => {
     var imoveis = await interestedController.findInteressados(req, res);
@@ -107,14 +100,20 @@ router.get('/imovel/interesse/:id', async (req, res) => {
 
 
 // Crud Imóvel
-router.get('/imoveis/busca', async (req, res) => {
+router.get('/search', async (req, res) => {
     await imovelController.findPesquisa(req, res);
 })
 
 router.get('/imoveis/result', async (req, res) => {
-    var imoveis = JSON.parse(req.query.data)
+    var imoveis = await JSON.parse(req.query.data)
     res.locals = { imoveis }
     res.render('ltr/vertical-menu-template-dark/imoveis-busca.ejs')
+})
+
+router.get('/meusImoveis/:id', async (req, res) => {
+    var imoveis = await imovelController.findAllByUserId(req, res);
+    res.locals = { imoveis }
+    res.render('ltr/vertical-menu-template-dark/imovel-listagem.ejs')
 })
 
 router.get('/busca', async (req, res) => {
