@@ -19,7 +19,7 @@ const storageProduct = multer.diskStorage({
         cb(null, Date.now() + file.originalname)
     }
 })
-const uploadProduct = multer({ storageProduct });
+const uploadProduct = multer({ storage: storageProduct })
 
 const attributesController = require('./controllers/attributesController');
 const rulesController = require('./controllers/rulesController');
@@ -88,7 +88,8 @@ router.post('/avatar', upload.single("avatar"), async (req, res) => {
 })
 
 //Produto
-router.post('/product', uploadProduct.single("product"), async (req, res) => {
+router.post('/product', uploadProduct.array('foto', 5), async (req, res) => {
+    // console.log(req.files)
     userController.storeProductImage(req, res)
 })
 

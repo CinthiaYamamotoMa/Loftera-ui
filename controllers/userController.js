@@ -33,19 +33,25 @@ module.exports = {
             });
     },
 
-   storeProductImage(req, res) {
-        const { nomeArquivo }  = req.file;
-        const productId = req.body.productId;
-        axios({
+    async storeProductImage(req, res) {
+
+        var fileNames = []
+        for(i = 0; i < req.files.length; i++) {
+            fileNames.push(req.files[i])
+        }
+        const productId = req.body.imovelId;
+
+        await axios({
             method: 'post',
             url: `http://localhost:3000/product`,
             data: {
                 productId: productId,
-                filename: nomeArquivo
+                filename: fileNames
             }
         })
             .then((retorno) => {
                 res.status(200);
+                console.log(retorno)
                 res.send(retorno.data)
             })
             .catch((error) => {
@@ -68,7 +74,7 @@ module.exports = {
                 user = null
                 console.log(error)
             })
-            return user
+        return user
     },
 
     updateAvatar(req, res) {
