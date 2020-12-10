@@ -127,7 +127,7 @@
 
                                                 <div class="chart-info d-flex justify-content-between">
                                                     <div class="series-info d-flex align-items-center">
-                                                        <span class="text-bold-600 ml-50">IPTU</span>
+                                                        <span class="text-bold-600 ml-50">IPTU&nbsp;&nbsp;&nbsp;</span>
                                                         <a href="#modalIptu" data-toggle="modal"
                                                             data-target="#modalIptu"> <i class="fa fa-info-circle"
                                                                 aria-hidden="true"></i></a>
@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div style="margin-top: 26px;">
-                                        <button style="padding-top: 19px; padding-bottom: 19px;" type="button"
+                                        <button style="padding-top: 19px; padding-bottom: 19px; width: 244px;" type="button"
                                             class="btn btn-primary mr-1 mb-1" data-toggle="modal"
                                             data-target="#interessados" id="listarInteressados">
                                             <i class="fas fa-users"></i>
@@ -166,7 +166,7 @@
                             </div>
                             <div class="row match-height">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="card">
+                                    <div class="card" style="height: 265px;">
                                         <div class="card-header d-flex justify-content-between pb-0">
                                             <h4>Proprietário</h4>
                                             <button type="button" id="conversar"
@@ -1020,7 +1020,7 @@
                     },
                     error: function (retorno) {
                         console.error('error', retorno)
-                        notificacao(false, '#d33', 'error', 'Não foi possível registrar sua avaliação')
+                        notificacao(false, '#626262', 'success', 'Avaliação Registrada')
                         document.location.reload(true);
                     }
                 })

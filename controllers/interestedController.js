@@ -10,6 +10,7 @@ module.exports.findInteressados = async function (req, res) {
     })
         .then((retorno) => {
             res.status(200);
+            console.log(retorno.data.data.interessados)
             interesses = retorno.data.data.interessados
         })
         .catch((error) => {

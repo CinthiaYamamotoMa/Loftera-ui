@@ -30,7 +30,6 @@ module.exports.findById = async function (req, res) {
             .then((retorno) => {
                 res.status(200);
                 console.log(retorno.data.data)
-
                 imoveis = retorno.data.data
             })
             .catch((error) => {
