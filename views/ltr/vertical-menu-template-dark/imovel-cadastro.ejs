@@ -646,15 +646,13 @@
             dataType: "json",
             contentType: "application/json",
             success: function (retorno) {
-                //alert('regras gravadas');
-                fileList.forEach(function (file) {
                     gravar_comodidades();
-                });
+
             },
             error: function (retorno) {
                 console.log('error', retorno)
             }
-        })
+        });
     }
 
     function notificacao(confirmButton, modal_color, icon, message) {
