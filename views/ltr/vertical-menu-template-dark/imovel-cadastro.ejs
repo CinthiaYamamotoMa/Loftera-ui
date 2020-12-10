@@ -687,12 +687,10 @@
             contentType: false,
             success: function (retorno) {
                 console.log('success', retorno)
-
                 notificacao(false, '#626262', 'success', 'Imóvel Criado')
                 setTimeout(function () {
-                    window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
+                    window.location = `/meusImoveis/${JSON.parse(localStorage.currentUser).id}`
                 }, 1000);
-                alert("deu bom");
             },
             error: function (xhr, status, error) {
                 console.log('Error: ' + error.message);

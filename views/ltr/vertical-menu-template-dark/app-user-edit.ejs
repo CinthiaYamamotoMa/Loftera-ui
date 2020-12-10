@@ -543,11 +543,12 @@
                 cancelButtonText: 'Não'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    var user = JSON.parse(localStorage.currentUser)
                     $.ajax({
                         type: 'post',
                         url: '/deleteAvatar',
                         data: JSON.stringify({
-                            userId: 1
+                            userId: user.id
                         }),
                         dataType: "json",
                         contentType: "application/json",
@@ -587,7 +588,11 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (retorno) {
-                    console.log('success', retorno);
+                    console.log('success', );
+                    var user = JSON.parse(localStorage.currentUser)
+                    user.name = retorno.data.name
+                    localStorage.removeItem('currentUser')
+                    localStorage.setItem('currentUser', JSON.stringify(user))
                     notificacao(false, '#626262', 'success', 'Dados Atualizados com sucesso!')
                     window.location = `/app-user-edit/${JSON.parse(localStorage.currentUser).id}`
 
